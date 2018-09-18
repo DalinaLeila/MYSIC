@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import api from "../utils/api";
+import { Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Post extends Component {
   constructor(props) {
@@ -51,13 +53,14 @@ class Post extends Component {
           />
           <div>{output}</div>
         </fieldset>
-        <button
+        <Button
+        color="primary"
           onClick={this.handleSubmit}
           className="submit-form-btn"
           type="submit"
         >
           Post
-        </button>
+        </Button>
       </div>
     );
   }

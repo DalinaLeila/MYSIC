@@ -24,16 +24,16 @@ const Navigation = props => {
                             Logout
                         </Link>
                     ) : (
-                        <span>
-                            <Link className="link nav-link" to="/auth/sign-in">
-                                Sign in
+                            <span>
+                                <Link className="link nav-link" to="/auth/sign-in">
+                                    Sign in
                             </Link>
-                            &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp;
                             <Link className="link nav-link" to="/auth/sign-up">
-                                Sign up
+                                    Sign up
                             </Link>
-                        </span>
-                    )}
+                            </span>
+                        )}
                 </div>
             </div>
         </div>
