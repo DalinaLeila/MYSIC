@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/User");
+const Post = require("../../models/Post");
 
 const SpotifyWebApi = require("spotify-web-api-node");
 
@@ -34,10 +34,20 @@ router.get("/tracks", (req, res, next) => {
 });
 
 router.post("/post", (req, res, next) => {
-  console.log("BODY", req.body);
+  let { caption, songId } = req.body;
+  // console.log("WORKING", caption, songId);
+  // console.log(req.user);
 
-  User.findByIdAndUpdate("5ba0c105a86c146d73a39608", { post }).then(data => {
-    console.log(data);
+  let post = new Post({
+    caption: caption,
+    songId: songId,
+    creatorId: req.user._id,
+    username: req.user.username,
+    profilePicture: req.user.profilePicture
+  });
+  post.save().then(result => {
+    console.log(result);
   });
 });
+
 module.exports = router;

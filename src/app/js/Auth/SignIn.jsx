@@ -12,6 +12,15 @@ class SignIn extends React.Component {
       <div className="container">
         <h1>SignIn</h1>
         <input
+          type="text"
+          value={this.props.username}
+          onChange={evt =>
+            this.props.handleInputChange("username", evt.target.value)
+          }
+          className="input"
+          placeholder="Username"
+        />
+        {/* <input
           type="email"
           value={this.props.email}
           onChange={evt =>
@@ -19,7 +28,7 @@ class SignIn extends React.Component {
           }
           className="input"
           placeholder="E-Mail"
-        />
+        /> */}
         <br />
         <br />
         <input

@@ -6,7 +6,8 @@ const postSchema = new Schema(
     caption: String,
     songId: String,
     creatorId: { type: Schema.Types.ObjectId, ref: "User" },
-    username: String
+    username: String,
+    profilePicture: String
   },
   {
     timestamps: {

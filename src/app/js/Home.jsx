@@ -8,12 +8,12 @@ class Home extends Component {
           <h1>
             Hello,{" "}
             {this.props.user
-              ? this.props.user.email
+              ? this.props.user.username
               : "Welcome to NAME, log in and share your music!"}
             !
           </h1>
         </div>
-        <Post />
+        {this.props.user && <Post />}
       </div>
     );
   }

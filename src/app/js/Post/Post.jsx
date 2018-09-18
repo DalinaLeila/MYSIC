@@ -7,7 +7,8 @@ class Post extends Component {
     this.state = {
       search: "",
       list: [],
-      post: [{ caption: "", songId: "" }]
+      caption: "",
+      songId: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -17,8 +18,8 @@ class Post extends Component {
   render() {
     let output = this.state.list.map(output => {
       return (
-        <div>
-          <div key={output.id} onClick={e => this.handleClick(e, output)}>
+        <div key={output.id}>
+          <div onClick={e => this.handleClick(e, output)}>
             <img src={output.album.images[0].url} width="30px" />
             {output.name} by {output.artists[0].name}
             {/* // <audio preload="none">
@@ -37,7 +38,7 @@ class Post extends Component {
             type="text"
             name="caption"
             placeholder="Caption"
-            onChange={evt => this.handleInputChange("post", evt.target.value)}
+            onChange={evt => this.handleCaption("caption", evt.target.value)}
           />
         </fieldset>
         <fieldset>
@@ -63,9 +64,18 @@ class Post extends Component {
 
   handleClick(e, output) {
     this.setState({
-      post: { caption: "hi", songId: output.id }
+      caption: this.state.caption,
+      songId: output.id
     });
-    console.log(this.state.post);
+    console.log("handleClick, Caption", this.state.caption);
+    console.log("handleClick, songId", this.state.songId);
+  }
+
+  handleCaption(key, newValue) {
+    this.setState({
+      [key]: newValue
+    });
+    console.log("handle caption", this.state.caption);
   }
 
   handleInputChange(key, newValue) {
@@ -89,16 +99,14 @@ class Post extends Component {
   handleSubmit() {
     api
       .post(`/api/music/post`, {
-        post: {
-          caption: this.state.post.caption,
-          songId: this.state.post.songId
-        }
+        caption: this.state.caption,
+        songId: this.state.songId
       })
       .then(data => {
-        this.props.history.push("/");
+        this.history.push("/profile");
       })
       .catch(err => {
-        console(err);
+        console.log(err);
       });
   }
 }
