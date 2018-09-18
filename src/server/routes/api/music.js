@@ -33,14 +33,25 @@ router.get("/tracks", (req, res, next) => {
     });
 });
 
+//Retrieving all posts
+router.get("/feed", (req, res, next) => {
+  Post.find({})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 router.post("/post", (req, res, next) => {
-  let { caption, songId } = req.body;
-  // console.log("WORKING", caption, songId);
+  let { caption, song } = req.body;
+  // console.log("WORKING", caption, song);
   // console.log(req.user);
 
   let post = new Post({
     caption: caption,
-    songId: songId,
+    song: song,
     creatorId: req.user._id,
     username: req.user.username,
     profilePicture: req.user.profilePicture

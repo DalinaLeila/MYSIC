@@ -8,7 +8,7 @@ class Post extends Component {
       search: "",
       list: [],
       caption: "",
-      songId: ""
+      song: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -63,12 +63,13 @@ class Post extends Component {
   }
 
   handleClick(e, output) {
+    console.log(output);
     this.setState({
       caption: this.state.caption,
-      songId: output.id
+      song: output
     });
-    console.log("handleClick, Caption", this.state.caption);
-    console.log("handleClick, songId", this.state.songId);
+    // console.log("handleClick, Caption", this.state.caption);
+    // console.log("handleClick, song", this.state.song);
   }
 
   handleCaption(key, newValue) {
@@ -100,7 +101,7 @@ class Post extends Component {
     api
       .post(`/api/music/post`, {
         caption: this.state.caption,
-        songId: this.state.songId
+        song: this.state.song
       })
       .then(data => {
         this.history.push("/profile");

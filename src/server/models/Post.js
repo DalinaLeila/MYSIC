@@ -4,7 +4,7 @@ const User = require("./User");
 const postSchema = new Schema(
   {
     caption: String,
-    songId: String,
+    song: Object,
     creatorId: { type: Schema.Types.ObjectId, ref: "User" },
     username: String,
     profilePicture: String
