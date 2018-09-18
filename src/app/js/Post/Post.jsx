@@ -18,15 +18,13 @@ class Post extends Component {
     let output = this.state.list.map(output => {
       return (
         <div>
-          <a href={output.preview_url}>
-            <div key={output.id} onClick={e => this.handleClick(e, output)}>
-              <img src={output.album.images[0].url} width="30px" />
-              {output.name} by {output.artists[0].name}
-              {/* // <audio preload="none">
+          <div key={output.id} onClick={e => this.handleClick(e, output)}>
+            <img src={output.album.images[0].url} width="30px" />
+            {output.name} by {output.artists[0].name}
+            {/* // <audio preload="none">
               //   <source src={output.preview_url} type="audio/mpeg" />
               // </audio> */}
-            </div>
-          </a>
+          </div>
           <hr />
         </div>
       );

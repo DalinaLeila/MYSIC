@@ -14,6 +14,7 @@ class Auth extends Component {
     super(props);
 
     this.state = {
+      username: "",
       email: "",
       password: "",
       picture: undefined,
@@ -33,6 +34,7 @@ class Auth extends Component {
           render={() => (
             <SignUp
               handleInputChange={this._handleInputChange}
+              username={this.state.username}
               email={this.state.email}
               password={this.state.password}
               error={this.state.error}
@@ -46,6 +48,7 @@ class Auth extends Component {
           render={() => (
             <SignIn
               handleInputChange={this._handleInputChange}
+              username={this.state.username}
               email={this.state.email}
               password={this.state.password}
               error={this.state.error}
@@ -79,7 +82,11 @@ class Auth extends Component {
     api
       .post(
         `/api/auth/sign-${type}`,
-        { email: this.state.email, password: this.state.password },
+        {
+          email: this.state.email,
+          password: this.state.password,
+          username: this.state.username
+        },
         pictureDeclaration
       )
       .then(data => {
