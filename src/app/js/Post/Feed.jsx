@@ -17,7 +17,7 @@ class Feed extends Component {
         this.setState({
           list: data
         })
-        console.log(this.state.list)
+        
       })
       .catch(err => {
         console.log(err);
@@ -25,7 +25,7 @@ class Feed extends Component {
   }
 
   render() {
-    console.log(this.state.list)
+   
     let feedPosts = this.state.list.map((post, index) => {
       return (
         <div key={index}>
@@ -44,7 +44,7 @@ class Feed extends Component {
             <div className="audio">
               <Music url={post.song} />
             </div>
-            {post.created_at.toString}
+            {post.created_at}
           </div>
           <hr />
         </div>

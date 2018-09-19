@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../utils/api";
 import { Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Redirect } from "react-router-dom";
 
 class Post extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class Post extends Component {
           <div>{output}</div>
         </fieldset>
         <Button
-        color="primary"
+          color="primary"
           onClick={this.handleSubmit}
           className="submit-form-btn"
           type="submit"
@@ -107,7 +108,9 @@ class Post extends Component {
         song: this.state.song
       })
       .then(data => {
-        this.history.push("/profile");
+        // console.log("working");
+        <Redirect to="/" />;
+
       })
       .catch(err => {
         console.log(err);
