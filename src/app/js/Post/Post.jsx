@@ -87,7 +87,7 @@ class Post extends Component {
       [key]: newValue
     });
     api
-      .get(`http://localhost:3000/api/music/tracks?name=${newValue}`)
+      .get(`/api/music/tracks?name=${newValue}`)
       .then(data => {
         this.setState({
           list: data
