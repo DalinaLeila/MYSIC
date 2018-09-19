@@ -1,8 +1,15 @@
 .userpost{
   display: flex;
 // margin:0 auto;
-justify-content: space-around;
+justify-content:flex-start;
+align-items: baseline;
 }
 .songinfo{
- margin: 0 40px;
+  // display:flex;
+//  margin: 0 40px;
+}
+
+
+.profilepicture{
+  border-radius: 50%;
 }

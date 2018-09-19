@@ -35,7 +35,7 @@ class Post extends Component {
     return (
       <div>
         <fieldset>
-          <label>Caption</label>
+          {/* <label>Caption</label> */}
           <input
             type="text"
             name="caption"

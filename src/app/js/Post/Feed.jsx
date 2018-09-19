@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from "../utils/api"
+import Music from './Music'
 
 class Feed extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class Feed extends Component {
     this.state = {
       list: [],
     }
-    
+
   }
 
   componentDidMount() {
@@ -25,37 +26,36 @@ class Feed extends Component {
 
   render() {
     console.log(this.state.list)
-    let feedPosts = this.state.list.map((post,index) => {
+    let feedPosts = this.state.list.map((post, index) => {
       return (
         <div key={index}>
           <div className="userpost">
             <div className="user">
-              <img src={post.profilePicture} width="30px" />
-              {post.username}
+              <img src={post.profilePicture} width="30px" className="profilepicture" />
+              {post.username}- 
             </div>
             <div className="usercomment">
-              {post.caption}
+             " {post.caption} "
             </div>
           </div>
           <div className="songinfo">
             <img src={post.song.album.images[0].url} width="50px" />
-            {post.song.name} by {post.song.artists[0].name}
-           <div className="audio">
-           <audio preload="none">
-                <source src={post.preview_url} type="audio/mpeg" />
-               </audio>
-               </div>
+            {post.song.artists[0].name} - {post.song.name} 
+            <div className="audio">
+              <Music url={post.song} />
+            </div>
+            {post.created_at.toString}
           </div>
-        <hr />
+          <hr />
         </div>
-    );
-  })
-return(
-  <div>
-    {feedPosts}
-  </div>
-)
-}
+      );
+    })
+    return (
+      <div>
+        {feedPosts}
+      </div>
+    )
+  }
 }
 
 
