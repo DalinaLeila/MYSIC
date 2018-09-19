@@ -42,9 +42,9 @@ class SignIn extends React.Component {
         />
         <br />
         <br />
-        <button className="button" onClick={() => this.props.sign("in")}>
+        <Button className="button" onClick={() => this.props.sign("in")}>
           Sign In
-        </button>
+        </Button>
         <br />
         <br />
         <p>{this.props.error}</p>

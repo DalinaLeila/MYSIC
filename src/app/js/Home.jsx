@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Post from "./Post/Post";
+import Feed from "./Post/Feed";
+
 class Home extends Component {
   render() {
     return (
@@ -14,6 +16,7 @@ class Home extends Component {
           </h1>
         </div>
         {this.props.user && <Post />}
+        <Feed />
       </div>
     );
   }
