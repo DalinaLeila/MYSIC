@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../utils/api";
-
+import Music from "../Post/Music";
 class UserPosts extends Component {
   render() {
     const mappedPosts = this.props.posts.map((el, index) => {
@@ -19,6 +19,7 @@ class UserPosts extends Component {
             <h6>
               {el.song.name} by {el.song.artists[0].name}
             </h6>
+            <Music url={el.song} />
           </div>
           <button onClick={e => this.handleClick(e, el)}>Delete</button>
           <hr />
