@@ -12,7 +12,7 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: clientSecret
 });
 
-// Retrieve an access token.
+// Retrieve an access token. (Spotify)
 spotifyApi.clientCredentialsGrant().then(
   function(data) {
     spotifyApi.setAccessToken(data.body["access_token"]);
@@ -22,6 +22,7 @@ spotifyApi.clientCredentialsGrant().then(
   }
 );
 
+//search tracks by user input
 router.get("/tracks", (req, res, next) => {
   spotifyApi
     .searchTracks(req.query.name)
@@ -44,6 +45,7 @@ router.get("/feed", (req, res, next) => {
     });
 });
 
+//Saving a new post
 router.post("/post", (req, res, next) => {
   let { caption, song } = req.body;
   // console.log("WORKING", caption, song);
