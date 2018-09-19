@@ -21,7 +21,9 @@ class UserPosts extends Component {
             </h6>
             <Music url={el.song} />
           </div>
-          <button onClick={e => this.handleClick(e, el)}>Delete</button>
+          {el.username === this.props.loggedInUser.username && (
+            <button onClick={e => this.handleClick(e, el)}>Delete</button>
+          )}
           <hr />
         </div>
       );
@@ -45,3 +47,36 @@ class UserPosts extends Component {
 }
 
 export default UserPosts;
+
+{
+  /* <div key={index}>
+<div className="userpost">
+  <div className="user">
+    <img
+      src={post.profilePicture}
+      width="30px"
+      className="profilepicture"
+    />
+    {post.username}-
+  </div>
+  <div className="usercomment">" {post.caption} "</div>
+</div>
+<div className="songinfo">
+  <img src={post.song.album.images[0].url} width="50px" />
+  {post.song.artists[0].name} - {post.song.name}
+  <div className="audio">
+    <Music url={post.song} />
+  </div>
+  {post.created_at}
+</div>
+<div className="social">
+  <a>
+    <Button>Like</Button>
+  </a>
+  <a>
+    <Button>Save</Button>
+  </a>
+</div>
+<hr />
+</div> */
+}

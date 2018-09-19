@@ -38,7 +38,7 @@ class Profile extends Component {
     return (
       <div className="container">
         <img
-          src={this.props.user.profilePicture}
+          src={this.state.user.profilePicture}
           alt=""
           width="200px"
           className="profilepicture"
@@ -50,7 +50,11 @@ class Profile extends Component {
         <div>
           <h3>Your Jam:</h3>
         </div>
-        <UserPosts posts={this.state.posts} user={this.state.user} />
+        <UserPosts
+          posts={this.state.posts}
+          user={this.state.user}
+          loggedInUser={this.props.user}
+        />
       </div>
     );
   }

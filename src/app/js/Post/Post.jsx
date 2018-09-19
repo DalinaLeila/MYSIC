@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import api from "../utils/api";
-import { Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Button,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import { Redirect } from "react-router-dom";
 
 class Post extends Component {
@@ -18,7 +23,6 @@ class Post extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-
   }
   toggle() {
     this.setState(prevState => ({
@@ -30,12 +34,9 @@ class Post extends Component {
     let output = this.state.list.map(output => {
       return (
         <DropdownItem key={output.id}>
-          <div onClick={this.toggle} onClick={e => this.handleClick(e, output)} >
+          <div onClick={this.toggle} onClick={e => this.handleClick(e, output)}>
             <img src={output.album.images[0].url} width="30px" />
             {output.name} by {output.artists[0].name}
-            {/* // <audio preload="none">
-              //   <source src={output.preview_url} type="audio/mpeg" />
-              // </audio> */}
           </div>
           <hr />
         </DropdownItem>
@@ -61,12 +62,8 @@ class Post extends Component {
             placeholder="What's your jam?"
           />
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-              Results
-        </DropdownToggle>
-            <DropdownMenu>
-              {output}
-            </DropdownMenu>
+            <DropdownToggle caret>Results</DropdownToggle>
+            <DropdownMenu>{output}</DropdownMenu>
           </Dropdown>
         </fieldset>
         <Button
@@ -125,7 +122,6 @@ class Post extends Component {
       .then(data => {
         // console.log("working");
         <Redirect to="/" />;
-
       })
       .catch(err => {
         console.log(err);

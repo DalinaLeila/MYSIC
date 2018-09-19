@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
 import { Button } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Link } from "react-router-dom";
 
