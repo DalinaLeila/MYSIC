@@ -11,6 +11,8 @@ class Profile extends Component {
       user: {},
       loading: true
     };
+
+    this._handleClick = this._handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +48,7 @@ class Profile extends Component {
         <br />
         <br />
         {this.state.user.username}
-        <button onClick={this.handleClick}>Follow</button> {/* to do */}
+        <button>Follow</button> {/* to do */}
         <div>
           <h3>Your Jam:</h3>
         </div>
@@ -54,14 +56,22 @@ class Profile extends Component {
           posts={this.state.posts}
           user={this.state.user}
           loggedInUser={this.props.user}
+          handleClick={this._handleClick}
         />
       </div>
     );
   }
 
   //to do!
-  handleClick() {
-    console.log("Click");
+  _handleClick(e, el) {
+    console.log(el);
+    api
+      .post(`/api/music/post/delete`, {
+        el
+      })
+      .then(data => {
+        this.props.history.push("/");
+      });
   }
 }
 

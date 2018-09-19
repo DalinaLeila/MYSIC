@@ -52,12 +52,9 @@ class Feed extends Component {
             {post.created_at}
           </div>
           <div className="social">
-            <a>
-              <Button>Like</Button>
-            </a>
-            <a>
-              <Button>Save</Button>
-            </a>
+            <Button>Like</Button>
+
+            <Button>Save</Button>
           </div>
           <hr />
         </div>

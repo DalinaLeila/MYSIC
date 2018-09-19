@@ -16,7 +16,7 @@ class Home extends Component {
           </h1>
         </div>
         {this.props.user && <Post />}
-        <Feed />
+        {this.props.user && <Feed />}
       </div>
     );
   }

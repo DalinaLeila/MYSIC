@@ -8,21 +8,30 @@ class UserPosts extends Component {
       return (
         <div key={index}>
           <Link to={`/profile/${el.username}`}>
-            <img src={el.profilePicture} width="80px" />
-            <h5>{el.username}</h5>
+            <div className="user">
+              <img
+                src={el.profilePicture}
+                width="30px"
+                className="profilepicture"
+              />
+              {el.username}
+            </div>
           </Link>
-          <div>
-            <h3>{el.caption}</h3>
-          </div>
-          <div>
-            <img src={el.song.album.images[0].url} alt="" width="100px" />
-            <h6>
-              {el.song.name} by {el.song.artists[0].name}
-            </h6>
-            <Music url={el.song} />
+          <div className="usercomment">"{el.caption}"</div>
+          <div className="songinfo">
+            <img src={el.song.album.images[0].url} alt="" width="50px" />
+            {el.song.artists[0].name} - {el.song.name}
+            <div className="audio">
+              <Music url={el.song} />
+            </div>
+            {el.created_at}
           </div>
           {el.username === this.props.loggedInUser.username && (
-            <button onClick={e => this.handleClick(e, el)}>Delete</button>
+            <img
+              onClick={e => this.props.handleClick(e, el)}
+              src="/../../assets/cross.png" // image is not showing properly at the moment!!
+              width="40px"
+            />
           )}
           <hr />
         </div>
@@ -34,49 +43,6 @@ class UserPosts extends Component {
       </div>
     );
   }
-  handleClick(e, el) {
-    console.log(el);
-    api
-      .post(`/api/music/post/delete`, {
-        el
-      })
-      .then(data => {
-        this.props.history.push("/");
-      });
-  }
 }
 
 export default UserPosts;
-
-{
-  /* <div key={index}>
-<div className="userpost">
-  <div className="user">
-    <img
-      src={post.profilePicture}
-      width="30px"
-      className="profilepicture"
-    />
-    {post.username}-
-  </div>
-  <div className="usercomment">" {post.caption} "</div>
-</div>
-<div className="songinfo">
-  <img src={post.song.album.images[0].url} width="50px" />
-  {post.song.artists[0].name} - {post.song.name}
-  <div className="audio">
-    <Music url={post.song} />
-  </div>
-  {post.created_at}
-</div>
-<div className="social">
-  <a>
-    <Button>Like</Button>
-  </a>
-  <a>
-    <Button>Save</Button>
-  </a>
-</div>
-<hr />
-</div> */
-}
