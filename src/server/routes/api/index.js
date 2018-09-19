@@ -3,6 +3,8 @@ const router = express.Router();
 
 const authRoutes = require("./auth");
 const musicRoutes = require("./music");
+const profileRoutes = require("./profile");
+
 const { userMiddleware, checkLoggedIn } = require("../../utils/middleware");
 
 router.use(userMiddleware);
@@ -18,6 +20,7 @@ router.get("/protected", checkLoggedIn, (req, res) => {
 
 router.use("/auth", authRoutes);
 router.use("/music", musicRoutes);
+router.use("/profile", profileRoutes);
 
 router.use((req, res) => {
   res.status(404).send({ error: "not-found" });
