@@ -28,7 +28,7 @@ const Navigation = props => {
                                 <Link className="link nav-link" to="/auth/sign-in">
                                     Sign in
                             </Link>
-                                &nbsp; &nbsp; &nbsp;
+                                 &nbsp; &nbsp;
                             <Link className="link nav-link" to="/auth/sign-up">
                                     Sign up
                             </Link>

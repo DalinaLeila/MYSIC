@@ -124,7 +124,7 @@ class Post extends Component {
       })
       .then(data => {
         // console.log("working");
-        <Redirect to="/" />;
+        console.log(data)
 
       })
       .catch(err => {
