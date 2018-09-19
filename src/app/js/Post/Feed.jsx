@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import api from "../utils/api"
 import Music from './Music'
+import { Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Feed extends Component {
   constructor(props) {
@@ -45,6 +47,10 @@ class Feed extends Component {
               <Music url={post.song} />
             </div>
             {post.created_at}
+          </div>
+          <div className="social">
+            <a><Button>Like</Button></a>-
+            <a><Button>Save</Button></a>
           </div>
           <hr />
         </div>
