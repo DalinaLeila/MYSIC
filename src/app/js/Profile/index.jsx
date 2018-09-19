@@ -37,7 +37,11 @@ class Profile extends Component {
     if (this.state.loading) return <h1>Loading</h1>;
     return (
       <div className="container">
+<<<<<<< HEAD
+        <img src={this.props.user.profilePicture} alt="" width="200px" className="profilepicture" />
+=======
         <img src={this.state.user.profilePicture} alt="" width="200px" />
+>>>>>>> master
         <br />
         <br />
         {this.state.user.username}

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import api from "../utils/api";
+import { Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Redirect } from "react-router-dom";
 
 class Post extends Component {
   constructor(props) {
@@ -8,18 +11,26 @@ class Post extends Component {
       search: "",
       list: [],
       caption: "",
-      song: []
+      song: [],
+      dropdownOpen: false
     };
+    this.toggle = this.toggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+
+  }
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   render() {
     let output = this.state.list.map(output => {
       return (
-        <div key={output.id}>
-          <div onClick={e => this.handleClick(e, output)}>
+        <DropdownItem key={output.id}>
+          <div onClick={this.toggle} onClick={e => this.handleClick(e, output)} >
             <img src={output.album.images[0].url} width="30px" />
             {output.name} by {output.artists[0].name}
             {/* // <audio preload="none">
@@ -27,13 +38,13 @@ class Post extends Component {
               // </audio> */}
           </div>
           <hr />
-        </div>
+        </DropdownItem>
       );
     });
     return (
       <div>
         <fieldset>
-          <label>Caption</label>
+          {/* <label>Caption</label> */}
           <input
             type="text"
             name="caption"
@@ -49,15 +60,23 @@ class Post extends Component {
             className="input"
             placeholder="What's your jam?"
           />
-          <div>{output}</div>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+              Results
+        </DropdownToggle>
+            <DropdownMenu>
+              {output}
+            </DropdownMenu>
+          </Dropdown>
         </fieldset>
-        <button
+        <Button
+          color="primary"
           onClick={this.handleSubmit}
           className="submit-form-btn"
           type="submit"
         >
           Post
-        </button>
+        </Button>
       </div>
     );
   }
@@ -104,7 +123,9 @@ class Post extends Component {
         song: this.state.song
       })
       .then(data => {
-        this.history.push("/profile");
+        // console.log("working");
+        <Redirect to="/" />;
+
       })
       .catch(err => {
         console.log(err);
