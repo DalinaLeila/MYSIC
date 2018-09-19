@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
@@ -8,7 +7,6 @@ import Home from "./Home";
 import Navigation from "./Navigation";
 import Profile from "./Profile";
 import NotFound from "./NotFound";
-import api from "./utils/api";
 
 class Application extends React.Component {
   constructor(props) {
@@ -40,6 +38,11 @@ class Application extends React.Component {
             <Route
               exact
               path="/profile"
+              render={() => <Profile user={this.state.user} />}
+            />
+            <Route
+              exact
+              path="/profile/:username"
               render={() => <Profile user={this.state.user} />}
             />
             <Route

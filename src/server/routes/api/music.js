@@ -37,6 +37,7 @@ router.get("/tracks", (req, res, next) => {
 //Retrieving all posts
 router.get("/feed", (req, res, next) => {
   Post.find({})
+    .sort([["updated_at", -1]])
     .then(data => {
       res.send(data);
     })
@@ -48,9 +49,6 @@ router.get("/feed", (req, res, next) => {
 //Saving a new post
 router.post("/post", (req, res, next) => {
   let { caption, song } = req.body;
-  // console.log("WORKING", caption, song);
-  // console.log(req.user);
-
   let post = new Post({
     caption: caption,
     song: song,
@@ -63,4 +61,12 @@ router.post("/post", (req, res, next) => {
   });
 });
 
+router.post("/post/delete", (req, res, next) => {
+  console.log("WORKING");
+  let { el } = req.body;
+  console.log(el._id);
+  Post.findByIdAndDelete(el._id).then(data => {
+    console.log("DELETED");
+  });
+});
 module.exports = router;
