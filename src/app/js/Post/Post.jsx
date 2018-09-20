@@ -16,11 +16,12 @@ class Post extends Component {
       search: "",
       list: [],
       caption: "",
-      song: [],
-      dropdownOpen: false
+      song: {},
+      dropdownOpen: false,
+      error: ""
     };
     this.toggle = this.toggle.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -57,42 +58,46 @@ class Post extends Component {
           <input
             type="text"
             value={this.state.search}
-            onChange={evt => this.handleInputChange("search", evt.target.value)}
+            onChange={evt => this.handleInputChange(evt.target.value)}
             className="input"
             placeholder="What's your jam?"
           />
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>Results</DropdownToggle>
-            <DropdownMenu
-              modifiers={{
-                setMaxHeight: {
-                  enabled: true,
-                  order: 890,
-                  fn: data => {
-                    return {
-                      ...data,
-                      styles: {
-                        ...data.styles,
-                        overflow: "auto",
-                        maxHeight: 400
-                      }
-                    };
-                  }
-                }
-              }}
-            >
+
+
+            <DropdownToggle caret>
+              Results
+        </DropdownToggle>
+            <DropdownMenu modifiers={{
+              setMaxHeight: {
+                enabled: true,
+                order: 890,
+                fn: (data) => {
+                  return {
+                    ...data,
+                    styles: {
+                      ...data.styles,
+                      overflow: 'auto',
+                      maxHeight: 300,
+                    },
+                  };
+                },
+              },
+            }}>
+
               {output}
             </DropdownMenu>
           </Dropdown>
         </fieldset>
         <Button
           color="primary"
-          onClick={this.handleSubmit}
+          onClick={() => this.props.handleSubmit(this.state.caption, this.state.song)}
           className="submit-form-btn"
           type="submit"
         >
           Post
         </Button>
+        <p>{this.props.error}</p>
       </div>
     );
   }
@@ -109,14 +114,15 @@ class Post extends Component {
 
   handleCaption(key, newValue) {
     this.setState({
-      [key]: newValue
+      caption: newValue
     });
     console.log("handle caption", this.state.caption);
   }
 
-  handleInputChange(key, newValue) {
+  handleInputChange(newValue) {
     this.setState({
-      [key]: newValue
+      search: newValue,
+      dropdownOpen: newValue !== ""
     });
     api
       .get(`/api/music/tracks?name=${newValue}`)
@@ -132,21 +138,25 @@ class Post extends Component {
       });
   }
 
-  handleSubmit() {
-    api
-      .post(`/api/music/post`, {
-        caption: this.state.caption,
-        song: this.state.song
-      })
-      .then(data => {
-        // console.log("working");
+  // handleSubmit() {
+  //   api
+  //     .post(`/api/music/post`, {
+  //       caption: this.state.caption,
+  //       song: this.state.song
+  //     })
+  //     .then(data => {
+  //       // console.log("working");
 
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+
+  //       console.log(data)
+
+
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
 }
 
 export default Post;

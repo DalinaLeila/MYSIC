@@ -6,29 +6,31 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: []
-    };
-  }
+//   constructor(props) {
+//     super(props);
+    // this.state = {
+    //   list: []
+    // };
+//   }
 
-  componentDidMount() {
-    api
-      .get(`/api/music/feed${this.props.url}`)
-      .then(data => {
-        this.setState({
-          list: data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+
+  // componentDidMount() {
+  //   api
+  //     .get("/api/music/feed")
+  //     .then(data => {
+  //       this.setState({
+  //         list: data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   render() {
     let feedPosts = this.state.list.map((post, index) => {
       console.log(post);
+
       return (
         <div key={index}>
           <div className="userpost">

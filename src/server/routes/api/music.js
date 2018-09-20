@@ -68,6 +68,7 @@ router.get("/feed", (req, res, next) => {
 //Saving a new post
 router.post("/post", (req, res, next) => {
   let { caption, song } = req.body;
+  
   let post = new Post({
     caption: caption,
     song: song,
@@ -75,6 +76,8 @@ router.post("/post", (req, res, next) => {
     username: req.user.username,
     profilePicture: req.user.profilePicture
   });
+  (!song || !caption)
+   ? res.status(400).send({ error: "Missing Jamz" }):
   post.save().then(result => {
     console.log(result);
     res.send(post);
