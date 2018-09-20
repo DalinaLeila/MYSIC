@@ -34,7 +34,27 @@ router.get("/tracks", (req, res, next) => {
     });
 });
 
-//Retrieving all posts
+//Retrieving only followed user posts for home page
+router.get("/feed/selected", (req, res, next) => {
+  let username = req.user.username;
+  Post.find({
+    $or: [
+      {
+        username: { $in: req.user.following }
+      },
+      { username }
+    ]
+  })
+    .sort([["updated_at", -1]])
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+//Retrieving all posts for discover page
 router.get("/feed", (req, res, next) => {
   Post.find({})
     .sort([["updated_at", -1]])
@@ -45,7 +65,6 @@ router.get("/feed", (req, res, next) => {
       console.log(err);
     });
 });
-
 //Saving a new post
 router.post("/post", (req, res, next) => {
   let { caption, song } = req.body;
@@ -61,7 +80,7 @@ router.post("/post", (req, res, next) => {
    ? res.status(400).send({ error: "Missing Jamz" }):
   post.save().then(result => {
     console.log(result);
-    res.send(post)
+    res.send(post);
   });
 });
 

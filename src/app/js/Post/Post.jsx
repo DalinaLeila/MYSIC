@@ -64,6 +64,7 @@ class Post extends Component {
           />
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 
+
             <DropdownToggle caret>
               Results
         </DropdownToggle>
@@ -83,9 +84,9 @@ class Post extends Component {
                 },
               },
             }}>
+
               {output}
             </DropdownMenu>
-
           </Dropdown>
         </fieldset>
         <Button
@@ -146,6 +147,7 @@ class Post extends Component {
   //     .then(data => {
   //       // console.log("working");
 
+
   //       console.log(data)
 
 
@@ -154,6 +156,7 @@ class Post extends Component {
   //       console.log(err);
   //     });
   // }
+
 }
 
 export default Post;

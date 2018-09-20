@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = props => {
-
   return (
     <div className="navigation">
       <div className="container nav-content">
@@ -15,6 +14,9 @@ const Navigation = props => {
               &nbsp; &nbsp; &nbsp;
               <Link className="link nav-link" to="/profile">
                 Profile
+              </Link>
+              <Link className="link nav-link" to="/discover">
+                Discover
               </Link>
             </span>
           )}

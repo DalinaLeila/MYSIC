@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Auth from "./Auth";
 import Home from "./Home";
+import Discover from "./Discover";
+
 import Navigation from "./Navigation";
 import Profile from "./Profile";
 import NotFound from "./NotFound";
@@ -38,13 +40,22 @@ class Application extends React.Component {
             />
             <Route
               exact
+              path="/discover"
+              render={() => <Discover user={this.state.user} />}
+            />
+            <Route
+              exact
               path="/profile"
-              render={() => <Profile user={this.state.user} />}
+              render={() => (
+                <Profile user={this.state.user} setUser={this._setUser} />
+              )}
             />
             <Route
               exact
               path="/profile/:username"
-              render={() => <Profile user={this.state.user} />}
+              render={() => (
+                <Profile user={this.state.user} setUser={this._setUser} />
+              )}
             />
             <Route
               path="/auth"

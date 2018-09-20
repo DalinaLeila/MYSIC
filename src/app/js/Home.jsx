@@ -5,19 +5,21 @@ import api from "./utils/api";
 
 class Home extends Component {
   constructor(props) {
+
     super(props)
 
     this.state = {
       error: "",
       list: [],
       loading: true,
+  
     };
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
   componentDidMount() {
     api
-      .get("/api/music/feed")
+      .get(`/api/music/feed/selected`)
       .then(data => {
         this.setState({
           list: data,
@@ -28,8 +30,7 @@ class Home extends Component {
         console.log(err);
       });
   }
-
-
+  
   render() {
     if (this.state.loading) {
       return (
@@ -47,8 +48,9 @@ class Home extends Component {
             !
           </h1>
         </div>
+
         {this.props.user && <Post handleSubmit={this.handleSubmit} />}
-        {this.props.user && <Feed list={this.state.list} />}
+        {this.props.user && <Feed list={this.state.list}/>}
       </div>
     );
   }
@@ -69,6 +71,7 @@ class Home extends Component {
         console.log(err);
       });
   }
+
 
 }
 

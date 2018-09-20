@@ -6,12 +6,13 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
-  constructor(props) {
-    super(props);
+//   constructor(props) {
+//     super(props);
     // this.state = {
     //   list: []
     // };
-  }
+//   }
+
 
   // componentDidMount() {
   //   api
@@ -27,8 +28,9 @@ class Feed extends Component {
   // }
 
   render() {
-   
-    let feedPosts = this.props.list.map((post, index) => {
+    let feedPosts = this.state.list.map((post, index) => {
+      console.log(post);
+
       return (
         <div key={index}>
           <div className="userpost">
@@ -53,7 +55,9 @@ class Feed extends Component {
             {post.created_at}
           </div>
           <div className="social">
-            <Button>Like</Button>
+            <Button onClick={el => this.handleLikeClick(el, post._id)}>
+              Like
+            </Button>
 
             <Button>Save</Button>
           </div>
@@ -62,6 +66,10 @@ class Feed extends Component {
       );
     });
     return <div>{feedPosts}</div>;
+  }
+
+  handleLikeClick(e, postId) {
+    console.log(postId);
   }
 }
 

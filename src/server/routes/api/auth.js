@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config");
 const upload = require("../../utils/upload");
 
+const { createUserToken } = require("../../utils/token");
+
 router.post("/sign-up", (req, res) => {
   const { email, password, username } = req.body;
 
@@ -31,16 +33,8 @@ router.post("/sign-up", (req, res) => {
       }).save();
     })
     .then(user => {
-      const token = jwt.sign(
-        {
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-          profilePicture: user.profilePicture
-        },
-        config.SECRET_JWT_PASSPHRASE
-      );
-      res.send({ token });
+      const userToken = createUserToken(user);
+      res.send({ token: userToken });
     });
 });
 
@@ -59,16 +53,8 @@ router.post("/sign-in", (req, res) => {
     if (!passwordsMatch)
       return res.status(400).send({ error: "Password is incorrect." });
 
-    const token = jwt.sign(
-      {
-        _id: existingUser._id,
-        email: existingUser.email,
-        username: existingUser.username,
-        profilePicture: existingUser.profilePicture
-      },
-      config.SECRET_JWT_PASSPHRASE
-    );
-    res.send({ token });
+    const userToken = createUserToken(existingUser);
+    res.send({ token: userToken });
   });
 });
 
