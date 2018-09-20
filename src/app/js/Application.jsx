@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Auth from "./Auth";
 import Home from "./Home";

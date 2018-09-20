@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
 import { Button } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Link } from "react-router-dom";
 
@@ -53,12 +52,9 @@ class Feed extends Component {
             {post.created_at}
           </div>
           <div className="social">
-            <a>
-              <Button>Like</Button>
-            </a>
-            <a>
-              <Button>Save</Button>
-            </a>
+            <Button>Like</Button>
+
+            <Button>Save</Button>
           </div>
           <hr />
         </div>
