@@ -5,7 +5,7 @@ class Music extends Component {
   constructor(props) {
     super(props);
 
-    console.log("songurl", this.props.url.preview_url)
+    // console.log("songurl", this.props.url.preview_url)
 
     this.state = { play: true };
     this.audio = new Audio(this.props.url.preview_url);
@@ -19,7 +19,7 @@ class Music extends Component {
   }
 
   render() {
-    console.log("this.props.url.preview_url :", this.audio)
+    
     return (
       <div>
        {this.props.url.preview_url !=null && <Button onClick={this.togglePlay}>{this.state.play ? 'Play':'Pause' }</Button> }

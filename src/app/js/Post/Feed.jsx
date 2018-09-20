@@ -8,26 +8,27 @@ import { Link } from "react-router-dom";
 class Feed extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      list: []
-    };
+    // this.state = {
+    //   list: []
+    // };
   }
 
-  componentDidMount() {
-    api
-      .get("/api/music/feed")
-      .then(data => {
-        this.setState({
-          list: data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   api
+  //     .get("/api/music/feed")
+  //     .then(data => {
+  //       this.setState({
+  //         list: data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   render() {
-    let feedPosts = this.state.list.map((post, index) => {
+   
+    let feedPosts = this.props.list.map((post, index) => {
       return (
         <div key={index}>
           <div className="userpost">

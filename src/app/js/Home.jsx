@@ -1,23 +1,41 @@
 import React, { Component } from "react";
 import Post from "./Post/Post";
 import Feed from "./Post/Feed";
+import api from "./utils/api";
 
 class Home extends Component {
-  // componentDidMount() {
-  //   api
-  //     .get("/api/music/feed")
-  //     .then(data => {
-  //       this.setState({
-  //         list: data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      error: "",
+      list: [],
+      loading: true,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+  }
+  componentDidMount() {
+    api
+      .get("/api/music/feed")
+      .then(data => {
+        this.setState({
+          list: data,
+          loading: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div>loading ...</div>
+      )
+    }
     return (
       <div>
         <div className="container">
@@ -29,27 +47,28 @@ class Home extends Component {
             !
           </h1>
         </div>
-        {this.props.user && <Post />}
-        {this.props.user && <Feed />}
+        {this.props.user && <Post handleSubmit={this.handleSubmit} />}
+        {this.props.user && <Feed list={this.state.list} />}
       </div>
     );
   }
 
-  // handleSubmit() {
-  //   api
-  //     .post(`/api/music/post`, {
-  //       caption: this.state.caption,
-  //       song: this.state.song
-  //     })
-  //     .then(data => {
-  //       // console.log("working");
-  //       console.log(data)
+  handleSubmit(caption, song) {
+    api
+      .post(`/api/music/post`, {
+        caption,
+        song
+      })
+      .then(data => {
+        this.setState({
+          list: [data].concat(this.state.list)
+        })
 
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
 }
 
