@@ -8,20 +8,31 @@ class UserPosts extends Component {
       return (
         <div key={index}>
           <Link to={`/profile/${el.username}`}>
-            <img src={el.profilePicture} width="80px" />
-            <h5>{el.username}</h5>
+            <div className="user">
+              <img
+                src={el.profilePicture}
+                width="30px"
+                className="profilepicture"
+              />
+              {el.username}
+            </div>
           </Link>
-          <div>
-            <h3>{el.caption}</h3>
+          <div className="usercomment">"{el.caption}"</div>
+          <div className="songinfo">
+            <img src={el.song.album.images[0].url} alt="" width="50px" />
+            {el.song.artists[0].name} - {el.song.name}
+            <div className="audio">
+              <Music url={el.song} />
+            </div>
+            {el.created_at}
           </div>
-          <div>
-            <img src={el.song.album.images[0].url} alt="" width="100px" />
-            <h6>
-              {el.song.name} by {el.song.artists[0].name}
-            </h6>
-            <Music url={el.song} />
-          </div>
-          <button onClick={e => this.handleClick(e, el)}>Delete</button>
+          {el.username === this.props.loggedInUser.username && (
+            <img
+              onClick={e => this.props.handleClick(e, el)}
+              src="/../../assets/cross.png" // image is not showing properly at the moment!!
+              width="40px"
+            />
+          )}
           <hr />
         </div>
       );
@@ -31,16 +42,6 @@ class UserPosts extends Component {
         <div>{mappedPosts}</div>
       </div>
     );
-  }
-  handleClick(e, el) {
-    console.log(el);
-    api
-      .post(`/api/music/post/delete`, {
-        el
-      })
-      .then(data => {
-        this.props.history.push("/");
-      });
   }
 }
 
