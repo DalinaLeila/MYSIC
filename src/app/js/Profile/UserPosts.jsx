@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../utils/api";
 import Music from "../Post/Music";
+
 class UserPosts extends Component {
   render() {
     const mappedPosts = this.props.posts.map((el, index) => {
@@ -26,6 +27,7 @@ class UserPosts extends Component {
             </div>
             {el.created_at}
           </div>
+          {/* delete option of posts */}
           {el.username === this.props.loggedInUser.username && (
             <img
               onClick={e => this.props.handleClick(e, el)}
@@ -33,6 +35,7 @@ class UserPosts extends Component {
               width="40px"
             />
           )}
+
           <hr />
         </div>
       );

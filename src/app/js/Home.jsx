@@ -3,20 +3,13 @@ import Post from "./Post/Post";
 import Feed from "./Post/Feed";
 
 class Home extends Component {
-  // componentDidMount() {
-  //   api
-  //     .get("/api/music/feed")
-  //     .then(data => {
-  //       this.setState({
-  //         list: data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+  constructor(props) {
+    super(props);
 
-
+    this.state = {
+      url: "/selected"
+    };
+  }
   render() {
     return (
       <div>
@@ -30,27 +23,10 @@ class Home extends Component {
           </h1>
         </div>
         {this.props.user && <Post />}
-        {this.props.user && <Feed />}
+        {this.props.user && <Feed url={this.state.url} />}
       </div>
     );
   }
-
-  // handleSubmit() {
-  //   api
-  //     .post(`/api/music/post`, {
-  //       caption: this.state.caption,
-  //       song: this.state.song
-  //     })
-  //     .then(data => {
-  //       // console.log("working");
-  //       console.log(data)
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
 }
 
 export default Home;

@@ -35,8 +35,15 @@ class Profile extends Component {
   }
 
   render() {
+    console.log("PROPS", this.props.user); //my profile
+    console.log("STATE", this.state.user); //friends profile
     if (!this.props.user) return <Redirect to="/auth/sign-in" />; // this is actually the protection
     if (this.state.loading) return <h1>Loading</h1>;
+
+    const isFollowing = this.props.user.following.includes(
+      this.state.user.username
+    );
+
     return (
       <div className="container">
         <img
@@ -48,7 +55,13 @@ class Profile extends Component {
         <br />
         <br />
         {this.state.user.username}
-        <button>Follow</button> {/* to do */}
+        {this.props.user.username !== this.state.user.username && (
+          <button
+            onClick={e => this.handleFollowClick(e, this.state.user.username)}
+          >
+            {isFollowing ? "Unfollow" : "Follow"}
+          </button>
+        )}
         <div>
           <h3>Your Jam:</h3>
         </div>
@@ -62,9 +75,16 @@ class Profile extends Component {
     );
   }
 
-  //to do!
+  handleFollowClick(e, followUsername) {
+    api
+      .post(`/api/profile/user-profile/${followUsername}/follow`)
+      .then(data => {
+        localStorage.setItem("identity", data.token);
+        this.props.setUser();
+      });
+  }
   _handleClick(e, el) {
-    console.log(el);
+    // console.log(el);
     api
       .post(`/api/music/post/delete`, {
         el
