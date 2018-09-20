@@ -12,7 +12,7 @@ class Home extends Component {
       error: "",
       list: [],
       loading: true,
-  
+
     };
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -30,13 +30,14 @@ class Home extends Component {
         console.log(err);
       });
   }
-  
+
   render() {
-    if (this.state.loading) {
-      return (
-        <div>loading ...</div>
-      )
-    }
+    if (this.props.user)
+      if (this.state.loading) {
+        return (
+          <div>loading ...</div>
+        )
+      }
     return (
       <div>
         <div className="container">
@@ -50,7 +51,7 @@ class Home extends Component {
         </div>
 
         {this.props.user && <Post handleSubmit={this.handleSubmit} />}
-        {this.props.user && <Feed list={this.state.list}/>}
+        {this.props.user && <Feed list={this.state.list} />}
       </div>
     );
   }

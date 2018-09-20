@@ -28,7 +28,7 @@ class Feed extends Component {
   // }
 
   render() {
-    let feedPosts = this.state.list.map((post, index) => {
+    let feedPosts = this.props.list.map((post, index) => {
       console.log(post);
 
       return (
