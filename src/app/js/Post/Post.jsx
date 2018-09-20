@@ -33,9 +33,7 @@ class Post extends Component {
           <div onClick={this.toggle} onClick={e => this.handleClick(e, output)} >
             <img src={output.album.images[0].url} width="30px" />
             {output.name} by {output.artists[0].name}
-            {/* // <audio preload="none">
-              //   <source src={output.preview_url} type="audio/mpeg" />
-              // </audio> */}
+
           </div>
           <hr />
         </DropdownItem>
@@ -64,7 +62,22 @@ class Post extends Component {
             <DropdownToggle caret>
               Results
         </DropdownToggle>
-            <DropdownMenu>
+            <DropdownMenu modifiers={{
+              setMaxHeight: {
+                enabled: true,
+                order: 890,
+                fn: (data) => {
+                  return {
+                    ...data,
+                    styles: {
+                      ...data.styles,
+                      overflow: 'auto',
+                      maxHeight: 400,
+                    },
+                  };
+                },
+              },
+            }}>
               {output}
             </DropdownMenu>
           </Dropdown>
