@@ -5,6 +5,8 @@ class Music extends Component {
   constructor(props) {
     super(props);
 
+    console.log("songurl", this.props.url.preview_url)
+
     this.state = { play: true };
     this.audio = new Audio(this.props.url.preview_url);
     this.props.url.preview_url = "";
@@ -13,7 +15,7 @@ class Music extends Component {
 
   togglePlay() {
     this.setState({ play: !this.state.play });
-    // console.log(this.audio);
+    console.log(this.audio);
     this.state.play ? this.audio.play() : this.audio.pause();
   }
 

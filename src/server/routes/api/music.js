@@ -58,6 +58,7 @@ router.post("/post", (req, res, next) => {
   });
   post.save().then(result => {
     console.log(result);
+    res.send(post)
   });
 });
 

@@ -62,8 +62,29 @@ class Post extends Component {
             placeholder="What's your jam?"
           />
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>Results</DropdownToggle>
-            <DropdownMenu>{output}</DropdownMenu>
+
+            <DropdownToggle caret>
+              Results
+        </DropdownToggle>
+            <DropdownMenu modifiers={{
+              setMaxHeight: {
+                enabled: true,
+                order: 890,
+                fn: (data) => {
+                  return {
+                    ...data,
+                    styles: {
+                      ...data.styles,
+                      overflow: 'auto',
+                      maxHeight: 400,
+                    },
+                  };
+                },
+              },
+            }}>
+              {output}
+            </DropdownMenu>
+
           </Dropdown>
         </fieldset>
         <Button
@@ -121,7 +142,11 @@ class Post extends Component {
       })
       .then(data => {
         // console.log("working");
+
+        console.log(data)
+
         <Redirect to="/" />;
+
       })
       .catch(err => {
         console.log(err);
