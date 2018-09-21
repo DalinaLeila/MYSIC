@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../../models/Post");
 const Comment = require("../../models/Comment")
-
+const { createPostToken } = require("../../utils/tokenPost");
 const SpotifyWebApi = require("spotify-web-api-node");
 
 const clientId = "b699d2563893414397d5d57212d81944",
@@ -85,7 +85,6 @@ router.post("/post", (req, res, next) => {
     res.send(post);
   });
 
-
 });
 
 //Deleting a Post
@@ -97,6 +96,7 @@ router.post("/post/delete", (req, res, next) => {
     console.log("DELETED");
   });
 });
+
 
 //COMMENTS
 //Writing a comment
@@ -134,6 +134,38 @@ router.post("/feed/comment/delete", (req, res, next) => {
   console.log(el._id);
   Comment.findByIdAndDelete(el._id).then(data => {
     console.log("DELETED");
+
+    //Like
+router.post("/post/like", (req, res, next) => {
+  let { likedUser, postId } = req.body;
+
+  Post.findById(postId).then(post => {
+    if (post.likedByUser.indexOf(likedUser) === -1) {
+      Post.findByIdAndUpdate(
+        postId,
+        { $push: { likedByUser: likedUser } },
+        { new: true }
+      )
+        .then(post => {
+          const postToken = createPostToken(post);
+          res.send({ token: postToken });
+          console.log("LIKE", postToken);
+        })
+        .catch(console.error);
+    } else {
+      Post.findByIdAndUpdate(
+        postId,
+        { $pull: { likedByUser: likedUser } },
+        { new: true }
+      )
+        .then(post => {
+          const postToken = createPostToken(post);
+          res.send({ token: postToken });
+          console.log("UNLIKE", postToken);
+        })
+        .catch(console.error);
+    }
+
   });
 });
 module.exports = router;

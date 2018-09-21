@@ -1,16 +1,36 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
-import { Button } from "reactstrap";
 
+import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      dropdownOpen: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+    this.handleLikeClick = this.handleLikeClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
+
   render() {
     let feedPosts = this.props.list.map((post, index) => {
-      // console.log(post);
-
+      // console.log("USER", this.props.user.username); //YOU
+      // console.log("POST", post);
+      const isLiking = post.likedByUser.includes(this.props.user.username);
+      let likes = post.likedByUser.map((name, index) => {
+        return (
+          <Link to={`/profile/${name}`}>
+            <li key={index}>{name}</li>
+          </Link>
+        ); //TOOOOO DOOOOO
+      });
+      console.log("POST.LOGGEDIN", this.props.loggedInUser); //
       return (
         <div key={index} className="postbody">
           <div className="userpost">
@@ -34,12 +54,37 @@ class Feed extends Component {
             </div>
             {post.created_at}
           </div>
+          {post.username === this.props.loggedInUser.username && (
+            <img
+              onClick={e => this.handleDeleteClick(e, post)}
+              src={require("../../assets/cross.png")} // image is not showing properly at the moment!!
+              width="40px"
+            />
+          )}
           <div className="social">
-            <Button onClick={el => this.handleLikeClick(el, post._id)}>
-              Like
-            </Button>
-
-            <Button>Save</Button>
+            <img
+              onClick={el =>
+                this.handleLikeClick(el, this.props.user.username, post._id)
+              }
+              src={
+                isLiking
+                  ? require("../../assets/likePurple.png")
+                  : require("../../assets/likeBlack.png")
+              }
+            />
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <DropdownToggle
+                tag="span"
+                onClick={this.toggle}
+                data-toggle="dropdown"
+                aria-expanded={this.state.dropdownOpen}
+              >
+                {post.likedByUser.length}
+              </DropdownToggle>
+              <DropdownMenu>
+                <div>{likes}</div>
+              </DropdownMenu>
+            </Dropdown>
           </div>
           <hr />
         </div>
@@ -47,9 +92,35 @@ class Feed extends Component {
     });
     return <div>{feedPosts}</div>;
   }
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+  handleLikeClick(el, likedUser, postId) {
+    api
+      .post("/api/music/post/like", {
+        likedUser,
+        postId
+      })
+      .then(data => {
+        localStorage.setItem("postIdentity", data.token);
+        this.props.setPost();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
-  handleLikeClick(e, postId) {
-    console.log(postId);
+  handleDeleteClick(e, el) {
+    // console.log(el);
+    api
+      .post(`/api/music/post/delete`, {
+        el
+      })
+      .then(data => {
+        this.props.history.push("/");
+      });
   }
 }
 

@@ -5,18 +5,16 @@ import api from "./utils/api";
 
 class Home extends Component {
   constructor(props) {
-
-    super(props)
+    super(props);
 
     this.state = {
       error: "",
       list: [],
+
       loading: true,
-      
 
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
   componentDidMount() {
     api
@@ -33,11 +31,10 @@ class Home extends Component {
   }
 
   render() {
+    // console.log("TOOKKKEENEEN", this.props.post);
     if (this.props.user)
       if (this.state.loading) {
-        return (
-          <div>loading ...</div>
-        )
+        return <div>loading ...</div>;
       }
     return (
       <div className="main">
@@ -51,13 +48,20 @@ class Home extends Component {
           </h1>
         </div>
 
-        {this.props.user && <Post handleSubmit={this.handleSubmit} />}
-        {this.props.user && <Feed list={this.state.list} />}
+        {this.props.user && <Post handleSubmit={this._handleSubmit} />}
+        {this.props.user && (
+          <Feed
+            loggedInUser={this.props.user}
+            list={this.state.list}
+            user={this.props.user}
+            setPost={this.props.setPost}
+          />
+        )}
       </div>
     );
   }
 
-  handleSubmit(caption, song) {
+  _handleSubmit(caption, song) {
     api
       .post(`/api/music/post`, {
         caption,
@@ -66,15 +70,12 @@ class Home extends Component {
       .then(data => {
         this.setState({
           list: [data].concat(this.state.list)
-        })
-
+        });
       })
       .catch(err => {
         console.log(err);
       });
   }
-
-
 }
 
 export default Home;

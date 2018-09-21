@@ -84,13 +84,16 @@ class Post extends Component {
               },
             }}>
 
+
               {output}
             </DropdownMenu>
           </Dropdown>
         </fieldset>
         <Button
           color="primary"
-          onClick={() => this.props.handleSubmit(this.state.caption, this.state.song)}
+          onClick={() =>
+            this.props.handleSubmit(this.state.caption, this.state.song)
+          }
           className="submit-form-btn"
           type="submit"
         >

@@ -8,7 +8,7 @@ class Discover extends Component {
 
     this.state = {
       loading: true,
-      list: [],
+      list: []
     };
   }
   componentDidMount() {
@@ -27,11 +27,20 @@ class Discover extends Component {
 
   render() {
     if (this.state.loading) {
-      return (
-        <div>loading ...</div>
-      )
+      return <div>loading ...</div>;
     }
-    return <div>{this.props.user && <Feed list={this.state.list} />}</div>;
+    return (
+      <div>
+        {this.props.user && (
+          <Feed
+            loggedInUser={this.props.user}
+            list={this.state.list}
+            user={this.props.user}
+            setPost={this.props.setPost}
+          />
+        )}
+      </div>
+    );
   }
 }
 
