@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
-
+import Comments from "./Comments"
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -10,12 +10,15 @@ class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      list: [],
+      error: '',
       dropdownOpen: false
     };
 
     this.toggle = this.toggle.bind(this);
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this._handleTwoSubmit = this._handleTwoSubmit.bind(this);
   }
 
   render() {
@@ -85,6 +88,7 @@ class Feed extends Component {
                 <div>{likes}</div>
               </DropdownMenu>
             </Dropdown>
+            <Comments handleTwoSubmit={this._handleTwoSubmit} post={post} />
           </div>
           <hr />
         </div>
@@ -122,6 +126,21 @@ class Feed extends Component {
         this.props.history.push("/");
       });
   }
+
+  _handleTwoSubmit(comment, postId) {
+    api
+      .post(`/api/music/feed/comment`, {
+        comment,
+        postId
+      })
+      .then(data => {
+        this.props.updatePost(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 }
+
 
 export default Feed;
