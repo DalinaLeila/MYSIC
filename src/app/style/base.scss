@@ -1,20 +1,55 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Hind+Madurai");
 
 * {
   box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: $text-color;
 }
 
 .container {
   padding: 25px calc((100vw - 960px) / 2);
-
+  background-color: #e6e6fa;
   @media (max-width: 980px) {
     padding: 25px 10px;
   }
+}
+
+.profile-header {
+  background-color: #e6e6fa;
+  text-align: center;
+  padding: 50px;
+}
+
+.profile-follow {
+  width: 110px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: #4b2cd4;
+  color: white;
+  float: right;
+  margin-right: 80px;
+}
+
+.profile-picture {
+  border: 2px solid #4b2cd4;
+
+  border-radius: 50%;
+}
+
+.profile-phrase {
+  background-color: white;
+  border-top: 2px solid #4b2cd4;
+  height: 50px;
+
+  padding: 50px;
+}
+
+.feed {
+  background-color: #e6e6fa;
+  padding: 50px;
 }

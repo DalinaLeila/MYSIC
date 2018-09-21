@@ -11,6 +11,8 @@ class Profile extends Component {
       user: {},
       loading: true
     };
+    this._updatePost = this._updatePost.bind(this);
+    this._deletePost = this._deletePost.bind(this);
   }
 
   componentDidMount() {
@@ -43,32 +45,41 @@ class Profile extends Component {
     );
 
     return (
-      <div className="container">
-        <img
-          src={this.state.user.profilePicture}
-          alt=""
-          width="200px"
-          className="profilepicture"
-        />
-        <br />
-        <br />
-        {this.state.user.username}
-        {this.props.user.username !== this.state.user.username && (
-          <button
-            onClick={e => this.handleFollowClick(e, this.state.user.username)}
-          >
-            {isFollowing ? "Unfollow" : "Follow"}
-          </button>
-        )}
-        <div>
-          <h3>Your Jam:</h3>
+      <div className="profile">
+        <div className="profile-header">
+          <img
+            src={this.state.user.profilePicture}
+            alt=""
+            width="200px"
+            className="profile-picture"
+          />
+          <br />
+          <br />
+          <h1>{this.state.user.username}</h1>
+          {this.props.user.username !== this.state.user.username && (
+            <button
+              className="profile-follow"
+              onClick={e => this.handleFollowClick(e, this.state.user.username)}
+            >
+              {isFollowing ? "Unfollow" : "Follow"}
+            </button>
+          )}
         </div>
-        <Feed
-          list={this.state.posts}
-          user={this.state.user}
-          loggedInUser={this.props.user}
-          setPost={this.props.setPost}
-        />
+        <div className="profile-phrase">
+          <h3>
+            {this.state.user.username}
+            's Jam:
+          </h3>
+        </div>
+        <div className="feed">
+          <Feed
+            list={this.state.posts}
+            user={this.state.user}
+            loggedInUser={this.props.user}
+            updatePost={this._updatePost}
+            deletePost={this._deletePost}
+          />
+        </div>
       </div>
     );
   }
@@ -80,6 +91,24 @@ class Profile extends Component {
         localStorage.setItem("identity", data.token);
         this.props.setUser();
       });
+  }
+
+  _updatePost(post) {
+    this.setState({
+      list: this.state.list.map(el => {
+        if (el._id !== post._id) return el;
+        return post;
+      })
+    });
+  }
+
+  _deletePost(post) {
+    this.setState({
+      list: this.state.list.filter(el => {
+        if (el._id !== post._id) return true;
+        return false;
+      })
+    });
   }
 }
 

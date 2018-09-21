@@ -17,37 +17,32 @@ class Application extends React.Component {
 
     this.state = {
       user: this._setUser(true),
-      isOpen: false,
-      post: this._setPost(true)
-
+      isOpen: false
     };
 
     this._setUser = this._setUser.bind(this);
-    this._setPost = this._setPost.bind(this);
     this._resetUser = this._resetUser.bind(this);
     this._toggle = this._toggle.bind(this);
-    this._resetPost = this._resetPost.bind(this);
-
   }
 
-
-  
   componentDidMount() {
     this._setUser();
-    this._setPost();
   }
-      _toggle() {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
-
+  _toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Navigation user={this.state.user} open={this.state.isOpen} toggle={this._toggle}  />
+          <Navigation
+            user={this.state.user}
+            open={this.state.isOpen}
+            toggle={this._toggle}
+          />
           <Switch>
             <Route
               exact
@@ -56,7 +51,6 @@ class Application extends React.Component {
                 <Home
                   setUser={this._setUser}
                   user={this.state.user}
-                  setPost={this._setPost}
                   post={this.state.post}
                 />
               )}
@@ -65,34 +59,21 @@ class Application extends React.Component {
               exact
               path="/discover"
               render={() => (
-                <Discover
-                  setUser={this._setUser}
-                  user={this.state.user}
-                  setPost={this._setPost}
-                  post={this.state.post}
-                />
+                <Discover setUser={this._setUser} user={this.state.user} />
               )}
             />
             <Route
               exact
               path="/profile"
               render={() => (
-                <Profile
-                  user={this.state.user}
-                  setUser={this._setUser}
-                  setPost={this._setPost}
-                />
+                <Profile user={this.state.user} setUser={this._setUser} />
               )}
             />
             <Route
               exact
               path="/profile/:username"
               render={() => (
-                <Profile
-                  user={this.state.user}
-                  setUser={this._setUser}
-                  setPost={this._setPost}
-                />
+                <Profile user={this.state.user} setUser={this._setUser} />
               )}
             />
             <Route
@@ -108,18 +89,9 @@ class Application extends React.Component {
     );
   }
 
-
-
-_resetUser() {
-  this.setState({
-    user: null
-  });
-}
-
-
-  _resetPost() {
+  _resetUser() {
     this.setState({
-      post: null
+      user: null
     });
   }
 
@@ -133,21 +105,7 @@ _resetUser() {
     } else {
       return null;
     }
-
-  }
-
-  _setPost(init) {
-    const token = localStorage.getItem("postIdentity");
-    if (token) {
-      const decoded = jwtDecode(token);
-      delete decoded.iat;
-      if (init) return decoded;
-      this.setState({ post: decoded });
-    } else {
-      return null;
-    }
   }
 }
-
 
 export default Application;

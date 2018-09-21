@@ -6,7 +6,6 @@ import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -25,12 +24,11 @@ class Feed extends Component {
       const isLiking = post.likedByUser.includes(this.props.user.username);
       let likes = post.likedByUser.map((name, index) => {
         return (
-          <Link to={`/profile/${name}`}>
-            <li key={index}>{name}</li>
+          <Link key={index} to={`/profile/${name}`}>
+            <li>{name}</li>
           </Link>
-        ); //TOOOOO DOOOOO
+        );
       });
-      console.log("POST.LOGGEDIN", this.props.loggedInUser); //
       return (
         <div key={index} className="postbody">
           <div className="userpost">
@@ -38,13 +36,22 @@ class Feed extends Component {
               <div className="user">
                 <img
                   src={post.profilePicture}
-                  width="30px"
+                  width="40px"
                   className="profilepicture"
                 />
-                {post.username}
+                <h5>{post.username}</h5>
               </div>
             </Link>
-            <div className="usercomment">" {post.caption} "</div>
+            <div className="usercomment">
+              <h3>" {post.caption} "</h3>
+            </div>
+            {post.username === this.props.loggedInUser.username && (
+              <img
+                onClick={e => this.handleDeleteClick(e, post)}
+                src={require("../../assets/cross.png")}
+                width="20px"
+              />
+            )}
           </div>
           <div className="songinfo">
             <img src={post.song.album.images[0].url} width="50px" />
@@ -54,13 +61,7 @@ class Feed extends Component {
             </div>
             {post.created_at}
           </div>
-          {post.username === this.props.loggedInUser.username && (
-            <img
-              onClick={e => this.handleDeleteClick(e, post)}
-              src={require("../../assets/cross.png")} // image is not showing properly at the moment!!
-              width="40px"
-            />
-          )}
+
           <div className="social">
             <img
               onClick={el =>
@@ -103,9 +104,8 @@ class Feed extends Component {
         likedUser,
         postId
       })
-      .then(data => {
-        localStorage.setItem("postIdentity", data.token);
-        this.props.setPost();
+      .then(result => {
+        this.props.updatePost(result);
       })
       .catch(err => {
         console.log(err);
@@ -113,13 +113,15 @@ class Feed extends Component {
   }
 
   handleDeleteClick(e, el) {
-    // console.log(el);
     api
       .post(`/api/music/post/delete`, {
         el
       })
-      .then(data => {
-        this.props.history.push("/");
+      .then(result => {
+        this.props.deletePost(result);
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 }
