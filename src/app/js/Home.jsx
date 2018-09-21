@@ -14,10 +14,9 @@ class Home extends Component {
       loading: true
     };
     this._handleSubmit = this._handleSubmit.bind(this);
-    this._updateComment=this._updateComment.bind(this)
+    this._updateComment = this._updateComment.bind(this);
     this._updatePost = this._updatePost.bind(this);
     this._deletePost = this._deletePost.bind(this);
-
   }
   componentDidMount() {
     api
@@ -50,17 +49,17 @@ class Home extends Component {
           </h1>
         </div>
 
-        {this.props.user && <Post handleSubmit={this._handleSubmit} error={this.state.error} />}
+        {this.props.user && (
+          <Post handleSubmit={this._handleSubmit} error={this.state.error} />
+        )}
         {this.props.user && (
           <Feed
             loggedInUser={this.props.user}
             list={this.state.list}
             user={this.props.user}
-<!--             setPost={this.props.setPost} -->
             updateComment={this._updateComment}
             updatePost={this._updatePost}
             deletePost={this._deletePost}
-
           />
         )}
       </div>
@@ -100,19 +99,18 @@ class Home extends Component {
       .catch(err => {
         this.setState({
           error: err.description
-        })
+        });
       });
   }
 
-  _updateComment(post){
+  _updateComment(post) {
     this.setState({
-      list:this.state.list.keys(el=>{
-        if( el.id !==post._id) return el;
+      list: this.state.list.map(el => {
+        if (el.id !== post._id) return el;
         return post;
       })
-    })
+    });
   }
-
 }
 
 export default Home;

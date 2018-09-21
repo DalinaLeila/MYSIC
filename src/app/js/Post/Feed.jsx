@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
-import Comments from "./Comments"
+import Comments from "./Comments";
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ class Feed extends Component {
     super(props);
     this.state = {
       list: [],
-      error: '',
+      error: "",
       dropdownOpen: false
     };
 
@@ -135,14 +135,13 @@ class Feed extends Component {
         comment,
         postId
       })
-      .then(data => {
-        this.props.updatePost(data)
+      .then(result => {
+        this.props.updatePost(result);
       })
       .catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 }
-
 
 export default Feed;
