@@ -134,7 +134,9 @@ router.post("/feed/comment/delete", (req, res, next) => {
   console.log(el._id);
   Comment.findByIdAndDelete(el._id).then(data => {
     console.log("DELETED");
-
+  }
+  )})
+  
     //Like
 router.post("/post/like", (req, res, next) => {
   let { likedUser, postId } = req.body;
@@ -168,4 +170,5 @@ router.post("/post/like", (req, res, next) => {
 
   });
 });
+
 module.exports = router;

@@ -17,9 +17,7 @@ class Application extends React.Component {
 
     this.state = {
       user: this._setUser(true),
-
-      isOpen: false
-
+      isOpen: false,
       post: this._setPost(true)
 
     };
@@ -150,6 +148,6 @@ _resetUser() {
     }
   }
 }
-}
+
 
 export default Application;
