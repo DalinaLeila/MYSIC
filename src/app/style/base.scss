@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Hind+Madurai");
-
+@import url("https://fonts.googleapis.com/css?family=Comfortaa|Hind+Madurai");
 * {
   box-sizing: border-box;
   font-family: "Helvetica Neue", sans-serif;
@@ -21,8 +20,12 @@ body {
 
 .profile-header {
   background-color: #e6e6fa;
+
+  // background-image: url("https://source.unsplash.com/1600x900/?music,purple");
+
   text-align: center;
   padding: 50px;
+  font-family: "Comfortaa", cursive;
 }
 
 .profile-follow {
