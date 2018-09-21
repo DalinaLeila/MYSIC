@@ -64,8 +64,6 @@ class Post extends Component {
             placeholder="What's your jam?"
           />
         </DropdownToggle>
-
-
             
             <DropdownMenu modifiers={{
               setMaxHeight: {
@@ -83,8 +81,6 @@ class Post extends Component {
                 },
               },
             }}>
-
-
               {output}
             </DropdownMenu>
           </Dropdown>
