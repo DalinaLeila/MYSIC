@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import api from "../utils/api";
 import UserPosts from "./UserPosts";
+import Feed from "../Post/Feed";
 
 class Profile extends Component {
   constructor(props) {
@@ -11,8 +12,6 @@ class Profile extends Component {
       user: {},
       loading: true
     };
-
-    this._handleClick = this._handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +34,8 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("PROPS", this.props.user); //my profile
-    console.log("STATE", this.state.user); //friends profile
+    // console.log("PROPS", this.props.user); //my profile
+    // console.log("STATE", this.state.user); //friends profile
     if (!this.props.user) return <Redirect to="/auth/sign-in" />; // this is actually the protection
     if (this.state.loading) return <h1>Loading</h1>;
 
@@ -65,11 +64,11 @@ class Profile extends Component {
         <div>
           <h3>Your Jam:</h3>
         </div>
-        <UserPosts
-          posts={this.state.posts}
+        <Feed
+          list={this.state.posts}
           user={this.state.user}
           loggedInUser={this.props.user}
-          handleClick={this._handleClick}
+          setPost={this.props.setPost}
         />
       </div>
     );
@@ -81,16 +80,6 @@ class Profile extends Component {
       .then(data => {
         localStorage.setItem("identity", data.token);
         this.props.setUser();
-      });
-  }
-  _handleClick(e, el) {
-    // console.log(el);
-    api
-      .post(`/api/music/post/delete`, {
-        el
-      })
-      .then(data => {
-        this.props.history.push("/");
       });
   }
 }

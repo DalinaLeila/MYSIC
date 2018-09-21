@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../../models/Post");
-
+const { createPostToken } = require("../../utils/tokenPost");
 const SpotifyWebApi = require("spotify-web-api-node");
 
 const clientId = "b699d2563893414397d5d57212d81944",
@@ -68,7 +68,7 @@ router.get("/feed", (req, res, next) => {
 //Saving a new post
 router.post("/post", (req, res, next) => {
   let { caption, song } = req.body;
-  
+
   let post = new Post({
     caption: caption,
     song: song,
@@ -76,12 +76,12 @@ router.post("/post", (req, res, next) => {
     username: req.user.username,
     profilePicture: req.user.profilePicture
   });
-  (!song || !caption)
-   ? res.status(400).send({ error: "Missing Jamz" }):
-  post.save().then(result => {
-    console.log(result);
-    res.send(post);
-  });
+  !song || !caption
+    ? res.status(400).send({ error: "Missing Jamz" })
+    : post.save().then(result => {
+        console.log(result);
+        res.send(post);
+      });
 });
 
 router.post("/post/delete", (req, res, next) => {
@@ -90,6 +90,38 @@ router.post("/post/delete", (req, res, next) => {
   console.log(el._id);
   Post.findByIdAndDelete(el._id).then(data => {
     console.log("DELETED");
+  });
+});
+
+router.post("/post/like", (req, res, next) => {
+  let { likedUser, postId } = req.body;
+
+  Post.findById(postId).then(post => {
+    if (post.likedByUser.indexOf(likedUser) === -1) {
+      Post.findByIdAndUpdate(
+        postId,
+        { $push: { likedByUser: likedUser } },
+        { new: true }
+      )
+        .then(post => {
+          const postToken = createPostToken(post);
+          res.send({ token: postToken });
+          console.log("LIKE", postToken);
+        })
+        .catch(console.error);
+    } else {
+      Post.findByIdAndUpdate(
+        postId,
+        { $pull: { likedByUser: likedUser } },
+        { new: true }
+      )
+        .then(post => {
+          const postToken = createPostToken(post);
+          res.send({ token: postToken });
+          console.log("UNLIKE", postToken);
+        })
+        .catch(console.error);
+    }
   });
 });
 module.exports = router;

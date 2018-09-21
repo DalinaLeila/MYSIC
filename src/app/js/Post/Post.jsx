@@ -63,35 +63,34 @@ class Post extends Component {
             placeholder="What's your jam?"
           />
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-
-
-            <DropdownToggle caret>
-              Results
-        </DropdownToggle>
-            <DropdownMenu modifiers={{
-              setMaxHeight: {
-                enabled: true,
-                order: 890,
-                fn: (data) => {
-                  return {
-                    ...data,
-                    styles: {
-                      ...data.styles,
-                      overflow: 'auto',
-                      maxHeight: 300,
-                    },
-                  };
-                },
-              },
-            }}>
-
+            <DropdownToggle caret>Results</DropdownToggle>
+            <DropdownMenu
+              modifiers={{
+                setMaxHeight: {
+                  enabled: true,
+                  order: 890,
+                  fn: data => {
+                    return {
+                      ...data,
+                      styles: {
+                        ...data.styles,
+                        overflow: "auto",
+                        maxHeight: 300
+                      }
+                    };
+                  }
+                }
+              }}
+            >
               {output}
             </DropdownMenu>
           </Dropdown>
         </fieldset>
         <Button
           color="primary"
-          onClick={() => this.props.handleSubmit(this.state.caption, this.state.song)}
+          onClick={() =>
+            this.props.handleSubmit(this.state.caption, this.state.song)
+          }
           className="submit-form-btn"
           type="submit"
         >
@@ -137,26 +136,6 @@ class Post extends Component {
         });
       });
   }
-
-  // handleSubmit() {
-  //   api
-  //     .post(`/api/music/post`, {
-  //       caption: this.state.caption,
-  //       song: this.state.song
-  //     })
-  //     .then(data => {
-  //       // console.log("working");
-
-
-  //       console.log(data)
-
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
 }
 
 export default Post;

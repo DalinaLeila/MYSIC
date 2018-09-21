@@ -16,15 +16,19 @@ class Application extends React.Component {
     super(props);
 
     this.state = {
-      user: this._setUser(true)
+      user: this._setUser(true),
+      post: this._setPost(true)
     };
 
     this._setUser = this._setUser.bind(this);
+    this._setPost = this._setPost.bind(this);
     this._resetUser = this._resetUser.bind(this);
+    this._resetPost = this._resetPost.bind(this);
   }
 
   componentDidMount() {
     this._setUser();
+    this._setPost();
   }
 
   render() {
@@ -36,25 +40,47 @@ class Application extends React.Component {
             <Route
               exact
               path="/"
-              render={() => <Home user={this.state.user} />}
+              render={() => (
+                <Home
+                  setUser={this._setUser}
+                  user={this.state.user}
+                  setPost={this._setPost}
+                  post={this.state.post}
+                />
+              )}
             />
             <Route
               exact
               path="/discover"
-              render={() => <Discover user={this.state.user} />}
+              render={() => (
+                <Discover
+                  setUser={this._setUser}
+                  user={this.state.user}
+                  setPost={this._setPost}
+                  post={this.state.post}
+                />
+              )}
             />
             <Route
               exact
               path="/profile"
               render={() => (
-                <Profile user={this.state.user} setUser={this._setUser} />
+                <Profile
+                  user={this.state.user}
+                  setUser={this._setUser}
+                  setPost={this._setPost}
+                />
               )}
             />
             <Route
               exact
               path="/profile/:username"
               render={() => (
-                <Profile user={this.state.user} setUser={this._setUser} />
+                <Profile
+                  user={this.state.user}
+                  setUser={this._setUser}
+                  setPost={this._setPost}
+                />
               )}
             />
             <Route
@@ -76,6 +102,12 @@ class Application extends React.Component {
     });
   }
 
+  _resetPost() {
+    this.setState({
+      post: null
+    });
+  }
+
   _setUser(init) {
     const token = localStorage.getItem("identity");
     if (token) {
@@ -83,6 +115,18 @@ class Application extends React.Component {
       delete decoded.iat;
       if (init) return decoded;
       this.setState({ user: decoded });
+    } else {
+      return null;
+    }
+  }
+
+  _setPost(init) {
+    const token = localStorage.getItem("postIdentity");
+    if (token) {
+      const decoded = jwtDecode(token);
+      delete decoded.iat;
+      if (init) return decoded;
+      this.setState({ post: decoded });
     } else {
       return null;
     }

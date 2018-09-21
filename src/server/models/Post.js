@@ -7,7 +7,8 @@ const postSchema = new Schema(
     song: Object,
     creatorId: { type: Schema.Types.ObjectId, ref: "User" },
     username: String,
-    profilePicture: String
+    profilePicture: String,
+    likedByUser: [{ type: String }]
   },
   {
     timestamps: {

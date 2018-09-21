@@ -6,31 +6,18 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
-//   constructor(props) {
-//     super(props);
-    // this.state = {
-    //   list: []
-    // };
-//   }
-
-
-  // componentDidMount() {
-  //   api
-  //     .get("/api/music/feed")
-  //     .then(data => {
-  //       this.setState({
-  //         list: data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
+  constructor(props) {
+    super(props);
+    this.handleLikeClick = this.handleLikeClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
   render() {
     let feedPosts = this.props.list.map((post, index) => {
-      console.log(post);
+      // console.log("USER", this.props.user.username); //YOU
+      // console.log("POST", post);
+      const isLiking = post.likedByUser.includes(this.props.user.username);
 
+      console.log("POST.LOGGEDIN", this.props.loggedInUser); //
       return (
         <div key={index}>
           <div className="userpost">
@@ -54,10 +41,32 @@ class Feed extends Component {
             </div>
             {post.created_at}
           </div>
+          {post.username === this.props.loggedInUser.username && (
+            <img
+              onClick={e => this.handleDeleteClick(e, post)}
+              src={require("../../assets/cross.png")} // image is not showing properly at the moment!!
+              width="40px"
+            />
+          )}
           <div className="social">
-            <Button onClick={el => this.handleLikeClick(el, post._id)}>
-              Like
-            </Button>
+            <img
+              onClick={el =>
+                this.handleLikeClick(el, this.props.user.username, post._id)
+              }
+              src={
+                isLiking
+                  ? require("../../assets/likePurple.png")
+                  : require("../../assets/likeBlack.png")
+              }
+            />
+
+            <p
+              onMouseOver={el => {
+                this.showLikes(el, post.likedByUser);
+              }}
+            >
+              {post.likedByUser.length}
+            </p>
 
             <Button>Save</Button>
           </div>
@@ -68,8 +77,36 @@ class Feed extends Component {
     return <div>{feedPosts}</div>;
   }
 
-  handleLikeClick(e, postId) {
-    console.log(postId);
+  showLikes(el, array) {
+    let likeName = array.forEach(name => {
+      return name;
+    });
+  }
+
+  handleLikeClick(el, likedUser, postId) {
+    api
+      .post("/api/music/post/like", {
+        likedUser,
+        postId
+      })
+      .then(data => {
+        localStorage.setItem("postIdentity", data.token);
+        this.props.setPost();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  handleDeleteClick(e, el) {
+    // console.log(el);
+    api
+      .post(`/api/music/post/delete`, {
+        el
+      })
+      .then(data => {
+        this.props.history.push("/");
+      });
   }
 }
 
