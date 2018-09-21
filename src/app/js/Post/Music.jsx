@@ -5,7 +5,8 @@ class Music extends Component {
   constructor(props) {
     super(props);
 
-    console.log("songurl", this.props.url.preview_url);
+    // console.log("songurl", this.props.url.preview_url)
+
 
     this.state = { play: true };
     this.audio = new Audio(this.props.url.preview_url);

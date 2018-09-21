@@ -6,6 +6,7 @@ import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +32,7 @@ class Feed extends Component {
       });
       console.log("POST.LOGGEDIN", this.props.loggedInUser); //
       return (
-        <div key={index}>
+        <div key={index} className="postbody">
           <div className="userpost">
             <Link to={`/profile/${post.username}`}>
               <div className="user">

@@ -13,3 +13,23 @@ align-items: baseline;
 .profilepicture{
   border-radius: 50%;
 }
+
+
+.main{
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.postbody{
+  margin: 0 auto;
+}
+
+.btn-primary{
+// border-color: black !important;
+background: $primary-color !important;}
+
+.dropsearch{
+  border:1px white solid;
+  background-color:white !important;
+  padding: 0 !important;
+}

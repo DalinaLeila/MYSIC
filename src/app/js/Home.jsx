@@ -10,7 +10,9 @@ class Home extends Component {
     this.state = {
       error: "",
       list: [],
-      loading: true
+
+      loading: true,
+
     };
     this._handleSubmit = this._handleSubmit.bind(this);
   }
@@ -35,7 +37,7 @@ class Home extends Component {
         return <div>loading ...</div>;
       }
     return (
-      <div>
+      <div className="main">
         <div className="container">
           <h1>
             Hello,{" "}

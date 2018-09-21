@@ -17,25 +17,39 @@ class Application extends React.Component {
 
     this.state = {
       user: this._setUser(true),
+
+      isOpen: false
+
       post: this._setPost(true)
+
     };
 
     this._setUser = this._setUser.bind(this);
     this._setPost = this._setPost.bind(this);
     this._resetUser = this._resetUser.bind(this);
+    this._toggle = this._toggle.bind(this);
     this._resetPost = this._resetPost.bind(this);
+
   }
 
+
+  
   componentDidMount() {
     this._setUser();
     this._setPost();
   }
+      _toggle() {
+        this.setState({
+          isOpen: !this.state.isOpen
+        });
+      }
+
 
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Navigation user={this.state.user} />
+          <Navigation user={this.state.user} open={this.state.isOpen} toggle={this._toggle}  />
           <Switch>
             <Route
               exact
@@ -96,11 +110,14 @@ class Application extends React.Component {
     );
   }
 
-  _resetUser() {
-    this.setState({
-      user: null
-    });
-  }
+
+
+_resetUser() {
+  this.setState({
+    user: null
+  });
+}
+
 
   _resetPost() {
     this.setState({
@@ -118,6 +135,7 @@ class Application extends React.Component {
     } else {
       return null;
     }
+
   }
 
   _setPost(init) {
@@ -131,6 +149,7 @@ class Application extends React.Component {
       return null;
     }
   }
+}
 }
 
 export default Application;
