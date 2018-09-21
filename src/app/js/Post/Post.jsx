@@ -54,6 +54,8 @@ class Post extends Component {
           />
         </fieldset>
         <fieldset>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} >
+            <DropdownToggle className='dropsearch'>
           <input
             type="text"
             value={this.state.search}
@@ -61,12 +63,10 @@ class Post extends Component {
             className="input"
             placeholder="What's your jam?"
           />
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-
-
-            <DropdownToggle caret>
-              Results
         </DropdownToggle>
+
+
+            
             <DropdownMenu modifiers={{
               setMaxHeight: {
                 enabled: true,

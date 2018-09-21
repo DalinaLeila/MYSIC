@@ -17,7 +17,7 @@ import {
 const Navigation = props => {
     return (
         <div>
-            <Navbar color="primary" dark expand="md">
+            <Navbar className="navigation" dark expand="md">
                 <NavbarBrand><Link className="link nav-link" to="/">Musicly </Link></NavbarBrand>
                 <NavbarToggler onClick={props.toggle} />
                 <Collapse isOpen={props.open} navbar>

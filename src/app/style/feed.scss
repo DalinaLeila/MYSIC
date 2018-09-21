@@ -23,3 +23,13 @@ align-items: baseline;
 .postbody{
   margin: 0 auto;
 }
+
+.btn-primary{
+// border-color: black !important;
+background: $primary-color !important;}
+
+.dropsearch{
+  border:1px white solid;
+  background-color:white !important;
+  padding: 0 !important;
+}
