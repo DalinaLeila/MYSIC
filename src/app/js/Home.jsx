@@ -11,11 +11,13 @@ class Home extends Component {
       error: "",
       list: [],
 
-      loading: true,
-
+      loading: true
     };
     this._handleSubmit = this._handleSubmit.bind(this);
     this._updateComment=this._updateComment.bind(this)
+    this._updatePost = this._updatePost.bind(this);
+    this._deletePost = this._deletePost.bind(this);
+
   }
   componentDidMount() {
     api
@@ -32,7 +34,6 @@ class Home extends Component {
   }
 
   render() {
-    // console.log("TOOKKKEENEEN", this.props.post);
     if (this.props.user)
       if (this.state.loading) {
         return <div>loading ...</div>;
@@ -55,12 +56,33 @@ class Home extends Component {
             loggedInUser={this.props.user}
             list={this.state.list}
             user={this.props.user}
-            setPost={this.props.setPost}
+<!--             setPost={this.props.setPost} -->
             updateComment={this._updateComment}
+            updatePost={this._updatePost}
+            deletePost={this._deletePost}
+
           />
         )}
       </div>
     );
+  }
+
+  _updatePost(post) {
+    this.setState({
+      list: this.state.list.map(el => {
+        if (el._id !== post._id) return el;
+        return post;
+      })
+    });
+  }
+
+  _deletePost(post) {
+    this.setState({
+      list: this.state.list.filter(el => {
+        if (el._id !== post._id) return true;
+        return false;
+      })
+    });
   }
 
   _handleSubmit(caption, song) {

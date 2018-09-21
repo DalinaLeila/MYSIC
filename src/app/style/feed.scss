@@ -1,35 +1,30 @@
-.userpost{
+.userpost {
   display: flex;
-background-color:silver;
-justify-content:flex-start;
-align-items: baseline;
+  background-color: silver;
+  justify-content: flex-start;
+  align-items: baseline;
 }
-.songinfo{
+.songinfo {
   // display:flex;
-//  margin: 0 40px;
+  //  margin: 0 40px;
 }
 
-
-.profilepicture{
-  border-radius: 50%;
-}
-
-
-.main{
+.main {
   margin: 0 auto;
   padding: 0 40px;
 }
 
-.postbody{
+.postbody {
   margin: 0 auto;
 }
 
-.btn-primary{
-// border-color: black !important;
-background: $primary-color !important;}
+.btn-primary {
+  // border-color: black !important;
+  background: $primary-color !important;
+}
 
-.dropsearch{
-  border:1px white solid;
-  background-color:white !important;
+.dropsearch {
+  border: 1px white solid;
+  background-color: white !important;
   padding: 0 !important;
 }

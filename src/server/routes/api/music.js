@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../../models/Post");
-const Comment = require("../../models/Comment")
-const { createPostToken } = require("../../utils/tokenPost");
+const Comment = require("../../models/Comment");
 const SpotifyWebApi = require("spotify-web-api-node");
 
 const clientId = "b699d2563893414397d5d57212d81944",
@@ -15,10 +14,10 @@ const spotifyApi = new SpotifyWebApi({
 
 // Retrieve an access token. (Spotify)
 spotifyApi.clientCredentialsGrant().then(
-  function (data) {
+  function(data) {
     spotifyApi.setAccessToken(data.body["access_token"]);
   },
-  function (err) {
+  function(err) {
     console.log("Something went wrong when retrieving an access token", err);
   }
 );
@@ -77,34 +76,35 @@ router.post("/post", (req, res, next) => {
     profilePicture: req.user.profilePicture
   });
 
+
   if (!song || !caption || !Object.keys(song).length)
     return res.status(400).send({ error: "Missing Jamz" })
+
 
   post.save().then(result => {
     console.log(result);
     res.send(post);
   });
-
 });
 
 //Deleting a Post
 router.post("/post/delete", (req, res, next) => {
-  console.log("WORKING");
   let { el } = req.body;
-  console.log(el._id);
+
   Post.findByIdAndDelete(el._id).then(data => {
-    console.log("DELETED");
+    res.send({ _id: el._id });
   });
 });
-
 
 //COMMENTS
 //Writing a comment
 router.post("/feed/comment", (req, res, next) => {
+
   let { comment, postId } = req.body;
   let message = new Comment({
     comment,
     postId: postId,
+
     username: req.user.username,
     profilePicture: req.user.profilePicture
   });
@@ -112,9 +112,10 @@ router.post("/feed/comment", (req, res, next) => {
     console.log(result);
     res.send(result);
   });
-})
+});
 
 //Displaying comments on a post
+
 // router.get("/feed/comment", (req, res, next) => {
 //   let post = req.post._id;
 //   Comment.find({ post })
@@ -127,6 +128,7 @@ router.post("/feed/comment", (req, res, next) => {
 //     });
 // });
 
+
 //Deleting comments
 router.post("/feed/comment/delete", (req, res, next) => {
   console.log("WORKING");
@@ -137,6 +139,7 @@ router.post("/feed/comment/delete", (req, res, next) => {
   }
   )
 })
+
 
 //Like
 router.post("/post/like", (req, res, next) => {
@@ -150,9 +153,7 @@ router.post("/post/like", (req, res, next) => {
         { new: true }
       )
         .then(post => {
-          const postToken = createPostToken(post);
-          res.send({ token: postToken });
-          console.log("LIKE", postToken);
+          res.send(post);
         })
         .catch(console.error);
     } else {
@@ -162,13 +163,10 @@ router.post("/post/like", (req, res, next) => {
         { new: true }
       )
         .then(post => {
-          const postToken = createPostToken(post);
-          res.send({ token: postToken });
-          console.log("UNLIKE", postToken);
+          res.send(post);
         })
         .catch(console.error);
     }
-
   });
 });
 
