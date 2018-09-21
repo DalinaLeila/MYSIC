@@ -18,7 +18,6 @@ class Post extends Component {
       caption: "",
       song: {},
       dropdownOpen: false,
-      error: ""
     };
     this.toggle = this.toggle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -137,25 +136,6 @@ class Post extends Component {
         });
       });
   }
-
-  // handleSubmit() {
-  //   api
-  //     .post(`/api/music/post`, {
-  //       caption: this.state.caption,
-  //       song: this.state.song
-  //     })
-  //     .then(data => {
-  //       // console.log("working");
-
-
-  //       console.log(data)
-
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
 }
 

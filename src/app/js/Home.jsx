@@ -12,6 +12,7 @@ class Home extends Component {
       error: "",
       list: [],
       loading: true,
+      
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +40,7 @@ class Home extends Component {
         )
       }
     return (
-      <div>
+      <div className="main">
         <div className="container">
           <h1>
             Hello,{" "}

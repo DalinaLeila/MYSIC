@@ -6,33 +6,13 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
-//   constructor(props) {
-//     super(props);
-    // this.state = {
-    //   list: []
-    // };
-//   }
-
-
-  // componentDidMount() {
-  //   api
-  //     .get("/api/music/feed")
-  //     .then(data => {
-  //       this.setState({
-  //         list: data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
   render() {
     let feedPosts = this.props.list.map((post, index) => {
-      console.log(post);
+      // console.log(post);
 
       return (
-        <div key={index}>
+        <div key={index} className="postbody">
           <div className="userpost">
             <Link to={`/profile/${post.username}`}>
               <div className="user">
