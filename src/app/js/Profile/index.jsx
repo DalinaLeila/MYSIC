@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import api from "../utils/api";
-import UserPosts from "./UserPosts";
 import Feed from "../Post/Feed";
 
 class Profile extends Component {

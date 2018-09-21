@@ -1,22 +1,34 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import Music from "./Music";
-import { Button } from "reactstrap";
 
+import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Feed extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      dropdownOpen: false
+    };
+
+    this.toggle = this.toggle.bind(this);
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
+
   render() {
     let feedPosts = this.props.list.map((post, index) => {
       // console.log("USER", this.props.user.username); //YOU
       // console.log("POST", post);
       const isLiking = post.likedByUser.includes(this.props.user.username);
-
+      let likes = post.likedByUser.map((name, index) => {
+        return (
+          <Link to={`/profile/${name}`}>
+            <li key={index}>{name}</li>
+          </Link>
+        ); //TOOOOO DOOOOO
+      });
       console.log("POST.LOGGEDIN", this.props.loggedInUser); //
       return (
         <div key={index}>
@@ -59,16 +71,19 @@ class Feed extends Component {
                   : require("../../assets/likeBlack.png")
               }
             />
-
-            <p
-              onMouseOver={el => {
-                this.showLikes(el, post.likedByUser);
-              }}
-            >
-              {post.likedByUser.length}
-            </p>
-
-            <Button>Save</Button>
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <DropdownToggle
+                tag="span"
+                onClick={this.toggle}
+                data-toggle="dropdown"
+                aria-expanded={this.state.dropdownOpen}
+              >
+                {post.likedByUser.length}
+              </DropdownToggle>
+              <DropdownMenu>
+                <div>{likes}</div>
+              </DropdownMenu>
+            </Dropdown>
           </div>
           <hr />
         </div>
@@ -76,13 +91,11 @@ class Feed extends Component {
     });
     return <div>{feedPosts}</div>;
   }
-
-  showLikes(el, array) {
-    let likeName = array.forEach(name => {
-      return name;
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
-
   handleLikeClick(el, likedUser, postId) {
     api
       .post("/api/music/post/like", {
