@@ -76,10 +76,8 @@ router.post("/post", (req, res, next) => {
     profilePicture: req.user.profilePicture
   });
 
-
   if (!song || !caption || !Object.keys(song).length)
-    return res.status(400).send({ error: "Missing Jamz" })
-
+    return res.status(400).send({ error: "Missing Jamz" });
 
   post.save().then(result => {
     console.log(result);
@@ -99,7 +97,6 @@ router.post("/post/delete", (req, res, next) => {
 //COMMENTS
 //Writing a comment
 router.post("/feed/comment", (req, res, next) => {
-
   let { comment, postId } = req.body;
   let message = new Comment({
     comment,
@@ -109,7 +106,7 @@ router.post("/feed/comment", (req, res, next) => {
     profilePicture: req.user.profilePicture
   });
   message.save().then(result => {
-    console.log(result);
+    console.log("COMMENT", result);
     res.send(result);
   });
 });
@@ -128,7 +125,6 @@ router.post("/feed/comment", (req, res, next) => {
 //     });
 // });
 
-
 //Deleting comments
 router.post("/feed/comment/delete", (req, res, next) => {
   console.log("WORKING");
@@ -136,10 +132,8 @@ router.post("/feed/comment/delete", (req, res, next) => {
   console.log(el._id);
   Comment.findByIdAndDelete(el._id).then(data => {
     console.log("DELETED");
-  }
-  )
-})
-
+  });
+});
 
 //Like
 router.post("/post/like", (req, res, next) => {

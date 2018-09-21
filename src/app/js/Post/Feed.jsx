@@ -11,13 +11,15 @@ class Feed extends Component {
     this.state = {
       list: [],
       error: "",
-      dropdownOpen: false
+      dropdownOpen: false,
+      comments: []
     };
 
     this.toggle = this.toggle.bind(this);
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this._handleTwoSubmit = this._handleTwoSubmit.bind(this);
+    // this.updateComment = this.updateComment.bind(this);
   }
 
   render() {
@@ -115,6 +117,14 @@ class Feed extends Component {
         console.log(err);
       });
   }
+  // updateComment(comment) {
+  //   this.setState({
+  //     list: this.state.list.map(el => {
+  //       if (el.id !== comment.postId) return el;
+  //       return comment;
+  //     })
+  //   });
+  // }
 
   handleDeleteClick(e, el) {
     api
@@ -135,8 +145,9 @@ class Feed extends Component {
         comment,
         postId
       })
-      .then(result => {
-        this.props.updatePost(result);
+      .then(comment => {
+        console.log("IWANT TO DISPLAY THIS", comment);
+        // this.updateComment(comment);
       })
       .catch(err => {
         console.log(err);

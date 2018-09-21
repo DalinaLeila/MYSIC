@@ -14,7 +14,6 @@ class Home extends Component {
       loading: true
     };
     this._handleSubmit = this._handleSubmit.bind(this);
-    this._updateComment = this._updateComment.bind(this);
     this._updatePost = this._updatePost.bind(this);
     this._deletePost = this._deletePost.bind(this);
   }
@@ -74,7 +73,6 @@ class Home extends Component {
       })
     });
   }
-
   _deletePost(post) {
     this.setState({
       list: this.state.list.filter(el => {
@@ -103,14 +101,14 @@ class Home extends Component {
       });
   }
 
-  _updateComment(post) {
-    this.setState({
-      list: this.state.list.map(el => {
-        if (el.id !== post._id) return el;
-        return post;
-      })
-    });
-  }
+  // _updateComment(post) {
+  //   this.setState({
+  //     list: this.state.list.map(el => {
+  //       if (el.id !== post._id) return el;
+  //       return post;
+  //     })
+  //   });
+  // }
 }
 
 export default Home;

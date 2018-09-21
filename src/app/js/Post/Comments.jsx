@@ -16,7 +16,6 @@ class Comments extends Component {
     };
   }
   render() {
-    console.log(this.props.post._id);
     return (
       <div>
         <input
