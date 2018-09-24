@@ -95,7 +95,7 @@ class Profile extends Component {
 
   _updatePost(post) {
     this.setState({
-      list: this.state.list.map(el => {
+      posts: this.state.posts.map(el => {
         if (el._id !== post._id) return el;
         return post;
       })
@@ -104,7 +104,7 @@ class Profile extends Component {
 
   _deletePost(post) {
     this.setState({
-      list: this.state.list.filter(el => {
+      posts: this.state.posts.filter(el => {
         if (el._id !== post._id) return true;
         return false;
       })

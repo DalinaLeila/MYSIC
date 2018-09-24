@@ -10,7 +10,6 @@ class Home extends Component {
     this.state = {
       error: "",
       list: [],
-
       loading: true
     };
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -56,7 +55,6 @@ class Home extends Component {
             loggedInUser={this.props.user}
             list={this.state.list}
             user={this.props.user}
-            updateComment={this._updateComment}
             updatePost={this._updatePost}
             deletePost={this._deletePost}
           />
@@ -100,15 +98,6 @@ class Home extends Component {
         });
       });
   }
-
-  // _updateComment(post) {
-  //   this.setState({
-  //     list: this.state.list.map(el => {
-  //       if (el.id !== post._id) return el;
-  //       return post;
-  //     })
-  //   });
-  // }
 }
 
 export default Home;

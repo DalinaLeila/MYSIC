@@ -96,12 +96,11 @@ router.post("/post/delete", (req, res, next) => {
 
 //COMMENTS
 //Writing a comment
-router.post("/feed/comment", (req, res, next) => {
+router.post("/feed/comment/create", (req, res, next) => {
   let { comment, postId } = req.body;
   let message = new Comment({
     comment,
     postId: postId,
-
     username: req.user.username,
     profilePicture: req.user.profilePicture
   });
@@ -113,25 +112,25 @@ router.post("/feed/comment", (req, res, next) => {
 
 //Displaying comments on a post
 
-// router.get("/feed/comment", (req, res, next) => {
-//   let post = req.post._id;
-//   Comment.find({ post })
-//     .sort([["created_at", 1]])
-//     .then(data => {
-//       res.send(data);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
+router.get("/feed/:postId/comment/display", (req, res, next) => {
+  postId = req.params.postId;
+  Comment.find({ postId })
+    .sort([["created_at", 1]])
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 
-//Deleting comments
-router.post("/feed/comment/delete", (req, res, next) => {
+// Deleting comments
+router.post("/feed/post/comment/delete", (req, res, next) => {
   console.log("WORKING");
   let { el } = req.body;
-  console.log(el._id);
-  Comment.findByIdAndDelete(el._id).then(data => {
-    console.log("DELETED");
+  console.log("test", el);
+  Comment.findByIdAndDelete(el).then(data => {
+    res.send({ _id: el });
   });
 });
 
