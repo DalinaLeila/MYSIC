@@ -4,7 +4,7 @@
   "description": "Easy to use, mern boilerplate. Ready to deploy to heroku, no further configuration required.",
   "main": "index.js",
   "engines":{
-"node": "8.11.3"
+  "node": "8.11.3"
   },
   "scripts": {
     "dev:app": "parcel watch src/app/index.html",
