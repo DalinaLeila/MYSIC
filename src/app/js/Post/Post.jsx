@@ -17,7 +17,8 @@ class Post extends Component {
       list: [],
       caption: "",
       song: {},
-      dropdownOpen: false
+      dropdownOpen: false,
+      placeholdertext: "What's your jam?"
     };
     this.toggle = this.toggle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,7 +62,7 @@ class Post extends Component {
                 value={this.state.search}
                 onChange={evt => this.handleInputChange(evt.target.value)}
                 className="input-box"
-                placeholder="Choose your song"
+                placeholder={this.state.placeholdertext}
               />
             </DropdownToggle>
 
@@ -107,7 +108,8 @@ class Post extends Component {
     console.log(output);
     this.setState({
       caption: this.state.caption,
-      song: output
+      song: output,
+      search: output.name
     });
     // console.log("handleClick, Caption", this.state.caption);
     // console.log("handleClick, song", this.state.song);
