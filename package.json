@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Easy to use, mern boilerplate. Ready to deploy to heroku, no further configuration required.",
   "main": "index.js",
-  "engines":{
-  "node": "8.11.3"
+  "engines": {
+    "node": "8.11.3"
   },
   "scripts": {
     "dev:app": "parcel watch src/app/index.html",
@@ -20,7 +20,7 @@
     "@progress/kendo-react-dropdowns": "^2.0.0",
     "@progress/kendo-react-intl": "^2.0.0",
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.3",
     "chalk": "^2.4.1",
