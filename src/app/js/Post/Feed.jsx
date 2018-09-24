@@ -11,15 +11,11 @@ class Feed extends Component {
     this.state = {
       list: [],
       error: "",
-      dropdownOpen: false,
-      comments: []
+      dropdownOpen: false
     };
-
     this.toggle = this.toggle.bind(this);
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this._handleTwoSubmit = this._handleTwoSubmit.bind(this);
-    // this.updateComment = this.updateComment.bind(this);
   }
 
   render() {
@@ -35,7 +31,7 @@ class Feed extends Component {
         );
       });
       return (
-        <div key={index} className="postbody">
+        <div key={post._id} className="postbody">
           <div className="userpost">
             <Link to={`/profile/${post.username}`}>
               <div className="user">
@@ -91,7 +87,7 @@ class Feed extends Component {
                 <div>{likes}</div>
               </DropdownMenu>
             </Dropdown>
-            <Comments handleTwoSubmit={this._handleTwoSubmit} post={post} />
+            <Comments post={post} />
           </div>
           <hr />
         </div>
@@ -117,14 +113,6 @@ class Feed extends Component {
         console.log(err);
       });
   }
-  // updateComment(comment) {
-  //   this.setState({
-  //     list: this.state.list.map(el => {
-  //       if (el.id !== comment.postId) return el;
-  //       return comment;
-  //     })
-  //   });
-  // }
 
   handleDeleteClick(e, el) {
     api
@@ -133,21 +121,6 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.deletePost(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  _handleTwoSubmit(comment, postId) {
-    api
-      .post(`/api/music/feed/comment`, {
-        comment,
-        postId
-      })
-      .then(comment => {
-        console.log("IWANT TO DISPLAY THIS", comment);
-        // this.updateComment(comment);
       })
       .catch(err => {
         console.log(err);
