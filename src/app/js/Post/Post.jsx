@@ -106,8 +106,7 @@ class Post extends Component {
     this.setState({
       caption: this.state.caption,
       song: output,
-      placeholdertext:output.name,
-      search: ""
+      search: output.name
     });
     // console.log("handleClick, Caption", this.state.caption);
     // console.log("handleClick, song", this.state.song);
