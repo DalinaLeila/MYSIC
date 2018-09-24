@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Easy to use, mern boilerplate. Ready to deploy to heroku, no further configuration required.",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.3"
+  },
   "scripts": {
     "dev:app": "parcel watch src/app/index.html",
     "dev:server": "nodemon --watch src/server src/server/index.js",
