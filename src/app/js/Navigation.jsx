@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Notifications from "./Post/Notifications"
 import {
   Collapse,
   Navbar,
@@ -28,6 +29,11 @@ const Navigation = props => {
           <Nav className="ml-auto" navbar>
             {props.user && (
               <span className="navChild">
+              <NavItem>
+                  {/* <Link className="link nav-link" to="/profile"> */}
+                    <Notifications />
+                  
+                </NavItem>
                 <NavItem>
                   <Link className="link nav-link" to="/profile">
                     Profile{" "}
