@@ -32,7 +32,7 @@ class Discover extends Component {
       return <div>loading ...</div>;
     }
     return (
-      <div>
+      <div className="main">
         {this.props.user && (
           <Feed
             loggedInUser={this.props.user}

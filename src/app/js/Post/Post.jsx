@@ -17,7 +17,7 @@ class Post extends Component {
       list: [],
       caption: "",
       song: {},
-      dropdownOpen: false,
+      dropdownOpen: false
     };
     this.toggle = this.toggle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,50 +43,53 @@ class Post extends Component {
       );
     });
     return (
-      <div>
+      <div className="input-container">
         <fieldset>
-          {/* <label>Caption</label> */}
           <input
+            className="input-box"
             type="text"
             name="caption"
-            placeholder="Caption"
+            placeholder="Whats on your mind?"
             onChange={evt => this.handleCaption("caption", evt.target.value)}
           />
         </fieldset>
         <fieldset>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} >
-            <DropdownToggle className='dropsearch'>
-          <input
-            type="text"
-            value={this.state.search}
-            onChange={evt => this.handleInputChange(evt.target.value)}
-            className="input"
-            placeholder="What's your jam?"
-          />
-        </DropdownToggle>
-            
-            <DropdownMenu modifiers={{
-              setMaxHeight: {
-                enabled: true,
-                order: 890,
-                fn: (data) => {
-                  return {
-                    ...data,
-                    styles: {
-                      ...data.styles,
-                      overflow: 'auto',
-                      maxHeight: 300,
-                    },
-                  };
-                },
-              },
-            }}>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle className="dropsearch">
+              <input
+                type="text"
+                value={this.state.search}
+                onChange={evt => this.handleInputChange(evt.target.value)}
+                className="input-box"
+                placeholder="Choose your song"
+              />
+            </DropdownToggle>
+
+            <DropdownMenu
+              modifiers={{
+                setMaxHeight: {
+                  enabled: true,
+                  order: 890,
+                  fn: data => {
+                    return {
+                      ...data,
+                      styles: {
+                        ...data.styles,
+                        overflow: "auto",
+                        maxHeight: 300
+                      }
+                    };
+                  }
+                }
+              }}
+            >
               {output}
             </DropdownMenu>
           </Dropdown>
         </fieldset>
         <Button
-          color="primary"
+          outline
+          color="success "
           onClick={() =>
             this.props.handleSubmit(this.state.caption, this.state.song)
           }
@@ -135,7 +138,6 @@ class Post extends Component {
         });
       });
   }
-
 }
 
 export default Post;

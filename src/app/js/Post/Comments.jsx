@@ -39,6 +39,7 @@ class Comments extends Component {
   render() {
     console.log(this.props.post._id);
     let userComments = this.state.postComments.map((comment, index) => {
+      console.log(comment);
       return (
         <div key={comment._id}>
           <img src={comment.profilePicture} alt="" width="20px" />
@@ -46,21 +47,22 @@ class Comments extends Component {
             {comment.username}: {comment.comment}
           </h6>
           {comment.updated_at}
-          <img
-            onClick={e => this.handleDeleteComment(e, comment._id)}
-            src={require("../../assets/cross.png")}
-            width="20px"
-          />
+          {comment.username === this.props.loggedInUser.username && (
+            <img
+              onClick={e => this.handleDeleteComment(e, comment._id)}
+              src={require("../../assets/cross.png")}
+              width="20px"
+            />
+          )}
         </div>
       );
     });
     return (
       <div>
-        <ul>{userComments}</ul>
         <input
           type="text"
           name="comment"
-          placeholder="Comment"
+          placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
         />
         <Button
@@ -73,7 +75,7 @@ class Comments extends Component {
         >
           Comment
         </Button>
-        {/* <p>{this.props.error}</p> */}
+        <ul>{userComments}</ul>
       </div>
     );
   }

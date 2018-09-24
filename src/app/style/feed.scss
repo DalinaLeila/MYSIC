@@ -1,17 +1,10 @@
-.userpost {
-  display: flex;
-  background-color: silver;
-  justify-content: flex-start;
-  align-items: baseline;
-}
-.songinfo {
-  // display:flex;
-  //  margin: 0 40px;
-}
-
 .main {
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 auto;
+  background-color: #e6e6fa;
+}
+.card-deck {
+  margin-bottom: 10px;
 }
 
 .postbody {
@@ -27,4 +20,74 @@
   border: 1px white solid;
   background-color: white !important;
   padding: 0 !important;
+}
+
+.postbody {
+  border: 2px solid #4b2cd4;
+  border-radius: 12px;
+  margin: 20px;
+  background-color: white;
+  // padding: 20px;
+  width: 400px;
+}
+
+.userpost {
+  display: flex;
+  flex-direction: row;
+}
+
+.user {
+  margin: 20px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+}
+
+.caption {
+  margin-left: 20px;
+}
+
+.profilePicture {
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.songInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .flex-feed {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+.flex-songInfo {
+  text-align: center;
+}
+
+.card-img {
+  height: 50%;
+}
+
+.input-box {
+  width: 400px;
+  height: 50px;
+  border-radius: 12px;
+  border: 2px solid #4b2cd4;
+  background-color: #e6e6fa;
+  text-align: center;
+}
+
+.input-container {
+  text-align: center;
+}
+
+.spotify-link {
+  float: right;
 }
