@@ -85,7 +85,7 @@ class Comments extends Component {
           className="btn-comment"
           color="primary"
           onClick={() =>
-            this.handleSubmit(this.state.comment, this.props.post._id)
+            this.handleSubmit(this.state.comment, this.props.post._id,this.props.post.creatorId)
           }
           className="submit-form-btn"
           type="submit"
@@ -105,7 +105,7 @@ class Comments extends Component {
     });
   }
 
-  handleSubmit(comment, postId) {
+  handleSubmit(comment, postId, userId) {
     api
       .post(`/api/music/feed/comment/create`, {
         comment,
@@ -113,9 +113,13 @@ class Comments extends Component {
       })
       .then(comment => {
         this.updateComment(comment);
-      })
-      return api.post('/api/profile/user-profile/comment/notify',{
-
+        return api.post('/api/profile/user-profile/comment/notify', {
+          userId,
+          postId
+        })
+          .then(result => {
+            console.log("notification", result);
+          })
       })
       .catch(err => {
         console.log(err);

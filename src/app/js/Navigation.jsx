@@ -38,7 +38,7 @@ const Navigation = props => {
                     <DropdownMenu right>
                     <DropdownItem>
                       <Notifications />
-                    Option 1
+                    
                   </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>

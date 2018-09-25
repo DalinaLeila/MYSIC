@@ -90,7 +90,8 @@ class Feed extends Component {
                       this.handleLikeClick(
                         el,
                         this.props.user.username,
-                        post._id
+                        post._id,
+                        post.creatorId
                       )
                     }
                     src={
@@ -137,7 +138,7 @@ class Feed extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  handleLikeClick(el, likedUser, postId) {
+  handleLikeClick(el, likedUser, postId,creatorId) {
     api
       .post("/api/music/post/like", {
         likedUser,
@@ -145,6 +146,15 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.updatePost(result);
+        return api.post('/api/profile/user-profile/like/notify', {
+          othersName:likedUser,
+          postId,
+          userId:creatorId,
+          kind:'like'
+        })
+          .then(result => {
+            console.log("notification", result);
+          })
       })
       .catch(err => {
         console.log(err);
