@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+
 import api from "../utils/api";
 
 import {
-  
-  DropdownItem
+ DropdownItem
 } from "reactstrap";
 
 class Notifications extends Component {

@@ -105,11 +105,12 @@ class Comments extends Component {
     });
   }
 
-  handleSubmit(comment, postId) {
+  handleSubmit(comment, postId,creatorId) {
     api
       .post(`/api/music/feed/comment/create`, {
         comment,
-        postId
+        postId,
+        creatorId
       })
       .then(comment => {
         this.updateComment(comment);

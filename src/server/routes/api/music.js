@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../../models/Post");
 const Comment = require("../../models/Comment");
+const User = require("../../models/User")
 const SpotifyWebApi = require("spotify-web-api-node");
 
 const clientId = "b699d2563893414397d5d57212d81944",
@@ -97,7 +98,7 @@ router.post("/post/delete", (req, res, next) => {
 //COMMENTS
 //Writing a comment
 router.post("/feed/comment/create", (req, res, next) => {
-  let { comment, postId } = req.body;
+  let { comment, postId, creatorId} = req.body;
   let message = new Comment({
     comment,
     postId: postId,
@@ -107,6 +108,14 @@ router.post("/feed/comment/create", (req, res, next) => {
   message.save().then(result => {
     console.log("COMMENT", result);
     res.send(result);
+    return User.findByIdAndUpdate(
+      creatorId,
+      {$push: {notifications:[{username:likedUser, postId}]}},
+      { new: true }
+      )
+      .then(note=>{
+    res.send(note)
+      })
   });
 });
 
@@ -136,7 +145,7 @@ router.post("/feed/post/comment/delete", (req, res, next) => {
 
 //Like
 router.post("/post/like", (req, res, next) => {
-  let { likedUser, postId } = req.body;
+  let { likedUser, postId, creatorId } = req.body;
 
   Post.findById(postId).then(post => {
     if (post.likedByUser.indexOf(likedUser) === -1) {
@@ -148,7 +157,14 @@ router.post("/post/like", (req, res, next) => {
         .then(post => {
           res.send(post);
         })
-        
+        return User.findByIdAndUpdate(
+        creatorId,
+        {$push: {notifications:[{username:likedUser, postId}]}},
+        { new: true }
+        )
+        .then(note=>{
+      res.send(note)
+        })
         .catch(console.error);
     } else {
       Post.findByIdAndUpdate(

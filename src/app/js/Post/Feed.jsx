@@ -79,6 +79,7 @@ class Feed extends Component {
                 </div>
               </div>
 
+
               <CardBody>
                 <div className="flex-songInfo">
                   <CardTitle> {post.song.name}</CardTitle>
@@ -137,11 +138,12 @@ class Feed extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  handleLikeClick(el, likedUser, postId) {
+  handleLikeClick(el, likedUser, postId,creatorId) {
     api
       .post("/api/music/post/like", {
         likedUser,
-        postId
+        postId,
+        creatorId
       })
       .then(result => {
         this.props.updatePost(result);
