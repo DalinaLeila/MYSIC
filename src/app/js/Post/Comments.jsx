@@ -114,6 +114,9 @@ class Comments extends Component {
       .then(comment => {
         this.updateComment(comment);
       })
+      return api.post('/api/profile/user-profile/comment/notify',{
+
+      })
       .catch(err => {
         console.log(err);
       });

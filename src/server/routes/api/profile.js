@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../../models/Post");
 const User = require("../../models/User");
+const Notification = require("../../models/Notification")
 
 const { createUserToken } = require("../../utils/token");
 
@@ -74,6 +75,56 @@ router.post("/user-profile/:username/follow", (req, res, next) => {
       }
     });
   });
+});
+
+
+
+//Notifications!!!
+
+//comment Notifications
+router.post("/user-profile/comment/notify", (req, res, next) => {
+  let {  userId, postId } = req.body;
+  let note = new Notification({
+    userId,
+    postId,
+    othersName: req.user.username,
+    kind: "comment"
+  });
+  note.save().then(result => {
+    console.log("notification", result);
+    res.send(result);
+  });
+});
+
+
+//like notifications
+router.post("/user-profile/like/notify", (req, res, next) => {
+  let {  userId, postId } = req.body;
+  let note = new Notification({
+    userId,
+    postId,
+    othersName: req.user.username,
+    kind: "like"
+  });
+  note.save().then(result => {
+    console.log("notification", result);
+    res.send(result);
+  });
+});
+
+
+
+//Show Notifications!
+router.get("/user-profile/notify", (req, res, next) => {
+  userId = req.user._id;
+  Notification.find({ userId })
+    .sort([["updated_at", -1]])
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
