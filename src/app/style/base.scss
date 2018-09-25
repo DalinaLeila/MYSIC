@@ -53,6 +53,9 @@ body {
   }
 }
 
+.title-main {
+  font-size: 2.5em;
+}
 .main-home-page {
   font-weight: 300;
   text-align: center;
@@ -75,7 +78,7 @@ body {
 .profile-header {
   background-color: #2e151b;
 
-  background-image: url("https://source.unsplash.com/1600x900/?music,purple");
+  background-image: url("https://source.unsplash.com/1600x900/?music,green");
   color: white;
   text-align: center;
   padding: 50px;
@@ -104,6 +107,21 @@ body {
 }
 
 .feed {
-  background-color: #2f4454;
+  background-color: $green;
   padding: 50px;
+}
+
+.container-auth {
+  background-color: rgba(255, 255, 255, 0.233);
+  width: 400px;
+  height: 400px;
+  border-radius: 12px;
+  padding: 40px 50px;
+  text-align: center;
+}
+
+.flex-auth {
+  display: flex;
+  justify-content: center;
+  margin-top: 12%;
 }

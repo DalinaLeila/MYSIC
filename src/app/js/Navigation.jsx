@@ -44,14 +44,14 @@ const Navigation = props => {
             {props.user ? (
               <NavItem>
                 <Link className="link nav-link" to="/auth/logout">
-                  Logout{" "}
+                  Log Out{" "}
                 </Link>
               </NavItem>
             ) : (
               <span className="navChild">
                 <NavItem>
                   <Link className="link nav-link" to="/auth/sign-in">
-                    Sign in{" "}
+                    Sign In{" "}
                   </Link>
                 </NavItem>
                 <NavItem>

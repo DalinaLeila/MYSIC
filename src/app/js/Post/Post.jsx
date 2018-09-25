@@ -18,7 +18,7 @@ class Post extends Component {
       caption: "",
       song: {},
       dropdownOpen: false,
-      placeholdertext: "What's your jam?"
+      placeholdertext: "Choose Song..."
     };
     this.toggle = this.toggle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,58 +47,58 @@ class Post extends Component {
       <div className="input-container">
         <fieldset>
           <input
-            className="input-box"
+            className="input input-post"
             type="text"
             name="caption"
-            placeholder="Whats on your mind?"
+            placeholder="Caption"
             onChange={evt => this.handleCaption("caption", evt.target.value)}
           />
         </fieldset>
-        <fieldset>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle className="dropsearch">
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle className="dropsearch">
+            <fieldset>
               <input
                 type="text"
                 value={this.state.search}
                 onChange={evt => this.handleInputChange(evt.target.value)}
-                className="input-box"
+                className="input input-post"
                 placeholder={this.state.placeholdertext}
               />
-            </DropdownToggle>
+            </fieldset>
+          </DropdownToggle>
 
-            <DropdownMenu
-              modifiers={{
-                setMaxHeight: {
-                  enabled: true,
-                  order: 890,
-                  fn: data => {
-                    return {
-                      ...data,
-                      styles: {
-                        ...data.styles,
-                        overflow: "auto",
-                        maxHeight: 300
-                      }
-                    };
-                  }
+          <DropdownMenu
+            modifiers={{
+              setMaxHeight: {
+                enabled: true,
+                order: 890,
+                fn: data => {
+                  return {
+                    ...data,
+                    styles: {
+                      ...data.styles,
+                      overflow: "auto",
+                      maxHeight: 300
+                    }
+                  };
                 }
-              }}
-            >
-              {output}
-            </DropdownMenu>
-          </Dropdown>
-        </fieldset>
-        <Button
+              }
+            }}
+          >
+            {output}
+          </DropdownMenu>
+        </Dropdown>
+        <button
           outline
           color="success "
           onClick={() =>
             this.props.handleSubmit(this.state.caption, this.state.song)
           }
-          className="submit-form-btn"
+          className="button"
           type="submit"
         >
-          Post
-        </Button>
+          Share
+        </button>
         <p>{this.props.error}</p>
       </div>
     );

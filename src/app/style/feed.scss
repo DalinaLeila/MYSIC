@@ -1,7 +1,7 @@
 .main {
   margin: 0 auto;
   padding: 0 auto;
-  background-color: #2f4454;
+  background-color: $green;
 }
 .card-deck {
   margin-bottom: 10px;
@@ -35,18 +35,29 @@
   width: 400px;
 }
 
-.userpost {
-  display: flex;
-  flex-direction: row;
+.like {
+  float: left;
 }
-
+.spotify-link {
+  float: right;
+}
 .user {
-  margin: 20px;
+  margin-top: 20px;
   height: 70px;
   display: flex;
   flex-direction: row;
 }
 
+.user-comment {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.ppComment {
+  height: 30px;
+}
 .caption {
   margin-left: 20px;
 }
@@ -60,7 +71,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 200px;
   text-align: center;
 }
 
@@ -72,46 +82,37 @@
 }
 .flex-songInfo {
   text-align: center;
-}
-
-.input-box {
-  width: 400px;
-  height: 50px;
-  border-radius: 12px;
-  border: 2px solid #4b2cd4;
-  background-color: #e6e6fa;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .input-container {
-  text-align: center;
-}
-
-.spotify-link {
-  float: right;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .scrollbar {
   float: left;
   height: 80px;
-  width: 100%;
-  background: #f5f5f5;
+  width: 105%;
   overflow-y: scroll;
+  padding-top: 20px;
 }
 
 .force-overflow {
-  min-height: 5px;
+  min-height: 10px;
 }
 
 #style-1::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: #f5f5f5;
 }
 
 #style-1::-webkit-scrollbar {
   width: 12px;
-  background-color: #f5f5f5;
 }
 
 #style-1::-webkit-scrollbar-thumb {
@@ -122,6 +123,7 @@
 
 .flex-comment {
   display: flex;
+  justify-content: space-evenly;
   flex-direction: row;
 }
 
@@ -129,11 +131,15 @@
   width: 15px;
   height: 15px;
   margin-top: 10px;
-  margin-left: 45%;
+  margin-left: 40px;
 }
 
 .date {
   color: rgb(105, 103, 103);
+}
+
+.date-size {
+  font-size: 0.8em;
 }
 
 .btnOnImg {
