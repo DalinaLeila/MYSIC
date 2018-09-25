@@ -82,8 +82,9 @@ class Comments extends Component {
           name="comment"
           placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
-          onKeyDown={evt =>
-            this.checkKey(evt, this.state.comment, this.props.post._id)
+onKeyDown={evt =>
+            this.checkKey(evt, this.state.comment, this.props.post._id,this.props.post.creatorId)
+
           }
         />
         <div className="scrollbar" id="style-1">
@@ -93,9 +94,9 @@ class Comments extends Component {
     );
   }
 
-  checkKey(event, comment, postId) {
+  checkKey(event, comment, postId,userId) {
     if (event.keyCode == 13) {
-      this.handleSubmit(comment, postId);
+      this.handleSubmit(comment, postId,userId);
     }
   }
 
@@ -105,7 +106,7 @@ class Comments extends Component {
     });
   }
 
-  handleSubmit(comment, postId) {
+  handleSubmit(comment, postId, userId) {
     api
       .post(`/api/music/feed/comment/create`, {
         comment,
@@ -113,6 +114,13 @@ class Comments extends Component {
       })
       .then(comment => {
         this.updateComment(comment);
+        return api.post('/api/profile/user/comment/notify', {
+          userId,
+          postId
+        })
+          .then(result => {
+            console.log("notification", result);
+          })
       })
       .catch(err => {
         console.log(err);
