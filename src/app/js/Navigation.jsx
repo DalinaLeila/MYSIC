@@ -30,9 +30,14 @@ const Navigation = props => {
             {props.user && (
               <span className="navChild">
               <NavItem>
-                  {/* <Link className="link nav-link" to="/profile"> */}
-                    <Notifications />
-                  
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Notifications
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <Notifications />
+                </DropdownMenu>
+              </UncontrolledDropdown>
                 </NavItem>
                 <NavItem>
                   <Link className="link nav-link" to="/profile">
