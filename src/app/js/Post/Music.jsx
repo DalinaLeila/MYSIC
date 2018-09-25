@@ -14,7 +14,7 @@ class Music extends Component {
 
   togglePlay() {
     this.setState({ play: !this.state.play });
-    console.log(this.audio);
+    // console.log(this.audio);
     this.state.play ? this.audio.play() : this.audio.pause();
   }
 
@@ -31,9 +31,6 @@ class Music extends Component {
             }
           />
         )}
-        <a href={this.props.url.external_urls.spotify}>
-          <img src={require("../../assets/spotify.png")} />
-        </a>
       </div>
     );
   }

@@ -5,6 +5,16 @@ import Comments from "./Comments";
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import {
+  Card,
+  CardImg,
+  CardTitle,
+  CardText,
+  CardDeck,
+  CardSubtitle,
+  CardBody
+} from "reactstrap";
+
 class Feed extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +31,7 @@ class Feed extends Component {
   render() {
     let feedPosts = this.props.list.map((post, index) => {
       // console.log("USER", this.props.user.username); //YOU
-      // console.log("POST", post);
+      console.log("POST", post);
       const isLiking = post.likedByUser.includes(this.props.user.username);
       let likes = post.likedByUser.map((name, index) => {
         return (
@@ -31,69 +41,97 @@ class Feed extends Component {
         );
       });
       return (
-        <div key={post._id} className="postbody">
-          <div className="userpost">
-            <Link to={`/profile/${post.username}`}>
-              <div className="user">
-                <img
-                  src={post.profilePicture}
-                  width="40px"
-                  className="profilepicture"
-                />
-                <h5>{post.username}</h5>
+        <div key={post._id}>
+          <CardDeck className="containter-post">
+            <Card>
+              <div className="flex-comment">
+                <Link to={`/profile/${post.username}`}>
+                  <div className="user">
+                    <img
+                      src={post.profilePicture}
+                      width="70px"
+                      className="profilePicture"
+                    />
+                    <h5>{post.username}</h5>
+                  </div>
+                </Link>
+                <div className="delete-img">
+                  {post.username === this.props.loggedInUser.username && (
+                    <img
+                      onClick={e => this.handleDeleteClick(e, post)}
+                      src={require("../../assets/cross.png")}
+                      width="20px"
+                    />
+                  )}
+                </div>
               </div>
-            </Link>
-            <div className="usercomment">
-              <h3>" {post.caption} "</h3>
-            </div>
-            {post.username === this.props.loggedInUser.username && (
-              <img
-                onClick={e => this.handleDeleteClick(e, post)}
-                src={require("../../assets/cross.png")}
-                width="20px"
-              />
-            )}
-          </div>
-          <div className="songinfo">
-            <img src={post.song.album.images[0].url} width="50px" />
-            {post.song.artists[0].name} - {post.song.name}
-            <div className="audio">
-              <Music url={post.song} />
-            </div>
-            {post.created_at}
-          </div>
+              <p className="caption">{post.caption}</p>
+              <div className="btnOnImg">
+                <CardImg
+                  className="card-img"
+                  top
+                  width="100%"
+                  src={post.song.album.images[0].url}
+                  alt="Card image cap"
+                />
+                <div className="audio">
+                  <Music url={post.song} />
+                </div>
+              </div>
 
-          <div className="social">
-            <img
-              onClick={el =>
-                this.handleLikeClick(el, this.props.user.username, post._id,post.username)
-              }
-              src={
-                isLiking
-                  ? require("../../assets/likePurple.png")
-                  : require("../../assets/likeBlack.png")
-              }
-            />
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-              <DropdownToggle
-                tag="span"
-                onClick={this.toggle}
-                data-toggle="dropdown"
-                aria-expanded={this.state.dropdownOpen}
-              >
-                {post.likedByUser.length}
-              </DropdownToggle>
-              <DropdownMenu>
-                <div>{likes}</div>
-              </DropdownMenu>
-            </Dropdown>
-            <Comments post={post} />
-          </div>
-          <hr />
+
+              <CardBody>
+                <div className="flex-songInfo">
+                  <CardTitle> {post.song.name}</CardTitle>
+                  <CardSubtitle>{post.song.artists[0].name} </CardSubtitle>
+                </div>
+                <div className="social">
+                  <img
+                    onClick={el =>
+                      this.handleLikeClick(
+                        el,
+                        this.props.user.username,
+                        post._id
+                      )
+                    }
+                    src={
+                      isLiking
+                        ? require("../../assets/like (2).png")
+                        : require("../../assets/like (3).png")
+                    }
+                    width="50px"
+                  />
+                  <Dropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggle}
+                  >
+                    <DropdownToggle
+                      tag="span"
+                      onClick={this.toggle}
+                      data-toggle="dropdown"
+                      aria-expanded={this.state.dropdownOpen}
+                    >
+                      <h3>{post.likedByUser.length}</h3>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <div>{likes}</div>
+                    </DropdownMenu>
+                  </Dropdown>
+                  <div className="spotify-link">
+                    <a href={post.song.external_urls.spotify}>
+                      <img src={require("../../assets/spotify.png")} />
+                    </a>
+                  </div>
+                </div>
+                <p className="date">{post.created_at}</p>
+                <Comments post={post} loggedInUser={this.props.loggedInUser} />
+              </CardBody>
+            </Card>
+          </CardDeck>
         </div>
       );
     });
-    return <div>{feedPosts}</div>;
+    return <div className="flex-feed">{feedPosts}</div>;
   }
   toggle() {
     this.setState({

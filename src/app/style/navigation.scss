@@ -1,7 +1,7 @@
 .navigation {
-  background-color: $primary-color;
+  background-color: #376e6f;
+  font-size: 1.2em;
 }
-
 .nav-content {
   display: flex;
   justify-content: space-around;
@@ -19,7 +19,6 @@
   }
 }
 
-
-.navChild{
+.navChild {
   display: flex;
 }

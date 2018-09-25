@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../utils/api";
+import { Link } from "react-router-dom";
 
 import {
   Button,
@@ -38,32 +39,50 @@ class Comments extends Component {
 
   render() {
     console.log(this.props.post._id);
-    let userComments = this.state.postComments.map((comment, index) => {
+    let userComments = this.state.postComments.map(comment => {
       return (
-        <div key={comment._id}>
-          <img src={comment.profilePicture} alt="" width="20px" />
-          <h6>
-            {comment.username}: {comment.comment}
-          </h6>
-          {comment.updated_at}
-          <img
-            onClick={e => this.handleDeleteComment(e, comment._id)}
-            src={require("../../assets/cross.png")}
-            width="20px"
-          />
+        <div className="force-overflow" key={comment._id}>
+          <Link to={`/profile/${comment.username}`}>
+            <div className="flex-comment">
+              <div>
+                <img
+                  className="profilePicture"
+                  src={comment.profilePicture}
+                  alt=""
+                  width="30px"
+                />
+              </div>
+              <div>
+                <h6>{comment.username}</h6>
+              </div>
+            </div>
+          </Link>
+
+          <h6>{comment.comment}</h6>
+          <div className="flex-comment">
+            <p className="date">{comment.updated_at}</p>
+            {comment.username === this.props.loggedInUser.username && (
+              <img
+                onClick={e => this.handleDeleteComment(e, comment._id)}
+                src={require("../../assets/cross.png")}
+                className="delete-img"
+              />
+            )}
+          </div>
         </div>
       );
     });
     return (
       <div>
-        <ul>{userComments}</ul>
         <input
+          className="input-comment"
           type="text"
           name="comment"
-          placeholder="Comment"
+          placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
         />
-        <Button
+        <button
+          className="btn-comment"
           color="primary"
           onClick={() =>
             this.handleSubmit(this.state.comment, this.props.post._id)
@@ -72,8 +91,10 @@ class Comments extends Component {
           type="submit"
         >
           Comment
-        </Button>
-        {/* <p>{this.props.error}</p> */}
+        </button>
+        <div className="scrollbar" id="style-1">
+          {userComments}
+        </div>
       </div>
     );
   }

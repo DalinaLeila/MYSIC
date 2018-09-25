@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
-const express = require("express");
-const router = express.Router();
+
+import api from "../utils/api";
+
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+ DropdownItem
 } from "reactstrap";
 
 class Notifications extends Component {
-  constructor(props){
-    super(props)
-this.state={
-list: []
+  constructor(props) {
+  super(props)
+  this.state = {
+    list: []
+  }
 }
+
+componentDidMount() {
+  this.intervalId = setInterval(checkBackend, 20000
+
+  )
+  function checkBackend() {
+    api
+      .get(`/api/profile/user-profile/notify`)
+      .then(data => {
+        this.setState({
+          list: data,
+
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-
-  // componentDidUpdate() {
-
-
-  //   router
-  //     .get(`/api/profile/user-profile/notify`)
-  //     .then(data => {
-  //       this.setState({
-  //         list: data,
-  //         loading: false
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-  render() {
-    return (
-      <DropdownItem>
-        Content
-      </DropdownItem>
-    );
-  }
+}
+componentWillUnmount() {
+  clearInterval(this.intervalId)
+}
+render() {
+  return (
+    <DropdownItem>
+     {this.state.list}
+    </DropdownItem>
+  );
+}
 }
 
 export default Notifications;

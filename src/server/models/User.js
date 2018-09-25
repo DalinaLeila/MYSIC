@@ -21,6 +21,7 @@ const userSchema = new Schema({
       "https://upload.wikimedia.org/wikipedia/commons/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg"
   },
   following: [{ type: Schema.Types.String, ref: "User" }],
+
   // notifications: [{
   //   username: {
   //     type: String,
@@ -42,5 +43,6 @@ const userSchema = new Schema({
   // }]
 }
 );
+
 
 module.exports = mongoose.model("User", userSchema);
