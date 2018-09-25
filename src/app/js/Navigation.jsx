@@ -59,23 +59,24 @@ const Navigation = props => {
             {props.user ? (
               <NavItem>
                 <Link className="link nav-link" to="/auth/logout">
-                  Logout{" "}
+                  Log Out{" "}
                 </Link>
               </NavItem>
             ) : (
-                <span className="navChild">
-                  <NavItem>
-                    <Link className="link nav-link" to="/auth/sign-in">
-                      Sign in{" "}
-                    </Link>
-                  </NavItem>
-                  <NavItem>
-                    <Link className="link nav-link" to="/auth/sign-up">
-                      Sign Up{" "}
-                    </Link>
-                  </NavItem>
-                </span>
-              )}
+
+              <span className="navChild">
+                <NavItem>
+                  <Link className="link nav-link" to="/auth/sign-in">
+                    Sign In{" "}
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link className="link nav-link" to="/auth/sign-up">
+                    Sign Up{" "}
+                  </Link>
+                </NavItem>
+              </span>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

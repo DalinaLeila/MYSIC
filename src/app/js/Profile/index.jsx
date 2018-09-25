@@ -65,12 +65,7 @@ class Profile extends Component {
             </button>
           )}
         </div>
-        <div className="profile-phrase">
-          <h3>
-            {this.state.user.username}
-            's Jam:
-          </h3>
-        </div>
+
         <div className="feed">
           <Feed
             list={this.state.posts}

@@ -27,7 +27,7 @@ class Music extends Component {
             src={
               this.state.play
                 ? require("../../assets/play-button.png")
-                : require("../../assets/round-pause-button.png")
+                : require("../../assets/rounded-pause-button.png")
             }
           />
         )}

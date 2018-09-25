@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import { Link } from "react-router-dom";
+const moment = require("moment");
 
 import {
   Button,
@@ -42,32 +43,33 @@ class Comments extends Component {
     let userComments = this.state.postComments.map(comment => {
       return (
         <div className="force-overflow" key={comment._id}>
-          <Link to={`/profile/${comment.username}`}>
-            <div className="flex-comment">
-              <div>
+          <div className="flex-comment">
+            <Link to={`/profile/${comment.username}`}>
+              <div className="user user-comment">
                 <img
-                  className="profilePicture"
+                  className="profilePicture ppComment"
                   src={comment.profilePicture}
                   alt=""
                   width="30px"
                 />
+                <div>
+                  <h6>{comment.username}</h6>
+                  <p className="date date-size">
+                    {moment(comment.updated_at).fromNow()}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h6>{comment.username}</h6>
-              </div>
+            </Link>
+            <p>{comment.comment}</p>
+            <div>
+              {comment.username === this.props.loggedInUser.username && (
+                <img
+                  onClick={e => this.handleDeleteComment(e, comment._id)}
+                  src={require("../../assets/cross.png")}
+                  className="delete-img"
+                />
+              )}
             </div>
-          </Link>
-
-          <h6>{comment.comment}</h6>
-          <div className="flex-comment">
-            <p className="date">{comment.updated_at}</p>
-            {comment.username === this.props.loggedInUser.username && (
-              <img
-                onClick={e => this.handleDeleteComment(e, comment._id)}
-                src={require("../../assets/cross.png")}
-                className="delete-img"
-              />
-            )}
           </div>
         </div>
       );
@@ -75,28 +77,27 @@ class Comments extends Component {
     return (
       <div>
         <input
-          className="input-comment"
+          className="input input-post"
           type="text"
           name="comment"
           placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
-        />
-        <button
-          className="btn-comment"
-          color="primary"
-          onClick={() =>
-            this.handleSubmit(this.state.comment, this.props.post._id,this.props.post.creatorId)
+onKeyDown={evt =>
+            this.checkKey(evt, this.state.comment, this.props.post._id,this.props.post.creatorId)
+
           }
-          className="submit-form-btn"
-          type="submit"
-        >
-          Comment
-        </button>
+        />
         <div className="scrollbar" id="style-1">
           {userComments}
         </div>
       </div>
     );
+  }
+
+  checkKey(event, comment, postId,userId) {
+    if (event.keyCode == 13) {
+      this.handleSubmit(comment, postId,userId);
+    }
   }
 
   handleComment(key, newValue) {

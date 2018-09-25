@@ -1,64 +1,73 @@
 .button {
-    padding: 10px 15px;
-    background-color: $primary-color;
-    color: #fff;
-    transition: 250ms all ease-in-out;
-    border: none;
-    outline: none;
-    border-radius: 3px;
+  padding: 10px 15px;
+  background-color: $primary-color;
+  color: #fff;
+  transition: 250ms all ease-in-out;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($primary-color, 8%);
+  }
+
+  &-secondary {
+    background-color: $secondary-color;
 
     &:hover {
-        cursor: pointer;
-        background-color: lighten($primary-color, 8%);
+      background-color: lighten($secondary-color, 8%);
     }
-
-    &-secondary {
-        background-color: $secondary-color;
-
-        &:hover {
-            background-color: lighten($secondary-color, 8%);
-        }
-    }
+  }
 }
 
 .input {
-    border-radius: 3px;
-    border: 1px solid $grey;
-    transition: 250ms all ease-in-out;
-    outline: none;
-    color: $text-color;
-    padding: 5px 10px;
-    background-color: #fff;
-    font-size: 16px;
-    min-width: 250px;
-    max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid $primary-color;
+  transition: 250ms all ease-in-out;
+  outline: none;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.233);
+  font-size: 16px;
+  min-width: 250px;
+  max-width: 100%;
+  color: $grey;
+  text-align: center;
 
-    &:focus {
-        border-color: $primary-color;
-        color: $primary-color;
-    }
+  &:focus {
+    border-color: $grey;
+    color: white;
+  }
+}
+
+.input-post {
+  background-color: white;
+  color: $primary-color;
+  &:focus {
+    color: $primary-color;
+  }
 }
 
 .separator {
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin: 15px 0;
-    background-color: $grey;
-    border: none;
-    outline: none;
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 15px 0;
+  background-color: $grey;
+  border: none;
+  outline: none;
 }
 
 .link {
+  color: $primary-color;
+  text-decoration: none;
+  transition: 250ms all ease-in-out;
+
+  &:visited {
     color: $primary-color;
-    text-decoration: none;
-    transition: 250ms all ease-in-out;
+  }
 
-    &:visited {
-        color: $primary-color;
-    }
-
-    &:hover {
-        color: lighten($primary-color, 8%);
-    }
+  &:hover {
+    color: lighten($primary-color, 8%);
+  }
 }

@@ -4,6 +4,7 @@ import Music from "./Music";
 import Comments from "./Comments";
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+const moment = require("moment");
 
 import {
   Card,
@@ -52,7 +53,12 @@ class Feed extends Component {
                       width="70px"
                       className="profilePicture"
                     />
-                    <h5>{post.username}</h5>
+                    <div>
+                      <h5>{post.username}</h5>
+                      <p className="date">
+                        {moment(post.created_at).fromNow()}
+                      </p>
+                    </div>
                   </div>
                 </Link>
                 <div className="delete-img">
@@ -81,49 +87,51 @@ class Feed extends Component {
 
               <CardBody>
                 <div className="flex-songInfo">
-                  <CardTitle> {post.song.name}</CardTitle>
-                  <CardSubtitle>{post.song.artists[0].name} </CardSubtitle>
-                </div>
-                <div className="social">
-                  <img
-                    onClick={el =>
-                      this.handleLikeClick(
-                        el,
-                        this.props.user.username,
-                        post._id,
-                        post.creatorId
-                      )
-                    }
-                    src={
-                      isLiking
-                        ? require("../../assets/like (2).png")
-                        : require("../../assets/like (3).png")
-                    }
-                    width="50px"
-                  />
-                  <Dropdown
-                    isOpen={this.state.dropdownOpen}
-                    toggle={this.toggle}
-                  >
-                    <DropdownToggle
-                      tag="span"
-                      onClick={this.toggle}
-                      data-toggle="dropdown"
-                      aria-expanded={this.state.dropdownOpen}
+
+                  <div className="like">
+                    <img
+                      onClick={el =>
+                        this.handleLikeClick(
+                          el,
+                          this.props.user.username,
+                          post._id,
+                         post.creatorId
+                        )
+                      }
+                      src={
+                        isLiking
+                          ? require("../../assets/unlike.png")
+                          : require("../../assets/like.png")
+                      }
+                      width="30px"
+                    />
+                    <Dropdown
+                      isOpen={this.state.dropdownOpen}
+                      toggle={this.toggle}
                     >
-                      <h3>{post.likedByUser.length}</h3>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <div>{likes}</div>
-                    </DropdownMenu>
-                  </Dropdown>
+                      <DropdownToggle
+                        tag="span"
+                        onClick={this.toggle}
+                        data-toggle="dropdown"
+                        aria-expanded={this.state.dropdownOpen}
+                      >
+                        <h5>{post.likedByUser.length}</h5>
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <div>{likes}</div>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </div>
+                  <div>
+                    <CardTitle> {post.song.name}</CardTitle>
+                    <CardSubtitle>{post.song.artists[0].name} </CardSubtitle>
+                  </div>
                   <div className="spotify-link">
                     <a href={post.song.external_urls.spotify}>
                       <img src={require("../../assets/spotify.png")} />
                     </a>
                   </div>
                 </div>
-                <p className="date">{post.created_at}</p>
                 <Comments post={post} loggedInUser={this.props.loggedInUser} />
               </CardBody>
             </Card>

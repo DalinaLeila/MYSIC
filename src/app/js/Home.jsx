@@ -42,21 +42,25 @@ class Home extends Component {
         <div className="main-home-page">
           <h1>
             {this.props.user ? (
-              `Hello ${this.props.user.username}`
+              ""
             ) : (
               <div>
-                <h1>Welcome to Musicly</h1>
+                <h1 className="title-main">Welcome to Musicly</h1>
                 <Link to="/auth/sign-up">
-                  <Button>Sign Up</Button>
+                  <button className="button">Sign Up</button>
                 </Link>
               </div>
             )}
           </h1>
         </div>
-
-        {this.props.user && (
-          <Post handleSubmit={this._handleSubmit} error={this.state.error} />
-        )}
+        <div className="profile-header">
+          <br />
+          <br />
+          <h1>What's your Jam {this.props.user.username}?</h1>
+          {this.props.user && (
+            <Post handleSubmit={this._handleSubmit} error={this.state.error} />
+          )}
+        </div>
         {this.props.user && (
           <div className="feed">
             <Feed
