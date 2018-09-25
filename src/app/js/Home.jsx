@@ -33,6 +33,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props.user);
     if (this.props.user)
       if (this.state.loading) {
         return <div>loading ...</div>;
@@ -56,7 +57,11 @@ class Home extends Component {
         <div className="profile-header">
           <br />
           <br />
-          <h1>What's your Jam {this.props.user.username}?</h1>
+          {this.props.user ? (
+            <h1>What's your Jam {this.props.user.username}?</h1>
+          ) : (
+            ""
+          )}
           {this.props.user && (
             <Post handleSubmit={this._handleSubmit} error={this.state.error} />
           )}
