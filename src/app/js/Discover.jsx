@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Feed from "./Post/Feed";
+import Feed from "./Post/feed";
 import api from "./utils/api";
 
 class Discover extends Component {
@@ -33,15 +33,17 @@ class Discover extends Component {
     }
     return (
       <div className="main">
-        {this.props.user && (
-          <Feed
-            loggedInUser={this.props.user}
-            list={this.state.list}
-            user={this.props.user}
-            updatePost={this._updatePost}
-            deletePost={this._deletePost}
-          />
-        )}
+        <div className="feed">
+          {this.props.user && (
+            <Feed
+              loggedInUser={this.props.user}
+              list={this.state.list}
+              user={this.props.user}
+              updatePost={this._updatePost}
+              deletePost={this._deletePost}
+            />
+          )}
+        </div>
       </div>
     );
   }

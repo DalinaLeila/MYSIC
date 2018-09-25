@@ -44,27 +44,40 @@ class Feed extends Component {
         <div key={post._id}>
           <CardDeck className="containter-post">
             <Card>
-              <Link to={`/profile/${post.username}`}>
-                <div className="user">
-                  <img
-                    src={post.profilePicture}
-                    width="70px"
-                    className="profilePicture"
-                  />
-                  <h5>{post.username}</h5>
+              <div className="flex-comment">
+                <Link to={`/profile/${post.username}`}>
+                  <div className="user">
+                    <img
+                      src={post.profilePicture}
+                      width="70px"
+                      className="profilePicture"
+                    />
+                    <h5>{post.username}</h5>
+                  </div>
+                </Link>
+                <div className="delete-img">
+                  {post.username === this.props.loggedInUser.username && (
+                    <img
+                      onClick={e => this.handleDeleteClick(e, post)}
+                      src={require("../../assets/cross.png")}
+                      width="20px"
+                    />
+                  )}
                 </div>
-              </Link>
-              <p className="caption">{post.caption}</p>
-              <div className="audio">
-                <Music url={post.song} />
               </div>
-              <CardImg
-                className="card-img"
-                top
-                width="100%"
-                src={post.song.album.images[0].url}
-                alt="Card image cap"
-              />
+              <p className="caption">{post.caption}</p>
+              <div className="btnOnImg">
+                <CardImg
+                  className="card-img"
+                  top
+                  width="100%"
+                  src={post.song.album.images[0].url}
+                  alt="Card image cap"
+                />
+                <div className="audio">
+                  <Music url={post.song} />
+                </div>
+              </div>
 
               <CardBody>
                 <div className="flex-songInfo">
@@ -97,7 +110,7 @@ class Feed extends Component {
                       data-toggle="dropdown"
                       aria-expanded={this.state.dropdownOpen}
                     >
-                      {post.likedByUser.length}
+                      <h3>{post.likedByUser.length}</h3>
                     </DropdownToggle>
                     <DropdownMenu>
                       <div>{likes}</div>
@@ -109,13 +122,8 @@ class Feed extends Component {
                     </a>
                   </div>
                 </div>
-                <CardText>
-                  <p>{post.created_at}</p>
-                  <Comments
-                    post={post}
-                    loggedInUser={this.props.loggedInUser}
-                  />
-                </CardText>
+                <p className="date">{post.created_at}</p>
+                <Comments post={post} loggedInUser={this.props.loggedInUser} />
               </CardBody>
             </Card>
           </CardDeck>

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Post from "./Post/Post";
 import Feed from "./Post/Feed";
 import api from "./utils/api";
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 class Home extends Component {
   constructor(props) {
@@ -37,13 +39,18 @@ class Home extends Component {
       }
     return (
       <div className="main">
-        <div className="container">
+        <div className="main-home-page">
           <h1>
-            Hello,{" "}
-            {this.props.user
-              ? this.props.user.username
-              : "Welcome to Musicly, log in and share your music!"}
-            !
+            {this.props.user ? (
+              `Hello ${this.props.user.username}`
+            ) : (
+              <div>
+                <h1>Welcome to Musicly</h1>
+                <Link to="/auth/sign-up">
+                  <Button>Sign Up</Button>
+                </Link>
+              </div>
+            )}
           </h1>
         </div>
 
@@ -51,13 +58,15 @@ class Home extends Component {
           <Post handleSubmit={this._handleSubmit} error={this.state.error} />
         )}
         {this.props.user && (
-          <Feed
-            loggedInUser={this.props.user}
-            list={this.state.list}
-            user={this.props.user}
-            updatePost={this._updatePost}
-            deletePost={this._deletePost}
-          />
+          <div className="feed">
+            <Feed
+              loggedInUser={this.props.user}
+              list={this.state.list}
+              user={this.props.user}
+              updatePost={this._updatePost}
+              deletePost={this._deletePost}
+            />
+          </div>
         )}
       </div>
     );
