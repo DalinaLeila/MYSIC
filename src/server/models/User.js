@@ -30,11 +30,14 @@ const userSchema = new Schema({
       type: String,
       required: true,
     },
+    read: {
+      type:Boolean,
+    default: false}
   },
-   {  timestamps: {
-        createdAt: "created_at",
-        updatedAt: "updated_at"
-      }}
+  //  {  timestamps: {
+  //       createdAt: "created_at",
+  //       updatedAt: "updated_at"
+  //     }}
 ]
 }
 );
