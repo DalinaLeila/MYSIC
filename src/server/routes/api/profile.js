@@ -82,7 +82,7 @@ router.post("/user-profile/:username/follow", (req, res, next) => {
 //Notifications!!!
 
 //comment Notifications
-router.post("/user-profile/comment/notify", (req, res, next) => {
+router.post("/user/comment/notify", (req, res, next) => {
   let {  userId, postId } = req.body;
   let note = new Notification({
     userId,
@@ -98,7 +98,7 @@ router.post("/user-profile/comment/notify", (req, res, next) => {
 
 
 //like notifications
-router.post("/user-profile/like/notify", (req, res, next) => {
+router.post("/user/like/notify", (req, res, next) => {
   let {  userId, postId } = req.body;
   let note = new Notification({
     userId,
@@ -115,8 +115,10 @@ router.post("/user-profile/like/notify", (req, res, next) => {
 
 
 //Show Notifications!
-router.get("/user-profile/notify", (req, res, next) => {
-  userId = req.user._id;
+router.get("/user/notify", (req, res, next) => {
+
+  console.log("USER", req.user._id)
+  let userId = req.user._id;
   Notification.find({ userId })
     .sort([["updated_at", -1]])
     .then(data => {

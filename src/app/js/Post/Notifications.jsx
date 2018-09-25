@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import api from "../utils/api";
 
 import {
-
   DropdownItem
 } from "reactstrap";
 
@@ -17,11 +16,13 @@ class Notifications extends Component {
 
   checkBackend() {
     api
-      .get(`/api/profile/user-profile/notify`)
+      .get(`/api/profile/user/notify`)
       .then(data => {
         this.setState({
-          list: [data]
+          list: data
+
         });
+        console.log("list",this.state.list)
       })
       .catch(err => {
         console.log(err);
@@ -31,7 +32,7 @@ class Notifications extends Component {
   componentDidMount() {
     this.intervalId = setInterval(() => {
       return this.checkBackend()
-    }, 20000)
+    }, 5000)
   }
   componentWillUnmount() {
     clearInterval(this.intervalId)

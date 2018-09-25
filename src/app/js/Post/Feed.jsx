@@ -146,7 +146,7 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.updatePost(result);
-        return api.post('/api/profile/user-profile/like/notify', {
+        return api.post('/api/profile/user/like/notify', {
           othersName:likedUser,
           postId,
           userId:creatorId,
