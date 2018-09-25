@@ -66,7 +66,7 @@ class Feed extends Component {
           <div className="social">
             <img
               onClick={el =>
-                this.handleLikeClick(el, this.props.user.username, post._id)
+                this.handleLikeClick(el, this.props.user.username, post._id,post.username)
               }
               src={
                 isLiking
@@ -100,11 +100,12 @@ class Feed extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  handleLikeClick(el, likedUser, postId) {
+  handleLikeClick(el, likedUser, postId,creatorId) {
     api
       .post("/api/music/post/like", {
         likedUser,
-        postId
+        postId,
+        creatorId
       })
       .then(result => {
         this.props.updatePost(result);

@@ -98,7 +98,7 @@ router.post("/post/delete", (req, res, next) => {
 //COMMENTS
 //Writing a comment
 router.post("/feed/comment/create", (req, res, next) => {
-  let { comment, postId } = req.body;
+  let { comment, postId, creatorId} = req.body;
   let message = new Comment({
     comment,
     postId: postId,
