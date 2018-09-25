@@ -148,6 +148,7 @@ router.post("/post/like", (req, res, next) => {
         .then(post => {
           res.send(post);
         })
+        
         .catch(console.error);
     } else {
       Post.findByIdAndUpdate(
