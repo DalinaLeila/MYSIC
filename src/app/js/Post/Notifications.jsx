@@ -30,6 +30,7 @@ class Notifications extends Component {
   }
 
   componentDidMount() {
+    this.checkBackend();
     this.intervalId = setInterval(() => {
       return this.checkBackend()
     }, 5000)
