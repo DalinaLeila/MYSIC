@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row, Footer } from "mdbreact";
-
+import api from "./utils/api";
 import Auth from "./Auth";
 import Home from "./Home";
 import Discover from "./Discover";
@@ -18,21 +18,44 @@ class Application extends React.Component {
 
     this.state = {
       user: this._setUser(true),
-      isOpen: false
+      isOpen: false,
+      list: []
     };
-
+    this.checkBackend = this.checkBackend.bind(this);
     this._setUser = this._setUser.bind(this);
     this._resetUser = this._resetUser.bind(this);
     this._toggle = this._toggle.bind(this);
   }
 
+  checkBackend() {
+    api
+      .get(`/api/profile/user/notify`)
+      .then(data => {
+        this.setState({
+          list: data
+        });
+
+        console.log("list", this.state.list);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   componentDidMount() {
+    this.checkBackend();
+    this.intervalId = setInterval(() => {
+      return this.checkBackend()
+    }, 15000)
     this._setUser();
   }
   _toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
   }
 
   render() {
@@ -43,6 +66,7 @@ class Application extends React.Component {
             user={this.state.user}
             open={this.state.isOpen}
             toggle={this._toggle}
+            list={this.state.list}
           />
           <Switch>
             <Route

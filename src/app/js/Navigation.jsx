@@ -36,10 +36,11 @@ const Navigation = props => {
                       src={require("../assets/notification.png")}
                       width="40px"
                     />
+                    <h5>{props.list.length}</h5>
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <Notifications />
+                      <Notifications list={props.list} />
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
