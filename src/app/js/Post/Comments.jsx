@@ -47,7 +47,7 @@ class Comments extends Component {
             <Link to={`/profile/${comment.username}`}>
               <div className="user user-comment">
                 <img
-                  className="profilePicture ppComment"
+                  className="ppComment"
                   src={comment.profilePicture}
                   alt=""
                   width="30px"
@@ -64,6 +64,7 @@ class Comments extends Component {
             <div>
               {comment.username === this.props.loggedInUser.username && (
                 <img
+                  width="20px"
                   onClick={e => this.handleDeleteComment(e, comment._id)}
                   src={require("../../assets/cross.png")}
                   className="delete-img"
@@ -82,9 +83,13 @@ class Comments extends Component {
           name="comment"
           placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
-onKeyDown={evt =>
-            this.checkKey(evt, this.state.comment, this.props.post._id,this.props.post.creatorId)
-
+          onKeyDown={evt =>
+            this.checkKey(
+              evt,
+              this.state.comment,
+              this.props.post._id,
+              this.props.post.creatorId
+            )
           }
         />
         <div className="scrollbar" id="style-1">
@@ -94,9 +99,9 @@ onKeyDown={evt =>
     );
   }
 
-  checkKey(event, comment, postId,userId) {
+  checkKey(event, comment, postId, userId) {
     if (event.keyCode == 13) {
-      this.handleSubmit(comment, postId,userId);
+      this.handleSubmit(comment, postId, userId);
     }
   }
 
@@ -114,13 +119,14 @@ onKeyDown={evt =>
       })
       .then(comment => {
         this.updateComment(comment);
-        return api.post('/api/profile/user/comment/notify', {
-          userId,
-          postId
-        })
+        return api
+          .post("/api/profile/user/comment/notify", {
+            userId,
+            postId
+          })
           .then(result => {
             console.log("notification", result);
-          })
+          });
       })
       .catch(err => {
         console.log(err);

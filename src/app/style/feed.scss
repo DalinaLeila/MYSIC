@@ -26,14 +26,14 @@
   padding: 0 !important;
 }
 
-.postbody {
-  border: 2px solid #4b2cd4;
-  border-radius: 12px;
-  margin: 20px;
-  background-color: white;
-  // padding: 20px;
-  width: 400px;
-}
+// .postbody {
+//   border: 2px solid #4b2cd4;
+//   border-radius: 12px;
+//   margin: 20px;
+//   // background-color: white;
+//   // padding: 20px;
+//   width: 400px;
+// }
 
 .like {
   float: left;
@@ -56,15 +56,18 @@
 }
 
 .ppComment {
+  border-radius: 50px;
   height: 30px;
 }
 .caption {
-  margin-left: 20px;
+  // margin-left: 20px;
+  color: black;
 }
 
 .profilePicture {
   border-radius: 50%;
   margin-right: 20px;
+  margin-left: 10px;
 }
 
 .songInfo {
@@ -123,16 +126,17 @@
 
 .flex-comment {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
+  color: black;
 }
 
-.delete-img {
-  width: 15px;
-  height: 15px;
-  margin-top: 10px;
-  margin-left: 40px;
-}
+// .delete-img {
+//   width: 15px;
+//   height: 15px;
+//   margin-top: 10px;
+//   margin-left: 40px;
+// }
 
 .date {
   color: rgb(105, 103, 103);
@@ -145,7 +149,6 @@
 .btnOnImg {
   position: relative;
   text-align: center;
-  color: white;
 }
 
 .audio {
@@ -158,4 +161,12 @@
 .input-comment {
   width: 260px;
   border-radius: 8px;
+}
+
+.card-title {
+  color: black;
+}
+
+.card-subtitle {
+  color: black;
 }

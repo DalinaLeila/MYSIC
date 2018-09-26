@@ -63,13 +63,13 @@ body {
   top: 45%;
   right: 0;
   left: 0;
-  color: white;
+  // color: white;
 }
 
 .container {
   padding: 25px calc((100vw - 960px) / 2);
   // background-color: #da7b93;
-  color: white;
+  // color: white;
   @media (max-width: 980px) {
     padding: 25px 10px;
   }
@@ -81,7 +81,7 @@ body {
   background-image: url("https://source.unsplash.com/1600x900/?music,green");
   color: white;
   text-align: center;
-  padding: 50px;
+  // padding: 50px;
 }
 
 .profile-follow {
