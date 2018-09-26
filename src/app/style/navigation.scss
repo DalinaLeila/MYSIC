@@ -21,6 +21,7 @@
 
 .navChild {
   display: flex;
+  padding-top: 20px;
 }
 
 footer {
@@ -41,4 +42,17 @@ footer {
   font-family: "Sue Ellen Francisco", cursive;
   font-size: 2em;
   line-height: 50%;
+}
+
+.icon-logOut {
+  padding-top: 23px;
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-flex p {
+  font-size: 0.7em;
 }

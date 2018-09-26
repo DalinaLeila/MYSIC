@@ -64,7 +64,18 @@ const Navigation = props => {
           {props.user ? (
             <NavItem>
               <Link className="link nav-link" to="/auth/logout">
-                Log Out{" "}
+                <div className="column-flex">
+                  <div>
+                    <img
+                      src={require("../assets/exit.png")}
+                      width="33px"
+                      className="icon-logOut"
+                    />
+                  </div>
+                  <div>
+                    <p>Exit</p>
+                  </div>
+                </div>
               </Link>
             </NavItem>
           ) : (
