@@ -59,7 +59,7 @@ class Profile extends Component {
           {this.props.user.username !== this.state.user.username && (
             <button
               className="profile-follow"
-              onClick={e => this.handleFollowClick(e, this.state.user.username)}
+              onClick={e => this.handleFollowClick(e, this.state.user.username,this.state.user._id)}
             >
               {isFollowing ? "Unfollow" : "Follow"}
             </button>
@@ -79,12 +79,19 @@ class Profile extends Component {
     );
   }
 
-  handleFollowClick(e, followUsername) {
+  handleFollowClick(e, followUsername,userId) {
     api
       .post(`/api/profile/user-profile/${followUsername}/follow`)
       .then(data => {
         localStorage.setItem("identity", data.token);
         this.props.setUser();
+        return api.post('/api/profile/user/follow/notify', {
+          userId,
+         
+        })
+          .then(result => {
+            console.log("notification", result);
+          })
       });
   }
 

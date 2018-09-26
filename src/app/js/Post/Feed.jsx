@@ -32,7 +32,7 @@ class Feed extends Component {
   render() {
     let feedPosts = this.props.list.map((post, index) => {
       // console.log("USER", this.props.user.username); //YOU
-      console.log("POST", post);
+      // console.log("POST", post);
       const isLiking = post.likedByUser.includes(this.props.user.username);
       let likes = post.likedByUser.map((name, index) => {
         return (
@@ -95,7 +95,8 @@ class Feed extends Component {
                           el,
                           this.props.user.username,
                           post._id,
-                         post.creatorId
+                         post.creatorId,
+                         post.profilePicture
                         )
                       }
                       src={
@@ -146,7 +147,7 @@ class Feed extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  handleLikeClick(el, likedUser, postId,creatorId) {
+  handleLikeClick(el, likedUser, postId,creatorId,profilePicture) {
     api
       .post("/api/music/post/like", {
         likedUser,
@@ -158,7 +159,8 @@ class Feed extends Component {
           othersName:likedUser,
           postId,
           userId:creatorId,
-          kind:'like'
+          kind:'like',
+          profilePicture
         })
           .then(result => {
             console.log("notification", result);
@@ -176,6 +178,12 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.deletePost(result);
+        return api.post('/api/profile/user/delete/notify', {
+          userId,
+        })
+          .then(result => {
+            console.log("notification", result);
+          })
       })
       .catch(err => {
         console.log(err);
