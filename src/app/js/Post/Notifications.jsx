@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import api from "../utils/api";
+
 import { Link } from "react-router-dom";
 import { DropdownItem } from "reactstrap";
+
 
 class Notifications extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class Notifications extends Component {
         this.setState({
           list: data
         });
+
         console.log("list", this.state.list);
       })
       .catch(err => {
@@ -26,21 +29,27 @@ class Notifications extends Component {
       });
   }
 
-  // componentDidMount() {
-  //   this.checkBackend();
-  //   this.intervalId = setInterval(() => {
-  //     return this.checkBackend()
-  //   }, 5000)
-  // }
-  // componentWillUnmount() {
-  //   clearInterval(this.intervalId)
-  // }
+  componentDidMount() {
+    this.checkBackend();
+    this.intervalId = setInterval(() => {
+      return this.checkBackend()
+    }, 15000)
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
+  }
+
   render() {
     let notePosts = this.state.list.map((post, index) => {
       return (
         <DropdownItem key={index}>
-          <Link to={`profile/${post.othersName}`}> {post.othersName}</Link>{" "}
-          {post.kind}s your post
+
+          <img
+            src={post.profilePicture}
+            width="50px"
+            className="profilePicture"
+          /> <Link to={`profile/${post.othersName}`}> {post.othersName}</Link> {post.kind}s you{post.postId && "r post"}
+
         </DropdownItem>
       );
     });

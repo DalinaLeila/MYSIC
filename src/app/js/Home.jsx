@@ -33,7 +33,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props.user);
+    // console.log(this.props.user);
     if (this.props.user)
       if (this.state.loading) {
         return <div>loading ...</div>;

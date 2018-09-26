@@ -39,7 +39,7 @@ class Comments extends Component {
   }
 
   render() {
-    console.log(this.props.post._id);
+    // console.log(this.props.post._id);
     let userComments = this.state.postComments.map(comment => {
       return (
         <div className="force-overflow" key={comment._id}>
@@ -83,6 +83,7 @@ class Comments extends Component {
           name="comment"
           placeholder="Write a comment..."
           onChange={evt => this.handleComment("comment", evt.target.value)}
+
           onKeyDown={evt =>
             this.checkKey(
               evt,
@@ -111,7 +112,7 @@ class Comments extends Component {
     });
   }
 
-  handleSubmit(comment, postId, userId) {
+  handleSubmit(comment, postId, userId,) {
     api
       .post(`/api/music/feed/comment/create`, {
         comment,
@@ -119,6 +120,7 @@ class Comments extends Component {
       })
       .then(comment => {
         this.updateComment(comment);
+
         return api
           .post("/api/profile/user/comment/notify", {
             userId,

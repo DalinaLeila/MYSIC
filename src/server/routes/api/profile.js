@@ -83,12 +83,13 @@ router.post("/user-profile/:username/follow", (req, res, next) => {
 
 //comment Notifications
 router.post("/user/comment/notify", (req, res, next) => {
-  let {  userId, postId } = req.body;
+  let { userId, postId, } = req.body;
   let note = new Notification({
     userId,
     postId,
     othersName: req.user.username,
-    kind: "comment"
+    kind: "comment",
+    profilePicture: req.user.profilePicture
   });
   note.save().then(result => {
     console.log("notification", result);
@@ -99,18 +100,57 @@ router.post("/user/comment/notify", (req, res, next) => {
 
 //like notifications
 router.post("/user/like/notify", (req, res, next) => {
-  let {  userId, postId } = req.body;
+  let { userId, postId, } = req.body;
+  Notification.findOne({ othersName: req.user.username, postId: postId }, function (err, result) {
+    if (err) { console.log("hi") }
+    if (result) {
+      Notification.findByIdAndRemove(result._id)
+      .then(result=>{
+        console.log('deleted')
+      })
+    } else {
+
+      let note = new Notification({
+        userId,
+        postId,
+        othersName: req.user.username,
+        kind: "like",
+        profilePicture: req.user.profilePicture
+      });
+      note.save().then(result => {
+        console.log("notification", result);
+        res.send(result);
+      });
+    }
+
+  });
+})
+
+//follow notifications
+router.post("/user/follow/notify", (req, res, next) => {
+  let { userId, } = req.body;
   let note = new Notification({
     userId,
-    postId,
     othersName: req.user.username,
-    kind: "like"
+    kind: "follow",
+    profilePicture: req.user.profilePicture
   });
   note.save().then(result => {
     console.log("notification", result);
     res.send(result);
   });
 });
+
+//Delete notifications
+router.post("/user/delete/notify", (req, res, next) => {
+  let { _id } = req.body;
+  console.log("DELETE ID", _id)
+  Notification.findByIdAndDelete(_id).then(result => {
+    console.log("notification", result);
+    res.send(result);
+  });
+});
+
 
 
 
