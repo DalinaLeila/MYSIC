@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from "../utils/api";
-
+import {Link} from 'react-router-dom'
 import {
   DropdownItem
 } from "reactstrap";
@@ -30,6 +30,7 @@ class Notifications extends Component {
   }
 
   componentDidMount() {
+    this.checkBackend();
     this.intervalId = setInterval(() => {
       return this.checkBackend()
     }, 5000)
@@ -41,7 +42,7 @@ class Notifications extends Component {
     let notePosts = this.state.list.map((post, index) => {
       return (
         <DropdownItem key ={index}>
-          {post.othersName} {post.kind}s your post
+         <Link to = {`profile/${post.othersName}`}> {post.othersName}</Link> {post.kind}s your post
         </DropdownItem>
       );
     })
