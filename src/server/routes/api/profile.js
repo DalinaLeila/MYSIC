@@ -105,9 +105,9 @@ router.post("/user/like/notify", (req, res, next) => {
     if (err) { console.log("hi") }
     if (result) {
       Notification.findByIdAndRemove(result._id)
-      .then(result=>{
-        console.log('deleted')
-      })
+        .then(result => {
+          console.log('deleted')
+        })
     } else {
 
       let note = new Notification({
@@ -129,44 +129,55 @@ router.post("/user/like/notify", (req, res, next) => {
 //follow notifications
 router.post("/user/follow/notify", (req, res, next) => {
   let { userId, } = req.body;
-  let note = new Notification({
-    userId,
-    othersName: req.user.username,
-    kind: "follow",
-    profilePicture: req.user.profilePicture
+  Notification.findOne({ othersName: req.user.username, userId: userId }, function (err, result) {
+    if (err) { console.log("hi") }
+    if (result) {
+      Notification.findByIdAndRemove(result._id)
+        .then(result => {
+          console.log('deleted')
+        })
+    } else {
+
+      let note = new Notification({
+        userId,
+        othersName: req.user.username,
+        kind: "follow",
+        profilePicture: req.user.profilePicture
+      });
+      note.save().then(result => {
+        console.log("notification", result);
+        res.send(result);
+      });
+    }
   });
-  note.save().then(result => {
-    console.log("notification", result);
-    res.send(result);
-  });
-});
+})
 
-//Delete notifications
-router.post("/user/delete/notify", (req, res, next) => {
-  let { _id } = req.body;
-  console.log("DELETE ID", _id)
-  Notification.findByIdAndDelete(_id).then(result => {
-    console.log("notification", result);
-    res.send(result);
-  });
-});
-
-
-
-
-//Show Notifications!
-router.get("/user/notify", (req, res, next) => {
-
-  console.log("USER", req.user._id)
-  let userId = req.user._id;
-  Notification.find({ userId })
-    .sort([["updated_at", -1]])
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      console.log(err);
+  //Delete notifications
+  router.post("/user/delete/notify", (req, res, next) => {
+    let { _id } = req.body;
+    console.log("DELETE ID", _id)
+    Notification.findByIdAndDelete(_id).then(result => {
+      console.log("notification", result);
+      res.send(result);
     });
-});
+  });
 
-module.exports = router;
+
+
+
+  //Show Notifications!
+  router.get("/user/notify", (req, res, next) => {
+
+    console.log("USER", req.user._id)
+    let userId = req.user._id;
+    Notification.find({ userId })
+      .sort([["updated_at", -1]])
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  module.exports = router;
