@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Comfortaa|Hind+Madurai");
+@import url("https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco");
 * {
   box-sizing: border-box;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
@@ -8,15 +9,16 @@ body {
   margin: 0;
   font-size: 16px;
   color: $text-color;
-  width: 100wh;
-  height: 90vh;
-  background: linear-gradient(-45deg, #2f4454, #376e6f, #da7b93, #1c3334);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+  // width: 100wh;
+  // height: 90vh;
+  background-color: #ececec;
 }
 
+// background: linear-gradient(-45deg, #2f4454, #376e6f, #da7b93, #1c3334);
+//   background-size: 400% 400%;
+//   -webkit-animation: Gradient 15s ease infinite;
+//   -moz-animation: Gradient 15s ease infinite;
+//   animation: Gradient 15s ease infinite;
 @-webkit-keyframes Gradient {
   0% {
     background-position: 0% 50%;
@@ -55,6 +57,7 @@ body {
 
 .title-main {
   font-size: 2.5em;
+  color: white;
 }
 .main-home-page {
   font-weight: 300;
@@ -63,25 +66,29 @@ body {
   top: 45%;
   right: 0;
   left: 0;
-  color: white;
+  // color: white;
 }
 
 .container {
   padding: 25px calc((100vw - 960px) / 2);
   // background-color: #da7b93;
-  color: white;
+  // color: white;
   @media (max-width: 980px) {
     padding: 25px 10px;
   }
 }
 
 .profile-header {
-  background-color: #2e151b;
-
-  background-image: url("https://source.unsplash.com/1600x900/?music,green");
-  color: white;
+  background-color: #ececec;
+  // $primary-color;
+  // background-image: url("https://source.unsplash.com/1600x900/?music,green");
+  color: black;
   text-align: center;
   padding: 50px;
+}
+
+.home-header {
+  padding: 50px 0;
 }
 
 .profile-follow {
@@ -107,17 +114,18 @@ body {
 }
 
 .feed {
-  background-color: $green;
+  background-color: white;
   padding: 50px;
 }
 
 .container-auth {
-  background-color: rgba(255, 255, 255, 0.233);
+  background-color: $secondary-color;
   width: 400px;
   height: 400px;
   border-radius: 12px;
   padding: 40px 50px;
   text-align: center;
+  color: white;
 }
 
 .flex-auth {

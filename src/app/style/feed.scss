@@ -1,7 +1,8 @@
 .main {
   margin: 0 auto;
   padding: 0 auto;
-  background-color: $green;
+  // background-color: $green;
+  background-color: #ececec;
 }
 .card-deck {
   margin-bottom: 10px;
@@ -26,17 +27,29 @@
   padding: 0 !important;
 }
 
-.postbody {
-  border: 2px solid #4b2cd4;
-  border-radius: 12px;
-  margin: 20px;
-  background-color: white;
-  // padding: 20px;
-  width: 400px;
+.post-btn {
+  margin: 40px;
+  background-color: $secondary-color;
+
+  &:hover {
+    cursor: pointer;
+    width: 80px;
+    height: 50px;
+    background-color: lighten($secondary-color, 2%);
+  }
 }
+// .postbody {
+//   border: 2px solid #4b2cd4;
+//   border-radius: 12px;
+//   margin: 20px;
+//   // background-color: white;
+//   // padding: 20px;
+//   width: 400px;
+// }
 
 .like {
   float: left;
+  cursor: pointer;
 }
 .spotify-link {
   float: right;
@@ -56,15 +69,18 @@
 }
 
 .ppComment {
+  border-radius: 50px;
   height: 30px;
 }
 .caption {
-  margin-left: 20px;
+  // margin-left: 20px;
+  color: black;
 }
 
 .profilePicture {
   border-radius: 50%;
   margin-right: 20px;
+  margin-left: 10px;
 }
 
 .songInfo {
@@ -111,9 +127,9 @@
   border-radius: 10px;
 }
 
-#style-1::-webkit-scrollbar {
-  width: 12px;
-}
+// #style-1::-webkit-scrollbar {
+//   // width: 1px;
+// }
 
 #style-1::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -123,17 +139,22 @@
 
 .flex-comment {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
+  color: black;
 }
 
 .delete-img {
-  width: 15px;
-  height: 15px;
-  margin-top: 10px;
-  margin-left: 40px;
+  // width: 15px;
+  // height: 15px;
+  // margin-top: 10px;
+  // margin-left: 40px;
+  cursor: pointer;
 }
 
+.music-feature {
+  cursor: pointer;
+}
 .date {
   color: rgb(105, 103, 103);
 }
@@ -145,7 +166,6 @@
 .btnOnImg {
   position: relative;
   text-align: center;
-  color: white;
 }
 
 .audio {
@@ -158,4 +178,16 @@
 .input-comment {
   width: 260px;
   border-radius: 8px;
+}
+
+.card-title {
+  color: black;
+}
+
+.card-subtitle {
+  color: black;
+}
+
+.card {
+  box-shadow: 3px 6px 15px -2px #7a7a7a;
 }

@@ -5,6 +5,7 @@ import Comments from "./Comments";
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 const moment = require("moment");
+import Fade from "react-reveal/Zoom";
 
 import {
   Card,
@@ -87,7 +88,6 @@ class Feed extends Component {
 
               <CardBody>
                 <div className="flex-songInfo">
-
                   <div className="like">
                     <img
                       onClick={el =>
@@ -97,6 +97,7 @@ class Feed extends Component {
                           post._id,
                          post.creatorId,
                          post.profilePicture
+
                         )
                       }
                       src={
@@ -140,14 +141,20 @@ class Feed extends Component {
         </div>
       );
     });
-    return <div className="flex-feed">{feedPosts}</div>;
+    return (
+      <Fade>
+        <div className="flex-feed">{feedPosts}</div>
+      </Fade>
+    );
   }
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
   handleLikeClick(el, likedUser, postId,creatorId,profilePicture) {
+
     api
       .post("/api/music/post/like", {
         likedUser,
@@ -155,6 +162,7 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.updatePost(result);
+
         return api.post('/api/profile/user/like/notify', {
           othersName:likedUser,
           postId,
@@ -162,9 +170,10 @@ class Feed extends Component {
           kind:'like',
           profilePicture
         })
+
           .then(result => {
             console.log("notification", result);
-          })
+          });
       })
       .catch(err => {
         console.log(err);

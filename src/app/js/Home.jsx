@@ -54,27 +54,19 @@ class Home extends Component {
             )}
           </h1>
         </div>
-        <div className="profile-header">
-          <br />
-          <br />
-          {this.props.user ? (
-            <h1>What's your Jam {this.props.user.username}?</h1>
-          ) : (
-            ""
-          )}
-          {this.props.user && (
-            <Post handleSubmit={this._handleSubmit} error={this.state.error} />
-          )}
-        </div>
         {this.props.user && (
-          <div className="feed">
-            <Feed
-              loggedInUser={this.props.user}
-              list={this.state.list}
-              user={this.props.user}
-              updatePost={this._updatePost}
-              deletePost={this._deletePost}
-            />
+          <div className="profile-header home-header">
+            <h1>What's your Jam {this.props.user.username}?</h1>
+            <Post handleSubmit={this._handleSubmit} error={this.state.error} />
+            <div className="feed">
+              <Feed
+                loggedInUser={this.props.user}
+                list={this.state.list}
+                user={this.props.user}
+                updatePost={this._updatePost}
+                deletePost={this._deletePost}
+              />
+            </div>
           </div>
         )}
       </div>

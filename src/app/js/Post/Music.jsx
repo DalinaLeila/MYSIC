@@ -23,6 +23,7 @@ class Music extends Component {
       <div>
         {this.props.url.preview_url != null && (
           <img
+            className="music-feature"
             onClick={this.togglePlay}
             src={
               this.state.play

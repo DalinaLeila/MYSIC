@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import api from "../utils/api";
-import { Link } from 'react-router-dom'
-import {
-  DropdownItem
-} from "reactstrap";
+
+import { Link } from "react-router-dom";
+import { DropdownItem } from "reactstrap";
+
 
 class Notifications extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       list: []
-    }
-    this.checkBackend = this.checkBackend.bind(this)
+    };
+    this.checkBackend = this.checkBackend.bind(this);
   }
 
   checkBackend() {
@@ -20,9 +20,9 @@ class Notifications extends Component {
       .then(data => {
         this.setState({
           list: data
-
         });
-        console.log("list", this.state.list)
+
+        console.log("list", this.state.list);
       })
       .catch(err => {
         console.log(err);
@@ -38,23 +38,23 @@ class Notifications extends Component {
   componentWillUnmount() {
     clearInterval(this.intervalId)
   }
+
   render() {
     let notePosts = this.state.list.map((post, index) => {
       return (
         <DropdownItem key={index}>
+
           <img
             src={post.profilePicture}
-            width="70px"
+            width="50px"
             className="profilePicture"
           /> <Link to={`profile/${post.othersName}`}> {post.othersName}</Link> {post.kind}s you{post.postId && "r post"}
+
         </DropdownItem>
       );
-    })
-    return (
-      <div>{notePosts}</div>
-    )
+    });
+    return <div>{notePosts}</div>;
   }
 }
-
 
 export default Notifications;
