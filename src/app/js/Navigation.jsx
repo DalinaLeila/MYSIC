@@ -30,14 +30,14 @@ const Navigation = props => {
           {props.user && (
             <span className="navChild">
               <NavItem>
-                <UncontrolledDropdown nav inNavbar>
+                <UncontrolledDropdown direction="left" nav inNavbar>
                   <DropdownToggle nav>
                     <img
                       src={require("../assets/notification.png")}
                       width="40px"
                     />
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu>
                     <DropdownItem>
                       <Notifications />
                     </DropdownItem>
