@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Feed from "./Post/feed";
+import Feed from "./Post/Feed";
 import api from "./utils/api";
 
 class Discover extends Component {
