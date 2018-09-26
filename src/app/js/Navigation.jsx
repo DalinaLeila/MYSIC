@@ -54,7 +54,7 @@ const Navigation = props => {
                     />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>
+                    <DropdownItem className="scrollbar nav-scroll" id="style-1">
                       <Notifications />
                     </DropdownItem>
                   </DropdownMenu>

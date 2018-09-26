@@ -9,7 +9,7 @@
 
   &:hover {
     cursor: pointer;
-    background-color: lighten($primary-color, 8%);
+    background-color: lighten($secondary-color, 8%);
   }
 
   &-secondary {
@@ -18,6 +18,24 @@
     &:hover {
       background-color: lighten($secondary-color, 8%);
     }
+  }
+}
+
+.btn-home {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  padding: 10px 15px;
+  background-color: $secondary-color;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  &:hover {
+    width: 200px;
+    height: 100px;
+    cursor: pointer;
+    background-color: lighten($secondary-color, 8%);
   }
 }
 

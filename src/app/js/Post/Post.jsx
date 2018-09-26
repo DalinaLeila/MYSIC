@@ -51,6 +51,7 @@ class Post extends Component {
               className="input input-post"
               type="text"
               name="caption"
+              value={this.state.caption}
               placeholder="Caption"
               onChange={evt => this.handleCaption("caption", evt.target.value)}
             />
@@ -94,9 +95,10 @@ class Post extends Component {
         <button
           outline
           color="success "
-          onClick={() =>
-            this.props.handleSubmit(this.state.caption, this.state.song)
-          }
+          onClick={() => {
+            this.props.handleSubmit(this.state.caption, this.state.song);
+            this.setState({ search: "", caption: "" });
+          }}
           className="button post-btn"
           type="submit"
         >

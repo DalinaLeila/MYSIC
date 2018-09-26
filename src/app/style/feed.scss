@@ -11,6 +11,7 @@
 .card {
   width: 400px;
   margin: 50px;
+  padding: 20px;
 }
 .postbody {
   margin: 0 auto;
@@ -112,10 +113,13 @@
 
 .scrollbar {
   float: left;
-  height: 80px;
+  height: 100px;
   width: 105%;
   overflow-y: scroll;
-  padding-top: 20px;
+  padding-top: 10px;
+}
+.nav-scroll {
+  height: 400px;
 }
 
 .force-overflow {
@@ -190,4 +194,8 @@
 
 .card {
   box-shadow: 3px 6px 15px -2px #7a7a7a;
+}
+
+.container-post {
+  padding: 20px;
 }

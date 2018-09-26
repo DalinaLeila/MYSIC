@@ -44,7 +44,7 @@ class Feed extends Component {
       });
       return (
         <div key={post._id}>
-          <CardDeck className="containter-post">
+          <CardDeck className="container-post">
             <Card>
               <div className="flex-comment">
                 <Link to={`/profile/${post.username}`}>
@@ -119,7 +119,7 @@ class Feed extends Component {
                         <h5>{post.likedByUser.length}</h5>
                       </DropdownToggle>
                       <DropdownMenu>
-                        <div>{likes}</div>
+                        <ul>{likes}</ul>
                       </DropdownMenu>
                     </Dropdown>
                   </div>

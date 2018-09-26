@@ -4,7 +4,6 @@ import api from "../utils/api";
 import { Link } from "react-router-dom";
 import { DropdownItem } from "reactstrap";
 
-
 class Notifications extends Component {
   constructor(props) {
     super(props);
@@ -32,24 +31,25 @@ class Notifications extends Component {
   componentDidMount() {
     this.checkBackend();
     this.intervalId = setInterval(() => {
-      return this.checkBackend()
-    }, 15000)
+      return this.checkBackend();
+    }, 15000);
   }
   componentWillUnmount() {
-    clearInterval(this.intervalId)
+    clearInterval(this.intervalId);
   }
 
   render() {
     let notePosts = this.state.list.map((post, index) => {
       return (
         <DropdownItem key={index}>
-
           <img
             src={post.profilePicture}
             width="50px"
             className="profilePicture"
-          /> <Link to={`profile/${post.othersName}`}> {post.othersName}</Link> {post.kind}s you{post.postId && "r post"}
-
+          />
+          <Link to={`profile/${post.othersName}`}> {post.othersName}</Link>{" "}
+          {post.kind}s you
+          {post.postId && "r post"}
         </DropdownItem>
       );
     });

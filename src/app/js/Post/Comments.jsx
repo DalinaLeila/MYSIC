@@ -17,7 +17,8 @@ class Comments extends Component {
     this.state = {
       list: [],
       comment: "",
-      postComments: []
+      postComments: [],
+      placeholder: "Write a comment..."
     };
 
     this.updateComment = this.updateComment.bind(this);
@@ -43,6 +44,7 @@ class Comments extends Component {
     let userComments = this.state.postComments.map(comment => {
       return (
         <div className="force-overflow" key={comment._id}>
+          <hr />
           <div className="flex-comment">
             <Link to={`/profile/${comment.username}`}>
               <div className="user user-comment">
@@ -70,6 +72,7 @@ class Comments extends Component {
                   className="delete-img"
                 />
               )}
+              <hr />
             </div>
           </div>
         </div>
@@ -81,9 +84,9 @@ class Comments extends Component {
           className="input input-post"
           type="text"
           name="comment"
-          placeholder="Write a comment..."
+          placeholder={this.state.placeholder}
           onChange={evt => this.handleComment("comment", evt.target.value)}
-
+          value={this.state.comment}
           onKeyDown={evt =>
             this.checkKey(
               evt,
@@ -94,6 +97,7 @@ class Comments extends Component {
           }
         />
         <div className="scrollbar" id="style-1">
+          <hr />
           {userComments}
         </div>
       </div>
@@ -101,7 +105,7 @@ class Comments extends Component {
   }
 
   checkKey(event, comment, postId, userId) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.handleSubmit(comment, postId, userId);
     }
   }
@@ -112,7 +116,7 @@ class Comments extends Component {
     });
   }
 
-  handleSubmit(comment, postId, userId,) {
+  handleSubmit(comment, postId, userId) {
     api
       .post(`/api/music/feed/comment/create`, {
         comment,
@@ -120,7 +124,9 @@ class Comments extends Component {
       })
       .then(comment => {
         this.updateComment(comment);
-
+        this.setState({
+          comment: ""
+        });
         return api
           .post("/api/profile/user/comment/notify", {
             userId,
@@ -142,7 +148,6 @@ class Comments extends Component {
   }
 
   handleDeleteComment(e, el) {
-    console.log("huiii", el);
     api
       .post(`/api/music/feed/post/comment/delete`, {
         el

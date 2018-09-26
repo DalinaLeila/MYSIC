@@ -63,7 +63,7 @@ class SignUp extends React.Component {
             </button>
 
             <p>{this.props.error}</p>
-            <p>
+            <p className="auth-quest">
               Do you have an account already?{" "}
               <Link className="link" to="/auth/sign-in">
                 Sign in{" "}
