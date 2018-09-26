@@ -44,62 +44,64 @@ class Post extends Component {
       );
     });
     return (
-      <div className="input-container">
-        <fieldset>
-          <input
-            className="input input-post"
-            type="text"
-            name="caption"
-            placeholder="Caption"
-            onChange={evt => this.handleCaption("caption", evt.target.value)}
-          />
-        </fieldset>
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle className="dropsearch">
-            <fieldset>
-              <input
-                type="text"
-                value={this.state.search}
-                onChange={evt => this.handleInputChange(evt.target.value)}
-                className="input input-post"
-                placeholder={this.state.placeholdertext}
-              />
-            </fieldset>
-          </DropdownToggle>
+      <div>
+        <div className="input-container">
+          <fieldset>
+            <input
+              className="input input-post"
+              type="text"
+              name="caption"
+              placeholder="Caption"
+              onChange={evt => this.handleCaption("caption", evt.target.value)}
+            />
+          </fieldset>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle className="dropsearch">
+              <fieldset>
+                <input
+                  type="text"
+                  value={this.state.search}
+                  onChange={evt => this.handleInputChange(evt.target.value)}
+                  className="input input-post"
+                  placeholder={this.state.placeholdertext}
+                />
+              </fieldset>
+            </DropdownToggle>
 
-          <DropdownMenu
-            modifiers={{
-              setMaxHeight: {
-                enabled: true,
-                order: 890,
-                fn: data => {
-                  return {
-                    ...data,
-                    styles: {
-                      ...data.styles,
-                      overflow: "auto",
-                      maxHeight: 300
-                    }
-                  };
+            <DropdownMenu
+              modifiers={{
+                setMaxHeight: {
+                  enabled: true,
+                  order: 890,
+                  fn: data => {
+                    return {
+                      ...data,
+                      styles: {
+                        ...data.styles,
+                        overflow: "auto",
+                        maxHeight: 300
+                      }
+                    };
+                  }
                 }
-              }
-            }}
-          >
-            {output}
-          </DropdownMenu>
-        </Dropdown>
+              }}
+            >
+              {output}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+        <p>{this.props.error}</p>
         <button
           outline
           color="success "
           onClick={() =>
             this.props.handleSubmit(this.state.caption, this.state.song)
           }
-          className="button"
+          className="button post-btn"
           type="submit"
         >
           Share
         </button>
-        <p>{this.props.error}</p>
       </div>
     );
   }

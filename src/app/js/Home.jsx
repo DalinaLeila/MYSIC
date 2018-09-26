@@ -55,7 +55,7 @@ class Home extends Component {
           </h1>
         </div>
         {this.props.user && (
-          <div className="profile-header">
+          <div className="profile-header home-header">
             <h1>What's your Jam {this.props.user.username}?</h1>
             <Post handleSubmit={this._handleSubmit} error={this.state.error} />
             <div className="feed">

@@ -5,6 +5,7 @@ import Comments from "./Comments";
 import { Dropdown, DropdownMenu, DropdownToggle, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 const moment = require("moment");
+import Fade from "react-reveal/Zoom";
 
 import {
   Card,
@@ -32,7 +33,7 @@ class Feed extends Component {
   render() {
     let feedPosts = this.props.list.map((post, index) => {
       // console.log("USER", this.props.user.username); //YOU
-      console.log("POST", post);
+      // console.log("POST", post);
       const isLiking = post.likedByUser.includes(this.props.user.username);
       let likes = post.likedByUser.map((name, index) => {
         return (
@@ -87,7 +88,6 @@ class Feed extends Component {
 
               <CardBody>
                 <div className="flex-songInfo">
-
                   <div className="like">
                     <img
                       onClick={el =>
@@ -95,7 +95,7 @@ class Feed extends Component {
                           el,
                           this.props.user.username,
                           post._id,
-                         post.creatorId
+                          post.creatorId
                         )
                       }
                       src={
@@ -139,14 +139,18 @@ class Feed extends Component {
         </div>
       );
     });
-    return <div className="flex-feed">{feedPosts}</div>;
+    return (
+      <Fade>
+        <div className="flex-feed">{feedPosts}</div>
+      </Fade>
+    );
   }
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  handleLikeClick(el, likedUser, postId,creatorId) {
+  handleLikeClick(el, likedUser, postId, creatorId) {
     api
       .post("/api/music/post/like", {
         likedUser,
@@ -154,15 +158,16 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.updatePost(result);
-        return api.post('/api/profile/user/like/notify', {
-          othersName:likedUser,
-          postId,
-          userId:creatorId,
-          kind:'like'
-        })
+        return api
+          .post("/api/profile/user/like/notify", {
+            othersName: likedUser,
+            postId,
+            userId: creatorId,
+            kind: "like"
+          })
           .then(result => {
             console.log("notification", result);
-          })
+          });
       })
       .catch(err => {
         console.log(err);

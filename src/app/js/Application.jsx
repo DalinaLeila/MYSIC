@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Col, Container, Row, Footer } from "mdbreact";
 
 import Auth from "./Auth";
 import Home from "./Home";
@@ -54,7 +55,7 @@ class Application extends React.Component {
                   post={this.state.post}
                 />
               )}
-            />
+            />{" "}
             <Route
               exact
               path="/discover"
@@ -84,6 +85,13 @@ class Application extends React.Component {
             />
             <Route component={NotFound} />
           </Switch>
+          <footer>
+            <div className="footer footer-copyright text-center py-3">
+              <Container fluid>
+                &copy; {new Date().getFullYear()} Copyright: Tim and Dalina
+              </Container>
+            </div>
+          </footer>
         </div>
       </BrowserRouter>
     );

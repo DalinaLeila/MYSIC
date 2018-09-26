@@ -61,10 +61,8 @@ class SignUp extends React.Component {
             <button className="button" onClick={() => this.props.sign("up")}>
               Sign Up
             </button>
-            <br />
-            <br />
+
             <p>{this.props.error}</p>
-            <div className="separator" />
             <p>
               Do you have an account already?{" "}
               <Link className="link" to="/auth/sign-in">
