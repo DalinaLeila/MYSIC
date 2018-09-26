@@ -30,6 +30,22 @@ const Navigation = props => {
           {props.user && (
             <span className="navChild">
               <NavItem>
+                <Link className="link nav-link" to="/profile">
+                  <div className="row-flex">
+                    <div>
+                      <img
+                        src={props.user.profilePicture}
+                        width="55px"
+                        className="nav-profile"
+                      />
+                    </div>
+                    <div className="nav-username">
+                      <h4>{props.user.username}</h4>
+                    </div>
+                  </div>
+                </Link>
+              </NavItem>
+              <NavItem>
                 <UncontrolledDropdown direction="left" nav inNavbar>
                   <DropdownToggle nav>
                     <img
@@ -43,15 +59,6 @@ const Navigation = props => {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-              </NavItem>
-              <NavItem>
-                <Link className="link nav-link" to="/profile">
-                  <img
-                    src={props.user.profilePicture}
-                    width="40px"
-                    className="nav-profile"
-                  />
-                </Link>
               </NavItem>
 
               <NavItem>

@@ -53,6 +53,19 @@ footer {
   flex-direction: column;
 }
 
+.row-flex {
+  display: flex;
+  flex-direction: row;
+  margin-right: 15px;
+}
+
 .column-flex p {
   font-size: 0.7em;
+}
+
+.nav-username {
+  margin-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border-right: 1px solid #4b8e8f;
 }
