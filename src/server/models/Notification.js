@@ -25,5 +25,5 @@ const noteSchema = new Schema({
     createdAt: "created_at",
     updatedAt: "updated_at"
   }})
-
+    
   module.exports = mongoose.model("Note", noteSchema);

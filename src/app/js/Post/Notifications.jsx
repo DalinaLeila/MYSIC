@@ -22,7 +22,7 @@ class Notifications extends Component {
           list: data
 
         });
-        // console.log("list", this.state.list)
+        console.log("list", this.state.list)
       })
       .catch(err => {
         console.log(err);
