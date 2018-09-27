@@ -44,7 +44,7 @@ class Feed extends Component {
       });
       return (
         <div key={post._id}>
-          <CardDeck className="containter-post">
+          <CardDeck className="container-post">
             <Card>
               <div className="flex-comment">
                 <Link to={`/profile/${post.username}`}>
@@ -95,9 +95,8 @@ class Feed extends Component {
                           el,
                           this.props.user.username,
                           post._id,
-                         post.creatorId,
-                         post.profilePicture
-
+                          post.creatorId,
+                          post.profilePicture
                         )
                       }
                       src={
@@ -120,7 +119,7 @@ class Feed extends Component {
                         <h5>{post.likedByUser.length}</h5>
                       </DropdownToggle>
                       <DropdownMenu>
-                        <div>{likes}</div>
+                        <ul>{likes}</ul>
                       </DropdownMenu>
                     </Dropdown>
                   </div>
@@ -153,8 +152,7 @@ class Feed extends Component {
     });
   }
 
-  handleLikeClick(el, likedUser, postId,creatorId,profilePicture) {
-
+  handleLikeClick(el, likedUser, postId, creatorId, profilePicture) {
     api
       .post("/api/music/post/like", {
         likedUser,
@@ -163,13 +161,14 @@ class Feed extends Component {
       .then(result => {
         this.props.updatePost(result);
 
-        return api.post('/api/profile/user/like/notify', {
-          othersName:likedUser,
-          postId,
-          userId:creatorId,
-          kind:'like',
-          profilePicture
-        })
+        return api
+          .post("/api/profile/user/like/notify", {
+            othersName: likedUser,
+            postId,
+            userId: creatorId,
+            kind: "like",
+            profilePicture
+          })
 
           .then(result => {
             console.log("notification", result);
@@ -187,12 +186,13 @@ class Feed extends Component {
       })
       .then(result => {
         this.props.deletePost(result);
-        return api.post('/api/profile/user/delete/notify', {
-          userId,
-        })
+        return api
+          .post("/api/profile/user/delete/notify", {
+            userId
+          })
           .then(result => {
             console.log("notification", result);
-          })
+          });
       })
       .catch(err => {
         console.log(err);

@@ -21,6 +21,7 @@
 
 .navChild {
   display: flex;
+  padding-top: 20px;
 }
 
 footer {
@@ -35,10 +36,36 @@ footer {
 
 .nav-profile {
   border-radius: 50px;
+  box-shadow: 0px 2px 50px 0px #264949ea;
 }
 
 .nav-logo {
-  font-family: "Sue Ellen Francisco", cursive;
-  font-size: 2em;
+  font-size: 1.6em;
   line-height: 50%;
+}
+
+.icon-logOut {
+  padding-top: 23px;
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-flex {
+  display: flex;
+  flex-direction: row;
+  margin-right: 15px;
+}
+
+.column-flex p {
+  font-size: 0.7em;
+}
+
+.nav-username {
+  margin-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border-right: 1px solid #4b8e8f;
 }

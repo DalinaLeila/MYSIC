@@ -48,9 +48,10 @@ class Post extends Component {
         <div className="input-container">
           <fieldset>
             <input
-              className="input input-post"
+              className="input input-post shadow"
               type="text"
               name="caption"
+              value={this.state.caption}
               placeholder="Caption"
               onChange={evt => this.handleCaption("caption", evt.target.value)}
             />
@@ -62,7 +63,7 @@ class Post extends Component {
                   type="text"
                   value={this.state.search}
                   onChange={evt => this.handleInputChange(evt.target.value)}
-                  className="input input-post"
+                  className="input input-post shadow"
                   placeholder={this.state.placeholdertext}
                 />
               </fieldset>
@@ -94,9 +95,10 @@ class Post extends Component {
         <button
           outline
           color="success "
-          onClick={() =>
-            this.props.handleSubmit(this.state.caption, this.state.song)
-          }
+          onClick={() => {
+            this.props.handleSubmit(this.state.caption, this.state.song);
+            this.setState({ search: "", caption: "" });
+          }}
           className="button post-btn"
           type="submit"
         >
