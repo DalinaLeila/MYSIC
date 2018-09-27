@@ -158,8 +158,8 @@ router.post("/user/follow/notify", (req, res, next) => {
 router.post("/user/read/notify", (req, res, next) => {
   console.log("USER", req.user._id);
   let userId = req.user._id;
-  Notification.find({ userId })
-    .sort([["created_at", -1]])
+  Notification.updateMany({ userId },
+    {$set:{read:true}},{new:true})
     .then(data => {
       res.send(data);
     })
@@ -171,7 +171,7 @@ router.post("/user/read/notify", (req, res, next) => {
 
 //Show Notifications!
 router.get("/user/notify", (req, res, next) => {
-  console.log("USER", req.user._id);
+  // console.log("USER", req.user._id);
   let userId = req.user._id;
   Notification.find({ userId })
     .sort([["created_at", -1]])

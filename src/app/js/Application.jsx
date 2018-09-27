@@ -23,7 +23,7 @@ class Application extends React.Component {
       number: 0
     };
     this.checkBackendFirst = this.checkBackendFirst.bind(this);
-    this._handleNoteClick=this._handleNoteClick.bind(this);
+    this._handleNoteClick = this._handleNoteClick.bind(this);
     this.checkBackend = this.checkBackend.bind(this);
     this._setUser = this._setUser.bind(this);
     this._resetUser = this._resetUser.bind(this);
@@ -31,53 +31,74 @@ class Application extends React.Component {
   }
 
   checkBackendFirst() {
-    
-    const oldList=this.state.list
-    console.log("oldlist1",oldList)
-    api
-      .get(`/api/profile/user/notify`)
-      .then(data => {
-        this.setState({
-          list: data,
-          // number: ''
-        });
-        console.log("list1", this.state.list);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+
+    // const oldList = this.state.list
+    // console.log("oldlist1", oldList)
+    // api
+    //   .get(`/api/profile/user/notify`)
+    //   .then(data => {
+    //     this.setState({
+    //       list: data,
+    //       // number: 
+    //     });
+    //     // console.log("read", data.filter(read=true))
+
+    //     console.log("list1", this.state.list);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
   checkBackend() {
-    const oldList=this.state.list
-    console.log("oldlist2",oldList)
+    const oldList = this.state.list
+    console.log("oldlist2", oldList)
     api
       .get(`/api/profile/user/notify`)
       .then(data => {
         this.setState({
           list: data,
         });
-        if (oldList.length!==this.state.list.length){
-          console.log("WORKING")
-          this.setState({
-            number: this.state.number+(this.state.list.length-oldList.length)})
-          }
-        console.log("list2", this.state.list);
+        if (oldList.length !== this.state.list.length) {
+        const read = this.state.list.map(e => e.read)
+        console.log(read)
+        for (let i = 0; i < read.length; i++) {
+          if (read[i] === false) {
+            console.log("there is notification", i)
+            this.setState({
+              number: this.state.number+1})
+          } else { console.log("no notification", i) }
+        }}
+        // if (oldList.length !== this.state.list.length) {
+        //   console.log("WORKING")
+        //   this.setState({
+        //     number: this.state.number + (this.state.list.length - oldList.length)
+        //   })
+        // }
+        // console.log("list2", this.state.list);
+
+
       })
+
       .catch(err => {
         console.log(err);
       });
   }
 
-  _handleNoteClick(e){
+  _handleNoteClick(e) {
     this.setState({
-      number:0
+      number: 0
     })
-  }
+    api
+      .post(`/api/profile/user/read/notify`)
+      .then(data => {
+        console.log("read notifications!")
+      });
 
+  }
   componentDidMount() {
-    this.checkBackendFirst();
+    this.checkBackend();
     this._setUser();
-    
+  this.checkBackend();
   }
   _toggle() {
     this.setState({
@@ -156,8 +177,8 @@ class Application extends React.Component {
   _resetUser() {
     this.setState({
       user: null,
-      list:[],
-      number:0
+      list: [],
+      number: 0
     });
     clearInterval(this.intervalId)
   }
