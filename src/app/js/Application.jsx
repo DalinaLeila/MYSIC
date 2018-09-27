@@ -22,12 +22,29 @@ class Application extends React.Component {
       list: [],
       number: 0
     };
+    this.checkBackendFirst = this.checkBackendFirst.bind(this);
+    this._handleNoteClick=this._handleNoteClick.bind(this);
     this.checkBackend = this.checkBackend.bind(this);
     this._setUser = this._setUser.bind(this);
     this._resetUser = this._resetUser.bind(this);
     this._toggle = this._toggle.bind(this);
   }
 
+  checkBackendFirst() {
+    const oldList=this.state.list
+    console.log("oldlist1",oldList)
+    api
+      .get(`/api/profile/user/notify`)
+      .then(data => {
+        this.setState({
+          list: data,
+        });
+        console.log("list1", this.state.list);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   checkBackend() {
     const oldList=this.state.list
     console.log("oldlist1",oldList)
@@ -40,7 +57,7 @@ class Application extends React.Component {
         if (oldList.length!==this.state.list.length){
           console.log("WORKING")
           this.setState({
-            number: this.state.number+1})
+            number: this.state.number+(this.state.list.length-oldList.length)})
           }
         console.log("list", this.state.list);
       })
@@ -50,11 +67,13 @@ class Application extends React.Component {
   }
 
   _handleNoteClick(e){
-    console.log('working')
+    this.setState({
+      number:0
+    })
   }
 
   componentDidMount() {
-    this.checkBackend();
+    this.checkBackendFirst();
     
     this.intervalId = setInterval(() => {
       return this.checkBackend()
