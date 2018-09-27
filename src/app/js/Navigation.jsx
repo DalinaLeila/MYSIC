@@ -21,7 +21,7 @@ const Navigation = props => {
     <Navbar className="navigation" dark expand="md">
       <NavbarBrand>
         <Link className="link nav-link nav-logo" to="/">
-          <img src={require("../assets/headphones.png")} width="50px" /> Musicly
+          <img src={require("../assets/headphones.png")} width="50px" /> Mysic
         </Link>
       </NavbarBrand>
       <NavbarToggler onClick={props.toggle} />
@@ -51,12 +51,11 @@ const Navigation = props => {
                     <img
                       src={require("../assets/notification.png")}
                       width="40px"
-                      onClick={e=>props.handleNoteClick(e)}
+                      onClick={e => props.handleNoteClick(e)}
                     />
                     <h5>{props.number}</h5>
                   </DropdownToggle>
                   <DropdownMenu>
-
                     <DropdownItem className="scrollbar nav-scroll" id="style-1">
                       <Notifications list={props.list} />
                     </DropdownItem>
@@ -103,7 +102,6 @@ const Navigation = props => {
             </span>
           )}
         </Nav>
-      
       </Collapse>
     </Navbar>
   );

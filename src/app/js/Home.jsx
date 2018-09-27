@@ -47,7 +47,7 @@ class Home extends Component {
             ) : (
               <div>
                 <img src={require("../assets/headphones (1).png")} />
-                <h1 className="title-main">Welcome to Musicly</h1>
+                <h1 className="title-main">Welcome to Mysic</h1>
                 <Link to="/auth/sign-up">
                   <button className="btn-home">Sign Up</button>
                 </Link>
@@ -58,8 +58,7 @@ class Home extends Component {
         {this.props.user && (
           <div className="profile-header home-header">
             <h1 className="shadow">
-              Share your current jam {this.props.user.username}
-              ...
+              What's your jam, {this.props.user.username}?
             </h1>
             <Post handleSubmit={this._handleSubmit} error={this.state.error} />
             <div className="feed">

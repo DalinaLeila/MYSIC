@@ -30,23 +30,18 @@
 
 .post-btn {
   margin: 40px;
-  background-color: $secondary-color;
+  width: 100px;
+  height: 60px;
+  background-color: darken($secondary-color, 10%);
+  border-radius: 6px;
 
   &:hover {
     cursor: pointer;
-    width: 80px;
-    height: 50px;
-    background-color: lighten($secondary-color, 2%);
+    background-color: darken($secondary-color, 5%);
+
+    border-radius: 12px;
   }
 }
-// .postbody {
-//   border: 2px solid #4b2cd4;
-//   border-radius: 12px;
-//   margin: 20px;
-//   // background-color: white;
-//   // padding: 20px;
-//   width: 400px;
-// }
 
 .like {
   float: left;
