@@ -45,7 +45,7 @@ router.get("/feed/selected", (req, res, next) => {
       { username }
     ]
   })
-    .sort([["updated_at", -1]])
+    .sort([["created_at", -1]])
     .then(data => {
       res.send(data);
     })
@@ -57,7 +57,7 @@ router.get("/feed/selected", (req, res, next) => {
 //Retrieving all posts for discover page
 router.get("/feed", (req, res, next) => {
   Post.find({})
-    .sort([["updated_at", -1]])
+    .sort([["created_at", -1]])
     .then(data => {
       res.send(data);
     })
@@ -115,7 +115,7 @@ router.post("/feed/comment/create", (req, res, next) => {
 router.get("/feed/:postId/comment/display", (req, res, next) => {
   postId = req.params.postId;
   Comment.find({ postId })
-    .sort([["updated_at", 1]])
+    .sort([["created_at", 1]])
     .then(data => {
       res.send(data);
     })

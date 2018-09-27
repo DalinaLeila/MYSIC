@@ -146,7 +146,7 @@ class Feed extends Component {
       </Fade>
     );
   }
-  toggle() {
+  toggle(index) {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
