@@ -19,7 +19,8 @@ class Application extends React.Component {
     this.state = {
       user: this._setUser(true),
       isOpen: false,
-      list: []
+      list: [],
+      number: 0
     };
     this.checkBackend = this.checkBackend.bind(this);
     this._setUser = this._setUser.bind(this);
@@ -28,13 +29,19 @@ class Application extends React.Component {
   }
 
   checkBackend() {
+    const oldList=this.state.list
+    console.log("oldlist1",oldList)
     api
       .get(`/api/profile/user/notify`)
       .then(data => {
         this.setState({
-          list: data
+          list: data,
         });
-
+        if (oldList.length!==this.state.list.length){
+          console.log("WORKING")
+          this.setState({
+            number: this.state.number+1})
+          }
         console.log("list", this.state.list);
       })
       .catch(err => {
@@ -42,8 +49,13 @@ class Application extends React.Component {
       });
   }
 
+  _handleNoteClick(e){
+    console.log('working')
+  }
+
   componentDidMount() {
     this.checkBackend();
+    
     this.intervalId = setInterval(() => {
       return this.checkBackend()
     }, 15000)
@@ -67,6 +79,8 @@ class Application extends React.Component {
             open={this.state.isOpen}
             toggle={this._toggle}
             list={this.state.list}
+            number={this.state.number}
+            handleNoteClick={this._handleNoteClick}
           />
           <Switch>
             <Route
