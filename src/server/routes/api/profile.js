@@ -154,19 +154,24 @@ router.post("/user/follow/notify", (req, res, next) => {
   );
 });
 
-//Delete notifications
-router.post("/user/delete/notify", (req, res, next) => {
-  let { _id } = req.body;
-  console.log("DELETE ID", _id);
-  Notification.findByIdAndDelete(_id).then(result => {
-    console.log("notification", result);
-    res.send(result);
+//Read notifications
+router.post("/user/read/notify", (req, res, next) => {
+  console.log("USER", req.user._id);
+  let userId = req.user._id;
+  Notification.updateMany({ userId },
+    {$set:{read:true}},{new:true})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   });
-});
+
 
 //Show Notifications!
 router.get("/user/notify", (req, res, next) => {
-  console.log("USER", req.user._id);
+  // console.log("USER", req.user._id);
   let userId = req.user._id;
   Notification.find({ userId })
     .sort([["created_at", -1]])
