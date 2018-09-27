@@ -51,11 +51,14 @@ const Navigation = props => {
                     <img
                       src={require("../assets/notification.png")}
                       width="40px"
+                      onClick={e=>props.handleNoteClick(e)}
                     />
+                    <h5>{props.number}</h5>
                   </DropdownToggle>
                   <DropdownMenu>
+
                     <DropdownItem className="scrollbar nav-scroll" id="style-1">
-                      <Notifications />
+                      <Notifications list={props.list} />
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -100,6 +103,7 @@ const Navigation = props => {
             </span>
           )}
         </Nav>
+      
       </Collapse>
     </Navbar>
   );
