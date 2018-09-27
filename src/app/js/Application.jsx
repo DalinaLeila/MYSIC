@@ -77,7 +77,7 @@ class Application extends React.Component {
     
     this.intervalId = setInterval(() => {
       return this.checkBackend()
-    }, 15000)
+    }, 5000)
     this._setUser();
   }
   _toggle() {
