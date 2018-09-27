@@ -48,7 +48,7 @@ class Post extends Component {
         <div className="input-container">
           <fieldset>
             <input
-              className="input input-post"
+              className="input input-post shadow"
               type="text"
               name="caption"
               value={this.state.caption}
@@ -63,7 +63,7 @@ class Post extends Component {
                   type="text"
                   value={this.state.search}
                   onChange={evt => this.handleInputChange(evt.target.value)}
-                  className="input input-post"
+                  className="input input-post shadow"
                   placeholder={this.state.placeholdertext}
                 />
               </fieldset>

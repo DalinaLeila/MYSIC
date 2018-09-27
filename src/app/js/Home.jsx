@@ -57,7 +57,7 @@ class Home extends Component {
         </div>
         {this.props.user && (
           <div className="profile-header home-header">
-            <h1>
+            <h1 className="shadow">
               Share your current jam {this.props.user.username}
               ...
             </h1>
