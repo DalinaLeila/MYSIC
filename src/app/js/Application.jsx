@@ -20,7 +20,7 @@ class Application extends React.Component {
       user: this._setUser(true),
       isOpen: false,
       list: [],
-      number: 0
+      number: ''
     };
     this.checkBackendFirst = this.checkBackendFirst.bind(this);
     this._handleNoteClick=this._handleNoteClick.bind(this);
@@ -38,6 +38,7 @@ class Application extends React.Component {
       .then(data => {
         this.setState({
           list: data,
+          // number: ''
         });
         console.log("list1", this.state.list);
       })
@@ -68,7 +69,7 @@ class Application extends React.Component {
 
   _handleNoteClick(e){
     this.setState({
-      number:0
+      number:''
     })
   }
 
