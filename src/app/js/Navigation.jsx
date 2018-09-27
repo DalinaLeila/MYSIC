@@ -53,7 +53,7 @@ const Navigation = props => {
                       width="40px"
                       onClick={e => props.handleNoteClick(e)}
                     />
-                    <h5>{props.number!=0 &&props.number}</h5>
+                    <h5>{props.number!=0 && props.number>0 &&props.number}</h5>
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem className="scrollbar nav-scroll" id="style-1">
