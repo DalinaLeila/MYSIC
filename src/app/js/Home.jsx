@@ -45,9 +45,18 @@ class Home extends Component {
             {this.props.user ? (
               ""
             ) : (
-              <div>
-                <img src={require("../assets/headphones (1).png")} />
-                <h1 className="title-main">Welcome to Mysic</h1>
+              <div className="container-main">
+                {/* <img
+                  className="headphone-"
+                  src={require("../assets/headphones (2).png")}
+                  alt=""
+                /> */}
+                <h1 className="title-main">Welcome to </h1>
+                <img
+                  className="img-main"
+                  width="700px"
+                  src={require("../assets/logoMain.jpeg")}
+                />
                 <Link to="/auth/sign-up">
                   <button className="btn-home">Sign Up</button>
                 </Link>

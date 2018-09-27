@@ -21,7 +21,9 @@ const Navigation = props => {
     <Navbar className="navigation" dark expand="md">
       <NavbarBrand>
         <Link className="link nav-link nav-logo" to="/">
-          <img src={require("../assets/headphones.png")} width="50px" /> Mysic
+          <img src={require("../assets/headphones.png")} width="50px" />{" "}
+          {"    "}
+          MYSIC
         </Link>
       </NavbarBrand>
       <NavbarToggler onClick={props.toggle} />

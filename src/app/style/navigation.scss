@@ -43,6 +43,7 @@ footer {
 .nav-logo {
   font-size: 1.6em;
   line-height: 50%;
+  margin: auto;
 }
 
 .icon-logOut {
@@ -69,4 +70,16 @@ footer {
   padding-right: 20px;
   padding-top: 10px;
   border-right: 1px solid #4b8e8f;
+}
+
+.notification-nav {
+  background-color: #4b8e8f;
+}
+
+.dropdown-item button {
+  color: white;
+}
+
+.dropdown-item a {
+  color: $grey;
 }

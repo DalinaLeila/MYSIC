@@ -24,16 +24,20 @@
 .btn-home {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
-
   padding: 10px 15px;
   background-color: $secondary-color;
   color: #fff;
   border: none;
   outline: none;
   border-radius: 10px;
+  position: absolute;
+  margin-left: 270px;
+  display: flex;
+  bottom: 14%;
+
   &:hover {
-    width: 200px;
-    height: 100px;
+    text-align: center;
+
     cursor: pointer;
     background-color: lighten($secondary-color, 8%);
   }

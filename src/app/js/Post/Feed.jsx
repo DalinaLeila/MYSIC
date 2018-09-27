@@ -118,7 +118,7 @@ class Feed extends Component {
                       >
                         <h5>{post.likedByUser.length}</h5>
                       </DropdownToggle>
-                      <DropdownMenu>
+                      <DropdownMenu onClick={this.state.dropdownOpen}>
                         <ul>{likes}</ul>
                       </DropdownMenu>
                     </Dropdown>
@@ -146,7 +146,7 @@ class Feed extends Component {
       </Fade>
     );
   }
-  toggle(index) {
+  toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });

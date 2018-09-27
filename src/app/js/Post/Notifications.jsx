@@ -15,7 +15,7 @@ const Notifications = props => {
       </DropdownItem>
     );
   });
-  return <div>{notePosts}</div>;
+  return <div className="notification-nav">{notePosts}</div>;
 };
 
 export default Notifications;
