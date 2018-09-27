@@ -20,7 +20,7 @@ class Application extends React.Component {
       user: this._setUser(true),
       isOpen: false,
       list: [],
-      number: ''
+      number: 0
     };
     this.checkBackendFirst = this.checkBackendFirst.bind(this);
     this._handleNoteClick=this._handleNoteClick.bind(this);
@@ -31,6 +31,7 @@ class Application extends React.Component {
   }
 
   checkBackendFirst() {
+    
     const oldList=this.state.list
     console.log("oldlist1",oldList)
     api
@@ -48,7 +49,7 @@ class Application extends React.Component {
   }
   checkBackend() {
     const oldList=this.state.list
-    console.log("oldlist1",oldList)
+    console.log("oldlist2",oldList)
     api
       .get(`/api/profile/user/notify`)
       .then(data => {
@@ -60,7 +61,7 @@ class Application extends React.Component {
           this.setState({
             number: this.state.number+(this.state.list.length-oldList.length)})
           }
-        console.log("list", this.state.list);
+        console.log("list2", this.state.list);
       })
       .catch(err => {
         console.log(err);
@@ -69,17 +70,14 @@ class Application extends React.Component {
 
   _handleNoteClick(e){
     this.setState({
-      number:''
+      number:0
     })
   }
 
   componentDidMount() {
     this.checkBackendFirst();
-    
-    this.intervalId = setInterval(() => {
-      return this.checkBackend()
-    }, 5000)
     this._setUser();
+    
   }
   _toggle() {
     this.setState({
@@ -157,8 +155,11 @@ class Application extends React.Component {
 
   _resetUser() {
     this.setState({
-      user: null
+      user: null,
+      list:[],
+      number:0
     });
+    clearInterval(this.intervalId)
   }
 
   _setUser(init) {
@@ -168,6 +169,10 @@ class Application extends React.Component {
       delete decoded.iat;
       if (init) return decoded;
       this.setState({ user: decoded });
+      this.checkBackendFirst();
+      this.intervalId = setInterval(() => {
+        return this.checkBackend()
+      }, 5000)
     } else {
       return null;
     }
