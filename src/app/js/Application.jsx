@@ -51,7 +51,7 @@ class Application extends React.Component {
   }
   checkBackend() {
     const oldList = this.state.list
-    console.log("oldlist2", oldList)
+    // console.log("oldlist2", oldList)
     api
       .get(`/api/profile/user/notify`)
       .then(data => {
@@ -59,14 +59,19 @@ class Application extends React.Component {
           list: data,
         });
         if (oldList.length !== this.state.list.length) {
+          this.setState({
+            number:0
+          })
         const read = this.state.list.map(e => e.read)
-        console.log(read)
+        // console.log(read)
         for (let i = 0; i < read.length; i++) {
           if (read[i] === false) {
-            console.log("there is notification", i)
+            // console.log("there is notification", i)
             this.setState({
               number: this.state.number+1})
-          } else { console.log("no notification", i) }
+          } else { 
+            // console.log("no notification", i) 
+          }
         }}
         // if (oldList.length !== this.state.list.length) {
         //   console.log("WORKING")
