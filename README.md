@@ -3,9 +3,7 @@
 by Tim and Dalina
 #### Share your music with your friends!
 ##### Hear what your friends are listening to.. right now.
-#
-#
-#
+
 
 ## How to run this on your computer
 1. Clone or copy this repository
