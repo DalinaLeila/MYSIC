@@ -1,4 +1,4 @@
-![Mysic Logo](./src/app/assets/logoMain.jpeg)
+![Mysic Logo](./src/app/assets/logoMain.jpeg =250x)
 
 by Tim and Dalina
 #### Share your music with your friends!
