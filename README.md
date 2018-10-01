@@ -1,4 +1,4 @@
-![Mysic Logo](./src/app/assets/logoMain.jpeg){:height="50%" width="50%"}
+![Mysic Logo](./src/app/assets/logoMain.jpeg)
 
 by Tim and Dalina
 #### Share your music with your friends!
