@@ -35,7 +35,7 @@ class Post extends Component {
     let output = this.state.list.map(output => {
       return (
         <DropdownItem key={output.id}>
-          <div onClick={this.toggle} onClick={e => this.handleClick(e, output)}>
+          <div onClick={e => this.handleClick(e, output)}>
             <img src={output.album.images[0].url} width="30px" />
             {output.name} by {output.artists[0].name}
           </div>
@@ -109,6 +109,7 @@ class Post extends Component {
   }
 
   handleClick(e, output) {
+    this.toggle();
     console.log(output);
     this.setState({
       caption: this.state.caption,
