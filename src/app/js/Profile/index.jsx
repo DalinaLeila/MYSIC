@@ -19,9 +19,9 @@ class Profile extends Component {
     api
       .get(
         `/api/profile/user-profile${
-          this.props.match.params.username
-            ? `/${this.props.match.params.username}`
-            : ""
+        this.props.match.params.username
+          ? `/${this.props.match.params.username}`
+          : ""
         }`
       )
       .then(data => {
@@ -39,7 +39,9 @@ class Profile extends Component {
     // console.log("STATE", this.state.user); //friends profile
     if (!this.props.user) return <Redirect to="/auth/sign-in" />; // this is actually the protection
     if (this.state.loading) return <h1>Loading</h1>;
-
+    if (this.props.posts) {
+      console.log("liked", this.props.post.song)
+    }
     const isFollowing = this.props.user.following.includes(
       this.state.user.username
     );
@@ -56,10 +58,18 @@ class Profile extends Component {
           <br />
           <br />
           <h1>{this.state.user.username}</h1>
+          Following: {
+            this.state.user.following.map(el=>{
+            return ( this.state.user.following.indexOf(el) <this.state.user.following.length-1 ?  el+", " :  el)
+            })
+          }
+          <hr />
+          Favorite Artist:
+          <hr />
           {this.props.user.username !== this.state.user.username && (
             <button
               className="profile-follow"
-              onClick={e => this.handleFollowClick(e, this.state.user.username,this.state.user._id)}
+              onClick={e => this.handleFollowClick(e, this.state.user.username, this.state.user._id)}
             >
               {isFollowing ? "Unfollow" : "Follow"}
             </button>
@@ -79,7 +89,7 @@ class Profile extends Component {
     );
   }
 
-  handleFollowClick(e, followUsername,userId) {
+  handleFollowClick(e, followUsername, userId) {
     api
       .post(`/api/profile/user-profile/${followUsername}/follow`)
       .then(data => {
@@ -87,7 +97,7 @@ class Profile extends Component {
         this.props.setUser();
         return api.post('/api/profile/user/follow/notify', {
           userId,
-         
+
         })
           .then(result => {
             console.log("notification", result);
