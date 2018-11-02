@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, Link } from "react-router-dom";
 import api from "../utils/api";
 import Feed from "../Post/Feed";
 
@@ -60,11 +60,15 @@ class Profile extends Component {
           <h1>{this.state.user.username}</h1>
           Following: {
             this.state.user.following.map(el=>{
-            return ( this.state.user.following.indexOf(el) <this.state.user.following.length-1 ?  el+", " :  el)
+            return ( this.state.user.following.indexOf(el) <this.state.user.following.length-1 ?  <Link to={`/profile/${el}`}>{el}, </Link>:  <Link to={`/profile/${el}`}>{el}</Link>)
             })
           }
+        
+
           <hr />
-          Favorite Artist:
+          Most Liked Artist:
+          <hr />
+          Most Posted Artist: 
           <hr />
           {this.props.user.username !== this.state.user.username && (
             <button
