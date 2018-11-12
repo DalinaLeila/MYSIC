@@ -26,7 +26,7 @@ It represents the culmination of our 9 weeks and also specifically our React mod
 The idea is simple: twitter meets spotify. Share the music you are listening to right now, with a simple comment. 
 ## Follow people who like similar music, follow your friends, make new friends! 
 
-# Here are some screenshots of the app in motion. 
+## Here are some screenshots of the app in motion. 
 On the Main page you are able to call the spotify api to search for a new song to post along with a comment. 
 ![song search](./src/app/assets/readmeimg/spotify-api-call.png)
 
@@ -37,9 +37,9 @@ You can see in the above photo I liked and commented on the new post.
 
 This will increase your notifications 
 ![note0](./src/app/assets/readmeimg/notes0.png)
-first to 1
+first to 
 ![note1](./src/app/assets/readmeimg/notes1.png)
-and then 2
+and then 
 ![note2](./src/app/assets/readmeimg/notes2.png)
 
 Clicking on the button will clear active notifications and display where each notification came from!
