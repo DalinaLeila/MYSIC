@@ -45,6 +45,10 @@ and then
 Clicking on the button will clear active notifications and display where each notification came from!
 ![notification menu](./src/app/assets/readmeimg/notification-menu.png)
 
+You can also click on a users name to view their profile page. Here you can see anything they have posted and follow them to make their posts appear on your main page. 
+![notification menu](./src/app/assets/readmeimg/Mysic-5.png)
+
+
 Of course it is still a work in progress but we are both quite proud of our final product and full of awesome ideas for where it will go next!
 
 #### Thanks so much for viewing! 
