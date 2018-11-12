@@ -51,4 +51,4 @@ You can also click on a users name to view their profile page. Here you can see 
 
 Of course it is still a work in progress but we are both quite proud of our final product and full of awesome ideas for where it will go next!
 
-#### Thanks so much for viewing! 
+### Thanks so much for viewing! Please reach out if you have any questions or ideas! 
