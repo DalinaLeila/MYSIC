@@ -24,16 +24,18 @@ This is our final project for Ironhack Berlin's July-October 2018 Full-Stack Web
 It represents the culmination of our 9 weeks and also specifically our React module. 
 
 The idea is simple: twitter meets spotify. Share the music you are listening to right now, with a simple comment. 
-##Follow people who like similar music, follow your friends, make new friends! 
+## Follow people who like similar music, follow your friends, make new friends! 
 
-#Here are some screenshots of the app in motion. 
+# Here are some screenshots of the app in motion. 
 On the Main page you are able to call the spotify api to search for a new song to post along with a comment. 
 ![song search](./src/app/assets/readmeimg/spotify-api-call.png)
 
 This will create a new post on your personal feed as well as the main discover feed and anyones feed who follows you. 
 ![new post](./src/app/assets/readmeimg/Mysic.png)
 
-You can see in the above photo I liked and commented on the new post. This will increase your notifications 
+You can see in the above photo I liked and commented on the new post. 
+
+This will increase your notifications 
 ![note0](./src/app/assets/readmeimg/notes0.png)
 first to 1
 ![note1](./src/app/assets/readmeimg/notes1.png)
