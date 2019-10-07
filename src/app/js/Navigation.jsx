@@ -97,8 +97,8 @@ const Navigation = props => {
                 </Link>
               </NavItem>
               <NavItem>
-                <Link className="link nav-link" to="/auth/sign-up">
-                  Sign Up{" "}
+                <Link className="link nav-link sign-up-nav" to="/auth/sign-up">
+                  Create Account{" "}
                 </Link>
               </NavItem>
             </span>

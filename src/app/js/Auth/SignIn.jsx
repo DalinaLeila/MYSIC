@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MusicNotes from "../MusicNotes"
 
 class SignIn extends React.Component {
   componentDidMount() {
@@ -10,6 +11,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <div className="container">
+      <MusicNotes />
         <div className="flex-auth">
           <div className="container-auth">
             <h1>Sign In</h1>

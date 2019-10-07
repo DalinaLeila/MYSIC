@@ -5,17 +5,81 @@
 }
 
 body {
+  height: 100%;
   margin: 0;
   font-size: 16px;
   color: $text-color;
+  background-color: rgb(179, 218, 219) !important;
   // width: 100wh;
   // height: 90vh;
   // background-color: #ececec;
-  background: linear-gradient(-45deg, #2f4454, #376e6f, #da7b93, #1c3334);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+  // background: linear-gradient(-45deg, #2f4454, #376e6f, #da7b93, #1c3334);
+  // background-size: 400% 400%;
+  // -webkit-animation: Gradient 15s ease infinite;
+  // -moz-animation: Gradient 15s ease infinite;
+  // animation: Gradient 15s ease infinite;
+}
+
+.muzieknootjes {
+  display: block;
+  position: relative;
+  width: 80%;
+  min-width: 300px;
+  border: 0px solid white;
+  color:white
+}
+
+.noot-1,
+.noot-2,
+.noot-3,
+.noot-4 {
+  position: absolute;
+  animation: notes 2s infinite linear;
+  font-size: 35px;
+  opacity: 0;
+}
+
+.noot-1 {
+  top: 60px;
+  left: 0;
+  animation-delay: 0.5s;
+}
+
+.noot-2 {
+  top: 30px;
+  left: 30%;
+  animation-delay: 1s;
+}
+
+.noot-3 {
+  top: 90px;
+  left: 60%;
+  animation-delay: 1.5s;
+}
+
+.noot-4 {
+  top: 40px;
+  left: 90%;
+  animation-delay: 2s;
+}
+
+@keyframes notes {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) translate(50%, -50%);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(1.5) translate(100%, -100%);
+  }
+  100% {
+    transform: scale(1.5) translate(100%, -100%);
+    opacity: 0;
+  }
 }
 
 @-webkit-keyframes Gradient {
@@ -57,9 +121,9 @@ body {
 .title-main {
   font-size: 1.5em;
   color: black;
-  position: absolute;
-  margin: 100px;
-  margin-left: 190px;
+  // position: absolute;
+  // margin: 100px;
+  // margin-left: 190px;
 }
 .main-home-page {
   text-align: center;
@@ -68,13 +132,24 @@ body {
   box-shadow: -1px 15px 41px 0px $secondary-color;
 }
 .img-main {
-  border-radius: 50px;
-  border: 2px solid $secondary-color;
+  // border-radius: 50px;
+  // border: 2px solid $secondary-color;
+  float: right;
+  margin-top:-322px;
+
+
+
+}
+
+.info-main{
+  font-size:25px;
+width:30%;
+padding-left: 8px
 }
 
 .container-main {
-  position: relative;
-  // text-align: center;
+margin-top: 14%;
+margin-left:5%
 }
 .container {
   padding: 25px calc((100vw - 960px) / 2);
@@ -86,13 +161,13 @@ body {
 }
 
 .profile-header {
-  background-color: #ececec;
+  // background-color: #ececec;
   // $primary-color;
   // background-image: url("https://source.unsplash.com/1600x900/?music,green");
   color: black;
   text-align: center;
   padding: 50px;
-  box-shadow: -1px 15px 41px 0px black;
+  // box-shadow: -1px 15px 41px 0px black;
 }
 
 .home-header {
@@ -132,12 +207,13 @@ body {
 }
 
 .feed {
-  background-color: white;
+  // background-color: white;
   padding: 50px;
 }
 
 .container-auth {
-  background-color: $secondary-color;
+border:2px solid rgb(54, 110, 111);
+background-color: rgba(54, 110, 111, 0.2);
   width: 400px;
   height: 400px;
   border-radius: 12px;
@@ -153,5 +229,16 @@ body {
 }
 
 .auth-quest {
-  color: black;
+  color: white;
+  opacity: 1;
+  font-weight: bolder
+}
+
+
+.sign-up-nav{
+  background-color: $secondary-color; 
+  border-radius: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white !important;
 }

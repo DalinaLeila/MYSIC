@@ -4,6 +4,7 @@ import Feed from "./Post/Feed";
 import api from "./utils/api";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import MusicNotes from "./MusicNotes";
 
 class Home extends Component {
   constructor(props) {
@@ -39,27 +40,39 @@ class Home extends Component {
         return <div>loading ...</div>;
       }
     return (
-      <div className="main">
-        <div className="main-home-page">
+      <div>
+        <div>
+      {/* <div className="main"> */}
+        {/* <div className="main-home-page"> */}
           <h1>
             {this.props.user ? (
               ""
             ) : (
-              <div className="container-main">
+                  <div>
+             <div className="container-main">
+
                 {/* <img
-                  className="headphone-"
+                  
                   src={require("../assets/headphones (2).png")}
                   alt=""
                 /> */}
-                <h1 className="title-main">Welcome to </h1>
-                <img
+                <h1 className="title-main">Welcome to<b> MYSIC</b></h1>
+                <p className="info-main">An app that lets you connect with your friends, get inspired by others and share your passion for music.</p>
+                {/* <img
                   className="img-main"
                   width="700px"
                   src={require("../assets/logoMain.jpeg")}
-                />
-                <Link to="/auth/sign-up">
-                  <button className="btn-home">Sign Up</button>
+                /> */}
+                
+                <Link to="/auth/sign-in">
+                  <button className="btn-home">Sign In</button>
                 </Link>
+                <Link to="/auth/sign-up">
+                  <button className="btn-home pink">Create Account</button>
+                </Link>
+              </div>
+                {/* <img className="img-main" src="https://www.mymockuptool.com/_Resources/Persistent/c/0/d/f/c0dfb4a50682fb6a56119c362e35052dde3468a7/iphone-6s-hand2-333x500.png"></img> */}
+              <MusicNotes />
               </div>
             )}
           </h1>
