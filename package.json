@@ -41,7 +41,7 @@
     "react": "^16.5.1",
     "react-360": "^1.0.0",
     "react-dom": "^16.5.2",
-    "react-native": "^0.57.1",
+    "react-native": "^0.70.2",
     "react-native-sound": "^0.10.9",
     "react-reveal": "^1.2.2",
     "react-router": "^4.3.1",
